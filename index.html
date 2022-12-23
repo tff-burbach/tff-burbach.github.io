@@ -1,22 +1,20 @@
 <html>
 
 <head>
-    <!-- <base href="file:///C:/DEV/Node.JS/myExpressApp/public/new_bb_generator.html" target="_self"> -->
     <script src="https://code.jquery.com/jquery-3.5.0.js"
         integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
-    <script src="js/stfvData.js" crossorigin="anonymous"></script> -->
-    <script src="js/tffdata.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="javascripts/tffData.js" crossorigin="anonymous"></script>
+    <script src="javascripts/stfvData.js" crossorigin="anonymous"></script>
     <script>
-        // let bbData;
+        let tffData;
         $(document).ready(function () {
-            // bbData = stfvData.getCurrentLeagueData('Landesliga',2019,'Ligabetrieb+Classic').
-            // then(result => {
-            //     bbData = result;
-            //     // $('#matchdays').text(bbData);
-            //     // $('#leagueData').val(bbData);
-                $('#leagueData').val(JSON.stringify(bbData, null, 4));
-            // })
+            readTFFData().then(result => {
+                tffData = result;
+                $('#leagueData').val(JSON.stringify(tffData, null, 4));
+                // $('#matchdays').text(tffData.matchdays.length);
+                // $('#leagueData').val(JSON.stringify(tffData, null, 4));
+            })
         })
     </script>
 </head>
@@ -25,9 +23,7 @@
     <label>Matchdays: </label>
     <label id="matchdays"></label>
     <br>
-    <textarea cols="150" rows="95" id="leagueData"></textarea>
-    <!-- <iframe id="stfvTable" src="http://www.stfv.de/stfv/ligabetrieb/ligatabelle.php??Jahr=2019&Kategorie=Ligabetrieb+Classic&Liga=Landesliga&Spieltag_Nr=1&Ansicht=Kreuztabelle"></iframe> -->
-
+    <textarea cols="200" rows="95" id="leagueData"></textarea>
 </body>
 
 
