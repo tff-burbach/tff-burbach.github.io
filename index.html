@@ -1,1 +1,34 @@
-Hello TFF Burbach
+<html>
+
+<head>
+    <!-- <base href="file:///C:/DEV/Node.JS/myExpressApp/public/new_bb_generator.html" target="_self"> -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"
+        integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <script src="js/stfvData.js" crossorigin="anonymous"></script> -->
+    <script src="js/tffdata.js" crossorigin="anonymous"></script>
+    <script>
+        // let bbData;
+        $(document).ready(function () {
+            // bbData = stfvData.getCurrentLeagueData('Landesliga',2019,'Ligabetrieb+Classic').
+            // then(result => {
+            //     bbData = result;
+            //     // $('#matchdays').text(bbData);
+            //     // $('#leagueData').val(bbData);
+                $('#leagueData').val(JSON.stringify(bbData, null, 4));
+            // })
+        })
+    </script>
+</head>
+
+<body>
+    <label>Matchdays: </label>
+    <label id="matchdays"></label>
+    <br>
+    <textarea cols="150" rows="95" id="leagueData"></textarea>
+    <!-- <iframe id="stfvTable" src="http://www.stfv.de/stfv/ligabetrieb/ligatabelle.php??Jahr=2019&Kategorie=Ligabetrieb+Classic&Liga=Landesliga&Spieltag_Nr=1&Ansicht=Kreuztabelle"></iframe> -->
+
+</body>
+
+
+</html>
