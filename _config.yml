@@ -1,0 +1,32 @@
+url: https://tff-burbach.github.io
+baseurl: 
+
+# Site settings
+title: TFF Burbach
+email: ralph.kiefer@web.de
+description: "TFF Burbach; Saarbruecken; Tischfussball; Sport; Sportmannschaft; STFV"
+
+
+# Team names, titles and social links
+people:
+- name: Jörg Ruppenthal
+  pic: 1
+  position: 1. Vorsitzender
+  social:
+    - title: facebook
+      url: https://de-de.facebook.com/jorg.ruppenthal/
+
+# Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
+social:
+  - title: facebook
+    url: https://www.facebook.com/TischFussballFreundeBurbach/
+
+# Postal address (add as many lines as necessary)
+address:
+  - line: In den Hanfgärten 4
+  - line: 66115 Saarbrücken-Burbach
+  - line: 0681-77773
+
+# Build settings
+markdown: kramdown
+permalink: pretty
