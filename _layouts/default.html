@@ -3,14 +3,22 @@
 
   {% include head.html %}
 
-
-    <body id="page-top" class="index">
-
+  <body id="page-top" class="index container-lg" data-bs-theme="dark"> 
+    
     {% include header.html %}
-    {% include events.html %}
-    {% include team.html %}
+
+    <div tabindex="0" data-bs-spy="scroll" data-bs-smooth-scroll="false" data-bs-target="#navbar-scrolling"  -->
+      {% include events.html %}
+      {% include table.html %}
+      {% include team.html %}
+      {% include statutes.html %}
+      {% include legalnotice.html %}
+    </div>
+    
     {% include footer.html %}
+
     {% include js.html %}
 
-    </body>
+  </body>
+
 </html>

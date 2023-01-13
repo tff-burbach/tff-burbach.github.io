@@ -1,0 +1,37 @@
+---
+# this ensures Jekyll reads the file to be transformed into CSS later
+# only Main files contain this front matter, not partials.
+---
+
+$dummy: 'dummy';
+
+$template-color-primary: #ffbf00;
+$template-color-secondary: #e0a802;
+$template-color-muted: #b18500;
+
+$template-font-primary: 'Montserrat, "Helvetica Neue",Helvetica,Arial,sans-serif';
+$template-font-secondary: '"Droid Serif", "Helvetica Neue", Helvetica,Arial,sans-serif';
+
+$navbar-dark-color: $template-color-muted;
+$navbar-dark-hover-color: $template-color-primary;
+$navbar-dark-active-color: $template-color-primary;
+$nav-tabs-link-hover-border-color: $template-color-primary;
+$nav-tabs-link-active-border-color: $template-color-primary;
+
+// $primary:$template-color-primary;
+// $secondary:$template-color-secondary;
+
+// $body-color:$template-color-primary;
+$body-color-dark:#ced4da ;
+$grid-gutter-width: 0.5rem;
+// $headings-color-dark:$template-color-secondary;
+$link-color-dark:$template-color-muted;
+$link-hover-color-dark:$template-color-primary;
+
+$navbar-background-image: url('{{ site.baseurl }}/img/content-top.png');
+$body-background-image: url('{{ site.baseurl }}/img/menu-background.jpg');
+
+@import "bootswatch/variables";  
+@import "bootstrap/bootstrap";  
+@import "bootswatch/bootswatch";  
+@import "tff";  

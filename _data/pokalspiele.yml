@@ -1,0 +1,31 @@
+# Felder:
+#  datum: Format JJJJ-MM-TT (Beispiel: 2023-03-17)
+#  zeit: optional, Standard 21:00
+#  gegner: Mannschaftname wie bei STFV
+#  ort: H - Heim oder A - Auswärts
+#  ergebnis:
+#
+- datum: 2023-03-17
+  gegner: Vorrunde
+  ort:
+  ergebnis:
+- datum: 2023-05-05
+  gegner: Hauptrunde
+  ort: 
+  ergebnis: 
+- datum: 2023-07-14
+  gegner: Achtelfinale
+  ort: 
+  ergebnis: 
+- datum: 2023-10-13
+  gegner: Viertelfinale
+  ort: 
+  ergebnis: 
+- datum: 2023-11-24
+  gegner: Halbfinale
+  ort: 
+  ergebnis: 
+- datum: 2023-12-09
+  gegner: Finale
+  ort: 
+  ergebnis: 

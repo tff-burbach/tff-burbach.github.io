@@ -1,0 +1,75 @@
+<!-- About Section -->
+    <section id="table" data-bs-spy="scroll">
+        <div id="contentTable">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="section-heading">Tabelle</h2>
+                    <h3 class="section-subheading text-muted">Landesliga Spieltag und Tabelle vom STFV.</h3>
+                </div>
+            </div>
+            <div id="status" class="status text-center"><i>loading</i></div>
+            <div class="row"></div>
+            <div id="currentMatchDayGames" class="row d-none">
+                <h3 id="gamesTitle" class="gamesTitle text-center">Spieltag</h3>
+                <h5 id="gamesRowHeader" class="row gamesHeader">
+                    <div id="empty" class="col"></div>
+                    <div id="no" class="col-1 text-center">Nr.</div>
+                    <div id="team1" class="col-4">Heim</div>
+                    <div id="team2" class="col-4">Gast</div>
+                    <div id="result" class="col-1 text-center">Ergebnis</div>
+                    <div id="empty" class="col"></div>
+                </h5>
+                <div id="gamesRowTemplate" class="row gamesRow d-none">
+                    <div id="empty" class="col"></div>
+                    <div id="no" class="col-1 text-center"></div>
+                    <div id="team1" class="col-4"></div>
+                    <div id="team2" class="col-4"></div>
+                    <div id="result" class="col-1 text-center"></div>
+                    <div id="empty" class="col"></div>
+                </div>
+            </div>
+            <div class="tableseparator row"></div>
+            <div id="currentMatchDayTable" class="leagueHeader row d-none">
+                <h3 id="tableTitle" class="tableTitle text-center">Tabelle</h3>
+                <h5 id="tableRowHeader" class="row tableHeader">
+                    <div id="place" class="col-1 text-center">Pl.</div>
+                    <div id="team" class="col-5">Verein</div>
+                    <div id="goals" class="col-2 text-center">Tore</div>
+                    <div id="sets" class="col-2 text-center">Sätze</div>
+                    <div id="score" class="col-2 text-center">Punkte</div>
+                </h5>
+                <div id="tableRowTemplate" class="row tableRow d-none">
+                    <div id="place" class="col-1 text-center"></div>
+                    <div id="team" class="col-5"></div>
+                    <div id="goals" class="col-2 text-center"></div>
+                    <div id="sets" class="col-2 text-center"></div>
+                    <div id="score" class="col-2 text-center"></div>
+                </div>
+            </div>
+            <div class="tableseparator row"></div>
+            <div id="nextMatchDayGames" class="row d-none">
+                <h3 id="gamesTitle" class="gamesTitle text-center">Spieltag</h3>
+                <h5 id="gamesRowHeader" class="row gamesHeader">
+                    <div id="empty" class="col-1"></div>
+                    <div id="no" class="col-1 text-center">Nr.</div>
+                    <div id="team1" class="col-4">Heim</div>
+                    <div id="team2" class="col-4">Gast</div>
+                    <div id="result" class="col-1 text-center">Ergebnis</div>
+                    <div id="empty" class="col-1"></div>
+                </h5>
+                <div id="gamesRowTemplate" class="row gamesRow d-none">
+                    <div id="empty" class="col-1"></div>
+                    <div id="no" class="col-1 text-center"></div>
+                    <div id="team1" class="col-4"></div>
+                    <div id="team2" class="col-4"></div>
+                    <div id="result" class="col-1 text-center"></div>
+                    <div id="empty" class="col-1"></div>
+                </div>
+                <div id="gamesNavTemplate" class="row d-none">
+                    <button class="col-1 text-center" onclick="tffTools.showGames(1)"><<</button>
+                    <div class="col-10"></div>
+                    <button class="col-1" onclick="tffTools.showGames(20)">>></button>
+                </div>
+            </div>                    
+        </div>
+    </section>
