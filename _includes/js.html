@@ -1,17 +1,48 @@
- <!-- jQuery Version 1.11.0 -->
-    <script src="{{ "/js/jquery-1.11.0.js" | prepend: site.baseurl }}"></script>
+<!-- jQuery Version -->
+    <script src="{{ "/js/jquery-3.6.3.js" | prepend: site.baseurl }}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="{{ "/js/bootstrap.min.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/js/bootstrap.bundle.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/js/bootstrap.bundle.js.map" | prepend: site.baseurl }}"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="{{ "/js/jquery.easing.min.js" | prepend: site.baseurl }}"></script>
+    <!-- <script src="{{ "/js/jquery.easing.min.js" | prepend: site.baseurl }}"></script>
     <script src="{{ "/js/classie.js" | prepend: site.baseurl }}"></script>
-    <script src="{{ "/js/cbpAnimatedHeader.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/js/cbpAnimatedHeader.js" | prepend: site.baseurl }}"></script> -->
 
     <!-- Contact Form JavaScript -->
-    <script src="{{ "/js/jqBootstrapValidation.js" | prepend: site.baseurl }}"></script>
-    <script src="{{ "/js/contact_me.js" | prepend: site.baseurl }}"></script>
+    <!-- <script src="{{ "/js/jqBootstrapValidation.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/js/contact_me.js" | prepend: site.baseurl }}"></script> -->
 
     <!-- Custom Theme JavaScript -->
-    <script src="{{ "/js/agency.js" | prepend: site.baseurl }}"></script>
+    <!-- <script src="{{ "/js/agency.js" | prepend: site.baseurl }}"></script> -->
+
+   <!-- TFF -->
+   <script src="{{ "/js/tffTools.js" | prepend: site.baseurl }}"></script>
+   <script src="{{ "/js/tffData.js" | prepend: site.baseurl }}"></script>
+   <script src="{{ "/js/stfvData.js" | prepend: site.baseurl }}"></script>
+   
+   <script>
+      tffData.team1 = { name: '{{ site.data.stfv.verein }}', league: '{{ site.data.stfv.liga }}', year: '{{ site.data.stfv.jahr }}' };
+      tffData.termine = [ 
+         {% for info in site.data.infos %}
+            {datetime: '{{ info.datum }}T{{ info.zeit | default:'00:00' }}' ,datum:'{{ info.datum }}', zeit:'{{ info.zeit }}', typ:'I', titel: '{{ info.titel }}', beschreibung: '{{ info.beschreibung }}', gegner:'{{ info.gegner }}', ort:'{{ info.ort }}', adresse:'{{ info.adresse }}', adress_url:'{{ info.adress_url }}'},
+         {% endfor %}
+         {% for spiel in site.data.freundschaftspiele %}
+            {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'F', titel: '{{ spiel.titel }}', beschreibung: '{{ spiel.beschreibung }}', gegner:'{{ spiel.gegner }}', ort:'{{ spiel.ort }}', adresse:'{{ spiel.adresse }}', adress_url:'{{ spiel.adress_url }}', gegner: '{{ spiel.gegner }}'},
+         {% endfor %}
+         {% for spiel in site.data.pokalspiele %}
+            {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'P', titel: '{{ spiel.titel }}', beschreibung: '{{ spiel.beschreibung }}', gegner:'{{ spiel.gegner }}', ort:'{{ spiel.ort }}', adresse:'{{ spiel.adresse }}', adress_url:'{{ spiel.adress_url }}', gegner: '{{ spiel.gegner }}'},
+         {% endfor %}
+      ]
+
+   </script>
+
+   <script>
+      jQuery(document).ready(function() {
+         //  tffTools.showCountdown(2, 80);
+         //  tffTools.showInfos(true);
+         tffTools.showTFFData();
+      });
+   </script>
+      

@@ -1,0 +1,32 @@
+# Felder:
+#   datum: Format JJJJ-MM-TT (Beispiel: 2023-12-31)
+#   zeit: optional
+#   titel:
+#   ort:
+#   adresse:
+#   adress_url: Google Maps URL
+#
+- datum: 2023-01-06
+  zeit: "19:00"
+  titel: Jahreshauptversammlung anschließendem Turnier
+  ort: Gasthaus Schank
+- datum: 2023-01-14
+  titel: Mannschaftsturnier - Treff 9:45 Gasthaus Schank
+  zeit: "11:00"
+  ort: Lautenbach
+  adresse: Halle, Schönbachstrasse 7, 66564 Lautenbach
+  adress_url: https://www.google.com/maps/place/Sch%C3%B6nbachstra%C3%9Fe+7,+66564+Ottweiler,+Germany/@49.4193925,7.2642048,68m/data=!3m1!1e3!4m5!3m4!1s0x4795c3b3a623b077:0x4b152144b5246eed!8m2!3d49.4195407!4d7.2641916
+- datum: 2023-01-15
+  titel: STFV Mitgliederversammlung - Treff 12:00 Schank
+  zeit: "13:00"
+  ort: Eppelborn
+  adresse: Big Eppel, Europaplatz 4, 66571 Eppelborn
+  adress_url: https://www.google.com/maps/place/big+Eppel/@49.4072516,6.9672644,17z/data=!3m2!4b1!5s0x4795bc8687b3b98d:0x3efc904337e0b09f!4m5!3m4!1s0x4795bc8680b080bb:0xbf3b1722c1199716!8m2!3d49.4072535!4d6.969449
+- datum: 2023-01-21
+  zeit: "14:00"
+  titel: Vereinsmeisterschaft Einzel und Doppel
+  ort: Gasthaus Schank
+- datum: 2023-12-08
+  titel: Relegationsspiele
+- datum: 2023-12-09
+  titel: Relegationsspiele

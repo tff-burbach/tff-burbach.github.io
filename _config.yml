@@ -6,16 +6,6 @@ title: TFF Burbach
 email: ralph.kiefer@web.de
 description: "TFF Burbach; Saarbruecken; Tischfussball; Sport; Sportmannschaft; STFV"
 
-
-# Team names, titles and social links
-people:
-- name: Jörg Ruppenthal
-  pic: 1
-  position: 1. Vorsitzender
-  social:
-    - title: facebook
-      url: https://de-de.facebook.com/jorg.ruppenthal/
-
 # Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
 social:
   - title: facebook
@@ -30,3 +20,8 @@ address:
 # Build settings
 markdown: kramdown
 permalink: pretty
+
+# # Saas
+# sass:
+#     sass_dir: _sass
+#     style: compact # possible values: nested expanded compact compressed    

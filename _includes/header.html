@@ -1,28 +1,31 @@
 <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top navbar-fixed-top" id="navbar-scrolling">
+        <div class="container-lg">
+
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+            <img src="/img/vereinswappen_small.png" alt="" width="30" height="30">
+            <a class="navbar-brand" href="#">{{site.title}}<a></a>
+
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">{{site.title}}</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item hidden">
+                        <a href="#welcome"></a>
                     </li>
-                    <li>
-                        <a class="page-scroll" href="#events">Termine</a>
+                    <li class="nav-item ms-auto">
+                        <a class="nav-link" href="#events">Termine</a>
                     </li>
-                    <li>
-                        <a class="page-scroll" href="#team">Verein</a>
+                    <li class="nav-item ms-auto">
+                        <a class="nav-link" href="#table">Tabelle</a>
+                    </li>
+                    <li class="nav-item ms-auto">
+                        <a class="nav-link" href="#team">Verein</a>
                     </li>
                 </ul>
             </div>
@@ -32,11 +35,13 @@
     </nav>
 
     <!-- Header -->
-    <header>
+    <header id="header" class="">
         <div class="container">
             <div class="intro-text">
                 <div class="intro-lead-in">Welcome To ...</div>
                 <div class="intro-heading">TFF Burbach</div>
+                <!-- <img src="/img/vereinswappen.png" alt="" width="300" height="300"> -->
+                <img src="/img/Vereinswappen_Trikot_weiss_transparent.png" alt="" width="300" height="300">
             </div>
         </div>
     </header>

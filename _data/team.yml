@@ -1,0 +1,22 @@
+# Felder:
+#   name: 
+#   rolle: z.B. 1. Vorsitzender
+#
+- vorname: Jörg
+  nachname: Ruppenthal
+  rolle: 1. Vorsitzender
+- vorname: Ralph
+  nachname: Kiefer
+  rolle: 2. Vorsitzender
+- vorname: Patric
+  nachname: Schneider
+  rolle: Kassenwart
+- vorname: Timo
+  nachname: Tausend
+  rolle: 1. Spielführer
+- vorname: Michael
+  nachname: Alles
+  rolle: 2. Spielführer
+- vorname: Marcus
+  nachname: Kollmannsperger
+  rolle: Organisation
