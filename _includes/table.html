@@ -10,20 +10,20 @@
             <div id="status" class="status text-center"><i>loading</i></div>
             <div class="row"></div>
             <div id="currentMatchDayGames" class="row d-none">
-                <h3 id="gamesTitle" class="gamesTitle text-center">Spieltag</h3>
-                <h5 id="gamesRowHeader" class="row gamesHeader">
+                <h4 id="gamesTitle" class="gamesTitle text-center">Spieltag</h4>
+                <h5 id="gamesRowHeader" class="row gamesHeader fs-4 fw-bold">
                     <div id="empty" class="col"></div>
                     <div id="no" class="col-1 text-center">Nr.</div>
                     <div id="team1" class="col-4">Heim</div>
                     <div id="team2" class="col-4">Gast</div>
-                    <div id="result" class="col-1 text-center">Ergebnis</div>
+                    <div id="result" class="col-1 text-center">Erg.</div>
                     <div id="empty" class="col"></div>
                 </h5>
-                <div id="gamesRowTemplate" class="row gamesRow d-none">
+                <div id="gamesRowTemplate" class="row gamesRow fs-4 d-none">
                     <div id="empty" class="col"></div>
                     <div id="no" class="col-1 text-center"></div>
-                    <div id="team1" class="col-4"></div>
-                    <div id="team2" class="col-4"></div>
+                    <div id="team1" class="col-4 text-nowrap text-truncate"></div>
+                    <div id="team2" class="col-4 text-nowrap text-truncate"></div>
                     <div id="result" class="col-1 text-center"></div>
                     <div id="empty" class="col"></div>
                 </div>
@@ -31,37 +31,41 @@
             <div class="tableseparator row"></div>
             <div id="currentMatchDayTable" class="leagueHeader row d-none">
                 <h3 id="tableTitle" class="tableTitle text-center">Tabelle</h3>
-                <h5 id="tableRowHeader" class="row tableHeader">
+                <h5 id="tableRowHeader" class="row tableHeader fs-4 fw-bold">
+                    <div id="empty" class="col"></div>
                     <div id="place" class="col-1 text-center">Pl.</div>
                     <div id="team" class="col-5">Verein</div>
-                    <div id="goals" class="col-2 text-center">Tore</div>
+                    <div id="goals" class="col-2 text-center d-none">Tore</div>
                     <div id="sets" class="col-2 text-center">Sätze</div>
                     <div id="score" class="col-2 text-center">Punkte</div>
+                    <div id="empty" class="col"></div>
                 </h5>
-                <div id="tableRowTemplate" class="row tableRow d-none">
+                <div id="tableRowTemplate" class="row tableRow fs-4 d-none">
+                    <div id="empty" class="col"></div>
                     <div id="place" class="col-1 text-center"></div>
-                    <div id="team" class="col-5"></div>
-                    <div id="goals" class="col-2 text-center"></div>
+                    <div id="team" class="col-5 text-nowrap text-truncate"></div>
+                    <div id="goals" class="col-2 text-center d-none"></div>
                     <div id="sets" class="col-2 text-center"></div>
                     <div id="score" class="col-2 text-center"></div>
+                    <div id="empty" class="col"></div>
                 </div>
             </div>
             <div class="tableseparator row"></div>
             <div id="nextMatchDayGames" class="row d-none">
                 <h3 id="gamesTitle" class="gamesTitle text-center">Spieltag</h3>
-                <h5 id="gamesRowHeader" class="row gamesHeader">
+                <h5 id="gamesRowHeader" class="row gamesHeader fs-4 fw-bold">
                     <div id="empty" class="col-1"></div>
                     <div id="no" class="col-1 text-center">Nr.</div>
                     <div id="team1" class="col-4">Heim</div>
                     <div id="team2" class="col-4">Gast</div>
-                    <div id="result" class="col-1 text-center">Ergebnis</div>
+                    <div id="result" class="col-1 text-center">Erg.</div>
                     <div id="empty" class="col-1"></div>
                 </h5>
-                <div id="gamesRowTemplate" class="row gamesRow d-none">
+                <div id="gamesRowTemplate" class="row gamesRow fs-4 d-none">
                     <div id="empty" class="col-1"></div>
                     <div id="no" class="col-1 text-center"></div>
-                    <div id="team1" class="col-4"></div>
-                    <div id="team2" class="col-4"></div>
+                    <div id="team1" class="col-4 text-nowrap text-truncate"></div>
+                    <div id="team2" class="col-4 text-nowrap text-truncate"></div>
                     <div id="result" class="col-1 text-center"></div>
                     <div id="empty" class="col-1"></div>
                 </div>

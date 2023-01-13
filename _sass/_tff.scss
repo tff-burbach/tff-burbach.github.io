@@ -820,7 +820,7 @@ img::-moz-selection {
 	font-size: 20px;
 	font-weight: bold;
 	margin: 0;
-	padding: 1px 0px 0px 0px;
+	padding: 3px 0px 0px 0px;
 	text-align: center;
 }
 
@@ -829,7 +829,7 @@ img::-moz-selection {
 	font-size: 12px;
 	font-weight: bold;
 	margin: 0;
-	padding: 0px 0px 0px 11px;
+	padding: 1px 0px 0px 11px;
 	text-transform: uppercase;
 }
 
@@ -919,7 +919,7 @@ body {
   margin-left:auto;
   margin-right:auto;
   position: relative;
-  font-size: x-large;
+  // font-size: x-large;
 }
 
 .clearfix {
