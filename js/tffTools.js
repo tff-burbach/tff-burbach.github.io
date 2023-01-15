@@ -262,26 +262,27 @@ tffTools = {
 		return requestedSchedules;
 	},
 	
-	_getDateTimeArray(termin) {
-		var d = termin.datum.split("-");
-		d[1] = d[1]-1;
-		var t;
-		if (termin.uhrzeit) {
-			t = termin.uhrzeit.split(":");
-		}
-		else {
-			t = ["00","00"];
-		}
-		return {d:d,t:t}; 
+	_getDateFromSchedule(termin) {
+		return new Date(termin.datetime);
+		// var dt = tffTools._getDateTimeArray(termin);
+		// var d = dt.d;
+		// var t = dt.t;
+		// var date = new Date(d[0], d[1], d[2], t[0], t[1]);
+		// return date;
 	},
 
-	_getDateFromSchedule(termin) {
-		var dt = tffTools._getDateTimeArray(termin);
-		var d = dt.d;
-		var t = dt.t;
-		var date = new Date(d[0], d[1], d[2], t[0], t[1]);
-		return date;
-	},
+	// _getDateTimeArray(termin) {
+	// 	var d = termin.datum.split("-");
+	// 	d[1] = d[1]-1;
+	// 	var t;
+	// 	if (termin.uhrzeit) {
+	// 		t = termin.uhrzeit.split(":");
+	// 	}
+	// 	else {
+	// 		t = ["00","00"];
+	// 	}
+	// 	return {d:d,t:t}; 
+	// },
 
 	_getNextSchedules(minImportance, noOfEntries, types) {
 		tffTools._initializeData();
@@ -478,11 +479,8 @@ tffTools = {
 	},
 
 	getCurrentDate() {
-		if (tffData.team1.year) {
-			return new Date(tffData.team1.year + '-04-19T19:59');
-		}
 		return new Date();
-		// return new Date('2019-04-19T19:59');
+		// return new Date('2023-02-03T11:01');
 	}
 
 }

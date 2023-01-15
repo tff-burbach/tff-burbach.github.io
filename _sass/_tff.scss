@@ -291,7 +291,7 @@ header {
 }
 
 header .intro-text {
-  padding-top: 100px;
+  padding-top: 50px;
   padding-bottom: 50px;
 }
 
@@ -569,6 +569,10 @@ section h3.section-subheading {
   .timeline>li.timeline-inverted>.timeline-panel {
       padding: 0 100px 20px 20px;
   }
+}
+
+section#team a{
+  color: $template-color-muted;
 }
 
 .team-member {
@@ -920,6 +924,10 @@ body {
   margin-right:auto;
   position: relative;
   // font-size: x-large;
+}
+
+body a{
+  font-style: italic;
 }
 
 .clearfix {

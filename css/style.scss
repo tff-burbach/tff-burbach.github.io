@@ -5,6 +5,8 @@
 
 $dummy: 'dummy';
 
+@import "bootswatch/variables";  
+
 $template-color-primary: #ffbf00;
 $template-color-secondary: #e0a802;
 $template-color-muted: #b18500;
@@ -22,16 +24,16 @@ $nav-tabs-link-active-border-color: $template-color-primary;
 // $secondary:$template-color-secondary;
 
 // $body-color:$template-color-primary;
-$body-color-dark:#ced4da ;
+$body-color-dark:$gray-200;//#ced4da ;
 $grid-gutter-width: 0.5rem;
 // $headings-color-dark:$template-color-secondary;
-$link-color-dark:$template-color-muted;
-$link-hover-color-dark:$template-color-primary;
+$link-color-dark:$gray-600; //$template-color-muted;
+$link-hover-color-dark:$template-color-muted;
+$link-decoration: none;
 
 $navbar-background-image: url('{{ site.baseurl }}/img/content-top.png');
 $body-background-image: url('{{ site.baseurl }}/img/menu-background.jpg');
 
-@import "bootswatch/variables";  
 @import "bootstrap/bootstrap";  
 @import "bootswatch/bootswatch";  
 @import "tff";  

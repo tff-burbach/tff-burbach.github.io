@@ -26,7 +26,7 @@
       tffData.team1 = { name: '{{ site.data.stfv.verein }}', league: '{{ site.data.stfv.liga }}', year: '{{ site.data.stfv.jahr }}' };
       tffData.termine = [ 
          {% for info in site.data.infos %}
-            {datetime: '{{ info.datum }}T{{ info.zeit | default:'00:00' }}' ,datum:'{{ info.datum }}', zeit:'{{ info.zeit }}', typ:'I', titel: '{{ info.titel }}', beschreibung: '{{ info.beschreibung }}', gegner:'{{ info.gegner }}', ort:'{{ info.ort }}', adresse:'{{ info.adresse }}', adress_url:'{{ info.adress_url }}'},
+            {datetime: '{{ info.datum }}T{{ info.zeit | default:'00:00' }}' ,datum:'{{ info.datum }}', zeit:'{{ info.zeit }}', typ:'I', titel: '{{ info.titel }}', beschreibung: '{{ info.beschreibung }}', gegner:'{{ info.gegner }}', ort:'{{ info.ort }}', ergebnis:'{{ info.ergebnis }}', adresse:'{{ info.adresse }}', adress_url:'{{ info.adress_url }}'},
          {% endfor %}
          {% for spiel in site.data.freundschaftspiele %}
             {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'F', titel: '{{ spiel.titel }}', beschreibung: '{{ spiel.beschreibung }}', gegner:'{{ spiel.gegner }}', ort:'{{ spiel.ort }}', adresse:'{{ spiel.adresse }}', adress_url:'{{ spiel.adress_url }}', gegner: '{{ spiel.gegner }}'},

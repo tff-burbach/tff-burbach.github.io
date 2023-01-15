@@ -27,9 +27,9 @@ tffData = {
 	typCString : 'Classic Cup A',
 	typCBString : 'Classic Cup B',
 	typKPString : 'Kreisligapokal',
-	typPString : 'Pokal (I.)',
+	typPString : 'Pokal',
 	typP2String : 'Pokal (II.)',
-	typFString : 'Freundschaftspiel (I.)',
+	typFString : 'Freundschaftspiel',
 	typF2String : 'Freundschaftspiel (II.)',
 	spieltag : 'Spieltag',
 
