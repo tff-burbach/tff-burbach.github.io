@@ -183,6 +183,11 @@
 //   background-color: #222;
 }
 
+.navbar a{
+  font-style: normal;
+  font-weight: 600;
+}
+
 // // .navbar .navbar-brand {
 // //   font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
 // //   color: $template-color-primary;
@@ -571,7 +576,7 @@ section h3.section-subheading {
   }
 }
 
-section#team a{
+section#club a{
   color: $template-color-muted;
 }
 
@@ -907,17 +912,15 @@ img::-moz-selection {
   // color: $template-color-primary;
 }
 
-#gamesNavTemplate>button{
+#previousGames,
+#nextGames {
+  color: $template-color-muted;
   padding-top: 0px;
-  margin-bottom: 30px;;
+  // margin-bottom: 30px;;
 }
 
 .gamesHeader,
 .tableHeader{
-  color: $template-color-muted;
-}
-
-#gamesNavTemplate>button{
   color: $template-color-muted;
 }
 
@@ -927,6 +930,16 @@ img::-moz-selection {
 
 .tableseparator{
   height: 100px;
+}
+
+#tableSTFVLink {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#tableSTFVLink a{
+  text-decoration: underline;
+  // color: $template-color-muted;
 }
 
 body {

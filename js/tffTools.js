@@ -310,31 +310,6 @@ tffTools = {
 		return new Date(termin.datetime);
 	},
 
-	_getNextSchedules(minImportance, noOfEntries, types) {
-		tffTools._initializeData();
-		var addNext = false;
-		var entryCounter = 0;
-		noOfEntries = (noOfEntries === undefined ? 1 : noOfEntries);
-		var nextSchedules = [];
-		for (var i = 0; i < tffData.termine.length; i++) {
-			var termin = tffData.termine[i];
-			if (termin === undefined) break; // ie hack
-			if (termin.isCurrent) {
-				addNext = true;
-			}
-			if (addNext && termin.wichtigkeit >= minImportance) {
-				if (types == undefined || types.indexOf(termin.typ) > -1) {
-					entryCounter++;
-					nextSchedules.push(termin);
-				}
-			}
-			if (entryCounter === noOfEntries) {
-				break;
-			}
-		}
-		return nextSchedules;
-	},
-
 	showPreviousGames() {
 		var currentIndex = parseInt($('#nextMatchDayGames').attr('matchdayindex'));
 		tffTools._showGames(currentIndex > 0 ? currentIndex - 1 : 0);
@@ -456,7 +431,8 @@ tffTools = {
 	},
 
 	async _initializeData() {
-		if (tffData.initialized) return;
+		// Keep data for 5 sec in memory
+		if (tffData.initialized && (new Date() - tffData.initializationTime) < 5 * 1000 ) return;
 		await tffTools._initializeTffData();
 		tffTools._initializeSchedules();
 		tffData.initialized = true;
@@ -476,6 +452,7 @@ tffTools = {
 			})
 		});
 		tffData.termine.sort((a, b) => (a.datetime > b.datetime) ? 1 : -1);
+		tffData.initializationTime = new Date();
 	},
 
 	_log(logMessage) {

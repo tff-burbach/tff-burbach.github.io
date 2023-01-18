@@ -48,11 +48,7 @@
             </div>
             <div class="tableseparator row"></div>
             <div id="nextMatchDayGames" class="row d-none">
-                <div id="gamesNavTemplate" class="row fs-3">
-                    <button id="previousGames" type="button" class="col text-end btn btn-link fs-3 fw-bold" onclick="tffTools.showPreviousGames()"><<</button>
-                    <h3 id="gamesTitle" class="col-7 gamesTitle text-center">Spieltag</h3>
-                    <button id="nextGames" type="button" class="col text-start btn btn-link fs-3 fw-bold" onclick="tffTools.showNextGames()">>></button>
-                </div>
+                <h3 id="gamesTitle" class="gamesTitle text-center">Spieltag</h3>
                 <h5 id="gamesRowHeader" class="row gamesHeader fs-4 fw-bold">
                     <div id="empty" class="col-1 d-none d-md-block"></div>
                     <div id="no" class="col-1 text-center">Nr.</div>
@@ -70,9 +66,12 @@
                     <div id="empty" class="col-1 d-none d-md-block"></div>
                 </div>
             </div>                    
-            <div class="tableseparator row"></div>
-            <div class="row text-center">
-                <a class="fs-4" target="_blank" href="https://www.stfv.de/stfv/index.php">... mehr auf STFV direkt</a>
+            <div id="gamesNavivation" class="row fs-3">
+                <button id="previousGames" type="button" class="col text-end btn btn-link fs-3 fw-bold" onclick="tffTools.showPreviousGames()"><<</button>
+                <div id="tableSTFVLink" class="col-7 text-center">
+                    <a class="fs-5" target="_blank" href="https://www.stfv.de/stfv/index.php">... mehr auf STFV</a>
+                </div>
+                <button id="nextGames" type="button" class="col text-start btn btn-link fs-3 fw-bold" onclick="tffTools.showNextGames()">>></button>
             </div>
         </div>
     </section>
