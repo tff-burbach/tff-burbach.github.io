@@ -1,5 +1,5 @@
 <!-- About Section -->
-    <section id="table" data-bs-spy="scroll">
+    <section id="table">
         <div id="contentTable">
             <div class="row">
                 <div class="col-12 text-center">
@@ -10,7 +10,7 @@
             <div id="status" class="status text-center"><i>loading</i></div>
             <div class="row"></div>
             <div id="currentMatchDayGames" class="row d-none">
-                <h4 id="gamesTitle" class="gamesTitle text-center">Spieltag</h4>
+                <h3 id="gamesTitle" class="gamesTitle text-center">Spieltag</h3>
                 <h5 id="gamesRowHeader" class="row gamesHeader fs-4 fw-bold">
                     <div id="empty" class="col-1 d-none d-md-block"></div>
                     <div id="no" class="col-1 text-center">Nr.</div>
@@ -33,22 +33,26 @@
                 <h3 id="tableTitle" class="tableTitle text-center">Tabelle</h3>
                 <h5 id="tableRowHeader" class="row tableHeader fs-4 fw-bold">
                     <div id="place" class="col-1 text-center">Pl.</div>
-                    <div id="team" class="col">Verein</div>
-                    <div id="goals" class="col-2 text-center d-none d-md-block">Tore</div>
-                    <div id="sets" class="col-2 text-center">Sätze</div>
-                    <div id="score" class="col-2 text-center">Punkte</div>
+                    <div id="team" class="col-5">Verein</div>
+                    <div id="goals" class="col text-center d-none d-lg-block">Tore</div>
+                    <div id="sets" class="col text-center">Sätze</div>
+                    <div id="score" class="col text-center">Punkte</div>
                 </h5>
                 <div id="tableRowTemplate" class="row tableRow fs-4 d-none">
                     <div id="place" class="col-1 text-center"></div>
-                    <div id="team" class="col text-nowrap text-truncate"></div>
-                    <div id="goals" class="col-2 text-center d-none d-md-block"></div>
-                    <div id="sets" class="col-2 text-center"></div>
-                    <div id="score" class="col-2 text-center"></div>
+                    <div id="team" class="col-5 text-nowrap text-truncate"></div>
+                    <div id="goals" class="col text-center d-none d-lg-block"></div>
+                    <div id="sets" class="col text-center"></div>
+                    <div id="score" class="col text-center"></div>
                 </div>
             </div>
             <div class="tableseparator row"></div>
             <div id="nextMatchDayGames" class="row d-none">
-                <h3 id="gamesTitle" class="gamesTitle text-center">Spieltag</h3>
+                <div id="gamesNavTemplate" class="row fs-3">
+                    <button id="previousGames" type="button" class="col text-end btn btn-link fs-3 fw-bold" onclick="tffTools.showPreviousGames()"><<</button>
+                    <h3 id="gamesTitle" class="col-7 gamesTitle text-center">Spieltag</h3>
+                    <button id="nextGames" type="button" class="col text-start btn btn-link fs-3 fw-bold" onclick="tffTools.showNextGames()">>></button>
+                </div>
                 <h5 id="gamesRowHeader" class="row gamesHeader fs-4 fw-bold">
                     <div id="empty" class="col-1 d-none d-md-block"></div>
                     <div id="no" class="col-1 text-center">Nr.</div>
@@ -65,11 +69,10 @@
                     <div id="result" class="col-1 text-center"></div>
                     <div id="empty" class="col-1 d-none d-md-block"></div>
                 </div>
-                <div id="gamesNavTemplate" class="row d-none">
-                    <button class="col-1 text-center" onclick="tffTools.showGames(1)"><<</button>
-                    <div class="col-10"></div>
-                    <button class="col-1" onclick="tffTools.showGames(20)">>></button>
-                </div>
             </div>                    
+            <div class="tableseparator row"></div>
+            <div class="row text-center">
+                <a class="fs-4" target="_blank" href="https://www.stfv.de/stfv/index.php">... mehr auf STFV direkt</a>
+            </div>
         </div>
     </section>

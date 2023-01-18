@@ -810,6 +810,18 @@ img::-moz-selection {
 }
 
 // Events
+.content {
+	margin-left: 10px;
+}
+
+.contenttitle {
+	// float: left;
+	// font-size: 22px;
+	// margin: 10px 0 0 0;
+	// padding: 0 10px 10px 10px;
+	// width: 555px;
+}
+
 .contentdate {
 	background: url("/img/contentdate.png") repeat scroll 0 0 #FFFFFF;
 	float: left;
@@ -833,20 +845,35 @@ img::-moz-selection {
 	font-size: 12px;
 	font-weight: bold;
 	margin: 0;
-	padding: 1px 0px 0px 11px;
+	padding: 0px 0px 0px 11px;
 	text-transform: uppercase;
 }
 
-.content {
-	margin-left: 10px;
+.contentcurrent{
+	text-shadow:2px 2px #000;
 }
 
-.contenttitle {
-	// float: left;
-	// font-size: 22px;
-	// margin: 10px 0 0 0;
-	// padding: 0 10px 10px 10px;
-	// width: 555px;
+.contentdatecurrent{
+}
+
+.contentdatecurrent>h3,
+.contentdatecurrent>h4{
+  // color: #800404;
+  // color: #800404;
+	// color: #1F00FF;
+	// font-weight: 700;
+	// text-shadow: -1px -1px rgb(81, 1, 1);
+  // text-decoration: underline;
+  // border: #000;
+  // border-style: dotted;
+}
+
+.contentinactive {
+	color: #aaa;
+}
+.contentdateinactive>h3,
+.contentdateinactive>h4{
+	color: #666;
 }
 
 .contentaddress {
@@ -857,6 +884,7 @@ img::-moz-selection {
 }
 
 .contentaddresslabel{
+  color: #aaa;
   flex: 1
 }
 
@@ -866,30 +894,6 @@ img::-moz-selection {
 
 .contentaddresstext{
   flex: 30
-}
-
-.contentinactive {
-	color: #aaa;
-}
-
-.contentdateinactive>h3{
-	color: #333;
-}
-
-.contentcurrent{
-	text-shadow:2px 2px #000;
-}
-
-.contentdatecurrent{
-}
-
-.contentdatecurrent>h3{
-  color: #800404;
-  // color: #800404;
-	// color: #1F00FF;
-	// font-weight: 800;
-	// text-shadow:2px 1px rgb(122, 7, 7);
-  // text-decoration: underline;
 }
 
 // Table
@@ -903,8 +907,17 @@ img::-moz-selection {
   // color: $template-color-primary;
 }
 
+#gamesNavTemplate>button{
+  padding-top: 0px;
+  margin-bottom: 30px;;
+}
+
 .gamesHeader,
 .tableHeader{
+  color: $template-color-muted;
+}
+
+#gamesNavTemplate>button{
   color: $template-color-muted;
 }
 

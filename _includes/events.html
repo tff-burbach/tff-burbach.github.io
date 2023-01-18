@@ -1,5 +1,5 @@
 <!-- About Section -->
-    <section id="events" data-bs-spy="scroll">
+    <section id="events">
         <div id="contentSchedules" class="fs-4">
             <div class="row">
                 <div class="col-12 text-center">
@@ -7,17 +7,20 @@
                     <h3 class="section-subheading text-muted">Spiele, Versammlungen, Feste.</h3>
                 </div>
             </div>
-            <div id="contentEntryTemplate" class="row justify-content-start" style="display: none;">
+            <div id="contentEntryTemplate" class="row justify-content-start d-none">
                 <div id="contentdate" class="contentdate col-1">
                         <h4 id="month"></h4>
                         <h3 id="day"></h3>
                 </div>
                 <div id="content" class="content col">
-                    <div id="contenttitle" class="contenttitle row"></div>
+                    <div id="contenttitle" class="contenttitle row">
+                        <div id="contenttitlemain" class="contenttitlemain"></div>
+                        <div id="contenttitleaddition" class="contenttitleaddition"></div>
+                    </div>
                     <div class="contentaddress row fs-5">
                         <div class="contentaddresslabel col">Ort: </div>
-                        <a class="contentaddresslink col-12" target="_blank" style="display:none;" href=""></a>
-                        <div class="contentaddresstext col-12" style="display:none;"></div>
+                        <a class="contentaddresslink col-12 d-none" target="_blank" href=""></a>
+                        <div class="contentaddresstext col-12 d-none"></div>
                         <p class="clearfix" />
                     </div>
                 </div>
