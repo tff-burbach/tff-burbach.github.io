@@ -827,6 +827,14 @@ img::-moz-selection {
 	// width: 555px;
 }
 
+#contentView.active {
+  color: $template-color-secondary;
+}
+
+.contentView>button {
+  font-style: italic;
+}
+
 .contentdate {
 	background: url("/img/contentdate.png") repeat scroll 0 0 #FFFFFF;
 	float: left;

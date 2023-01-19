@@ -8,7 +8,7 @@
 #
 - datum: 2023-01-06
   zeit: "19:00"
-  titel: Jahreshauptversammlung mit anschließendem Turnier
+  titel: TFF Jahreshauptversammlung mit anschließendem Turnier
   ort: Gasthaus Schank
 - datum: 2023-01-14
   titel: Mannschaftsturnier
@@ -28,7 +28,35 @@
 - datum: 2023-01-21
   treff: "13:30"
   zeit: "14:00"
-  titel: Vereinsmeisterschaft Einzel und Doppel
+  titel: TFF Vereinsmeisterschaft Einzel und Doppel
+  ort: Gasthaus Schank
+- datum: 2023-02-20
+  zeit: "13:00"
+  titel: TFF Rosenmontagstreffen
+  ort: Gasthaus Schank
+- datum: 2023-04-08
+  zeit: "10:00"
+  titel: TFF Osterturnier
+  ort: 
+- datum: 2023-05-18
+  zeit: "11:00"
+  titel: TFF Vatertagstreffen
+  ort: Gasthaus Schank
+- datum: 2023-07-22
+  zeit: "14:00"
+  titel: TFF Sommerfest
+  ort: Gasthaus Schank
+- datum: 2023-09-15
+  zeit: "20:00"
+  titel: TFF Bayrischer Abend mit Turnier
+  ort: Gasthaus Schank
+- datum: 2023-09-22
+  zeit: "20:00"
+  titel: TFF Spielabend (Karten, Knobeln, 8er Tischi)
+  ort: Gasthaus Schank
+- datum: 2023-12-09
+  zeit: "19:00"
+  titel: TFF Weihnachtsfeier
   ort: Gasthaus Schank
 - datum: 2023-12-08
   titel: Relegationsspiele

@@ -22,7 +22,7 @@ tffTools = {
 
 	async showTFFData() {
 		await tffTools._initializeData();
-		await tffTools.showSchedules(3, 10, true, true);
+		await tffTools.showSchedules('normalSchedules');
 		await tffTools.showTable();
 		// var dataSpyList = [].slice.call(document.querySelectorAll('[data-bs-spy="scroll"]'))
 		// dataSpyList.forEach(function (dataSpyEl) {
@@ -35,8 +35,33 @@ tffTools = {
 		// })
 	},
 
-	async showSchedules(noPast, noFuture, animate, onlyImportant, types) {
-		var $scheduleParent = jQuery('#contentSchedules');
+	async showSchedules(view) {
+		var eventId = '#' + view;
+		$(eventId).parent().find('.btn').removeClass('active')
+		switch(view) {
+			case 'allSchedules':
+				tffTools._showCurrentSchedules();
+				break;
+			case 'leagueSchedules':
+				tffTools._showSchedulesByType('#contentSchedules', tffData.typL);
+				break;
+			case 'cupSchedules':
+				tffTools._showSchedulesByType('#contentSchedules', tffData.typP);
+				break;
+			case 'friendlySchedules':
+				tffTools._showSchedulesByType('#contentSchedules', tffData.typF);
+				break;
+			case 'infoSchedules':
+				tffTools._showSchedulesByType('#contentSchedules', tffData.typI);
+				break;
+			default:
+				tffTools._showCurrentSchedules(3, 6, true, true);
+		}
+		$(eventId).addClass('active');
+	},
+
+	async _showCurrentSchedules(noPast, noFuture, animate, onlyImportant, types) {
+		var $scheduleParent = $('#contentSchedules');
 		if (onlyImportant) {
 			tffTools._showSchedules($scheduleParent, await tffTools._getSchedules(noPast, noFuture, types, 1, 2), animate);
 		}
@@ -45,10 +70,10 @@ tffTools = {
 		}
 	},
 
-	async showSchedulesByType(contentSchedulesId, type) {
+	async _showSchedulesByType(contentSchedulesId, type) {
 		var animate;
-		var $scheduleParent = jQuery(contentSchedulesId);
-		tffTools._showSchedules($scheduleParent, tffTools._getSchedules(undefined, undefined, Array.from(type)), animate);
+		var $scheduleParent = $(contentSchedulesId);
+		tffTools._showSchedules($scheduleParent, await tffTools._getSchedules(undefined, undefined, Array.from(type)), animate);
 	},
 
 	refreshPage() {
@@ -57,15 +82,18 @@ tffTools = {
 
 	async _showSchedules($scheduleParent, requestedSchedules, animate) {
 		animate = (animate === undefined ? false : animate);
+		$scheduleParent.find('.contentEntryGenerated').remove();
 		var $scheduleTemplate = $scheduleParent.find('#contentEntryTemplate');
 		var fadeTimeTmp = tffTools.fadeTime;
-		// requestedSchedules.forEach(termin => {
+		var contentShown = false;
 		for (var i = 0; i < requestedSchedules.length; i++) {
 			var termin = requestedSchedules[i];
 			var date = new Date(termin.datum);
 			var $scheduleEntry = $scheduleTemplate.clone();
-			$scheduleEntry.attr('id', 'contentEntryGenerated');
+			contentShown = true;
+			$scheduleEntry.attr('id', 'contentEntryGenerated' + i);
 			$scheduleEntry.removeClass('d-none');
+			$scheduleEntry.addClass('contentEntryGenerated');
 			if (termin.isPast) {
 				$scheduleEntry.addClass('contentinactive');
 			}
@@ -88,7 +116,7 @@ tffTools = {
 			}
 			$scheduleParent.append($scheduleEntry);
 		}
-		// )
+		contentShown ? $('#noEvents').addClass('d-none') : $('#noEvents').removeClass('d-none');
 		tffTools.setAddresses();
 	},
 
@@ -345,7 +373,7 @@ tffTools = {
 	_buildMatchdayGames($matchdayGames, teamname, matchday, matchdayIndex) {
 		games = matchday.games;
 		var loaded = false;
-		$matchdayGames.find('#gamesRowGenerated').remove();
+		$matchdayGames.find('.gamesRowGenerated').remove();
 		$matchdayGames.find('#gamesTitle').text(matchday.text);
 		$matchdayGames.attr('spieltag', matchday.no);
 		$matchdayGames.attr('matchdayIndex', matchdayIndex);
@@ -353,7 +381,8 @@ tffTools = {
 		games.forEach(game => {
 			$gamesRow = $matchdayGames.find('#gamesRowTemplate').clone();
 			var no = game.no ? game.no : index;
-			$gamesRow.attr('id', 'gamesRowGenerated');
+			$gamesRow.attr('id', 'gamesRowGenerated' + index);
+			$gamesRow.addClass('gamesRowGenerated');
 			$gamesRow.find('#no').text(no);
 			$gamesRow.find('#team1').text(game.team1);
 			$gamesRow.find('#team2').text(game.team2);
@@ -375,18 +404,19 @@ tffTools = {
 		})
 		if (loaded) {
 			$matchdayGames.removeClass('d-none');
-			matchdayIndex <= 0 ? $matchdayGames.find('#previousGames').css('color', 'transparent') : $matchdayGames.find('#previousGames').css('color', '');
-			matchdayIndex >= tffData.leagueData.matchDays.length - 1 ? $matchdayGames.find('#nextGames').css('color', 'transparent') : $matchdayGames.find('#nextGames').css('color', '');
+			matchdayIndex <= 0 ? $('#previousGames').css('color', 'transparent') : $('#previousGames').css('color', '');
+			matchdayIndex >= tffData.leagueData.matchDays.length - 1 ? $('#nextGames').css('color', 'transparent') : $('#nextGames').css('color', '');
 		}
 	},
 
 	_buildMatchdayTable($matchdayTable, teamname, matchday) {
 		table = matchday.table;
 		var loaded = false;
-		$matchdayTable.find('#tableRowGenerated').remove();
+		$matchdayTable.find('.tableRowGenerated').remove();
 		table.forEach(tableRow => {
 			$tableRow = $matchdayTable.find('#tableRowTemplate').clone();
-			$tableRow.attr('id', 'tableRowGenerated');
+			$tableRow.attr('id', 'tableRowGenerated' + tableRow.place);
+			$tableRow.addClass('tableRowGenerated');
 			$tableRow.find('#place').text(tableRow.place);
 			$tableRow.find('#team').text(tableRow.team);
 			$tableRow.find('#goals').text(tableRow.goals);
@@ -431,8 +461,8 @@ tffTools = {
 	},
 
 	async _initializeData() {
-		// Keep data for 5 sec in memory
-		if (tffData.initialized && (new Date() - tffData.initializationTime) < 5 * 1000 ) return;
+		// Keep data for 60 secs in memory
+		if (tffData.initialized && (new Date() - tffData.initializationTime) < 60 * 1000 ) return;
 		await tffTools._initializeTffData();
 		tffTools._initializeSchedules();
 		tffData.initialized = true;
@@ -440,7 +470,13 @@ tffTools = {
 
 	async _initializeTffData() {
 		tffData.leagueData = await stfvData.collectLeagueData(tffTools.getTeam());
-		tffData.leagueData.matches.forEach(match => {
+		// tffData.termine.filter(function(value, index, arr){ 
+		// 	return !generated;
+		// });
+		tffData.termine = tffData.termine.filter(termin => { 
+			return !termin.generated;
+		});
+	tffData.leagueData.matches.forEach(match => {
 			tffData.termine.push({
 				datetime: match.datetime,
 				datum: match.date,
@@ -448,7 +484,8 @@ tffTools = {
 				typ: tffData.typL,
 				gegner: match.opponent,
 				ort: match.home ? 'H' : 'A',
-				ergebnis: match.result
+				ergebnis: match.result,
+				generated: new Date()
 			})
 		});
 		tffData.termine.sort((a, b) => (a.datetime > b.datetime) ? 1 : -1);
