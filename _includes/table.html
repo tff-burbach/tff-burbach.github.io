@@ -66,12 +66,13 @@
                     <div id="empty" class="col-1 d-none d-md-block"></div>
                 </div>
             </div>                    
-            <div id="gamesNavivation" class="row fs-3">
-                <button id="previousGames" type="button" class="col text-end btn btn-link fs-3 fw-bold" onclick="tffTools.showPreviousGames()"><<</button>
-                <div id="tableSTFVLink" class="col-7 text-center">
-                    <a class="fs-5" target="_blank" href="https://www.stfv.de/stfv/index.php">... mehr auf STFV</a>
-                </div>
-                <button id="nextGames" type="button" class="col text-start btn btn-link fs-3 fw-bold" onclick="tffTools.showNextGames()">>></button>
+            <div id="gamesNavigation" class="row">
+                <button id="previousGames" type="button" class="col text-end btn btn-link fs-4 fw-bold inactive" onclick="tffTools.showPreviousGames()"><<</button>
+                <button id="refreshData" type="button" class="col text-center btn btn-link fs-4 inactive" onclick="tffTools.showTFFData()">aktualisieren</button>
+                <button id="nextGames" type="button" class="col text-start btn btn-link fs-4 fw-bold inactive" onclick="tffTools.showNextGames()">>></button>
             </div>
-        </div>
+            <div id="tableSTFVLink" class="row text-center">
+                <a class="fs-4" target="_blank" href="https://www.stfv.de/stfv/index.php">STFV Datenbank</a>
+            </div>
+    </div>
     </section>

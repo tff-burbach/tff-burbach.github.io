@@ -28,7 +28,7 @@ stfvData = {
 
 	async fetchTableFromStfv(team, matchdayno, category) {
 		const url = stfvData.getLeagueUrl(team.league, matchdayno, team.year, category);
-		const response = await $.get(url);
+		const response = await $.get({url: url, cache: false});
 		var html = response.contents;
 		var stfvTable = document.createElement('div');
 		stfvTable.innerHTML = html; //stfvData.fixEncoding(html);

@@ -921,10 +921,20 @@ img::-moz-selection {
 }
 
 #previousGames,
-#nextGames {
+#nextGames,
+#refreshData {
   color: $template-color-muted;
   padding-top: 0px;
-  // margin-bottom: 30px;;
+}
+
+#previousGames.inactive,
+#nextGames.inactive,
+#refreshData.inactive {
+  color: transparent;
+}
+
+#refreshData {
+  font-style: italic;
 }
 
 .gamesHeader,
@@ -940,7 +950,8 @@ img::-moz-selection {
   height: 100px;
 }
 
-#tableSTFVLink {
+#tableSTFVLink,
+#gamesNavigation {
   margin-top: 30px;
   margin-bottom: 30px;
 }

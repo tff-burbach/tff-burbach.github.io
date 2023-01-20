@@ -1,16 +1,7 @@
 tffTools = {
 
-	x_csrf_token: '',
-	schedules4Update: [],
-	updateScheduled: false,
-	collectionTimeMsec: 3 * 1000,
-
-	fadeTime: 500,
-	fadeTimeIncrement: 500,
-	rotateDegree: 0,
-	rotateDegreeIncrement: 1,
-	rotateDelay: 20,
-	rotateWaitingTime: 5000,
+	cacheTimeMsec: 5 * 60 * 1000,
+	// cacheTimeMsec: 5 * 1000,
 
 	months: [
 		'JAN', 'FEB', 'MÄR', 'APR', 'MAI', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DEZ'
@@ -21,7 +12,7 @@ tffTools = {
 	],
 
 	async showTFFData() {
-		await tffTools._initializeData();
+		await tffTools._initializeData(true);
 		await tffTools.showSchedules('normalSchedules');
 		await tffTools.showTable();
 		// var dataSpyList = [].slice.call(document.querySelectorAll('[data-bs-spy="scroll"]'))
@@ -404,8 +395,8 @@ tffTools = {
 		})
 		if (loaded) {
 			$matchdayGames.removeClass('d-none');
-			matchdayIndex <= 0 ? $('#previousGames').css('color', 'transparent') : $('#previousGames').css('color', '');
-			matchdayIndex >= tffData.leagueData.matchDays.length - 1 ? $('#nextGames').css('color', 'transparent') : $('#nextGames').css('color', '');
+			matchdayIndex <= 0 ? $('#previousGames').addClass('inactive') : $('#previousGames').removeClass('inactive');
+			matchdayIndex >= tffData.leagueData.matchDays.length - 1 ? $('#nextGames').addClass('inactive') : $('#nextGames').removeClass('inactive');
 		}
 	},
 
@@ -460,15 +451,15 @@ tffTools = {
 		}
 	},
 
-	async _initializeData() {
-		// Keep data for 60 secs in memory
-		if (tffData.initialized && (new Date() - tffData.initializationTime) < 60 * 1000 ) return;
+	async _initializeData(force) {
+		// Keep data for cacheTimeMsec in memory and refresh automatically
+		if (!force && tffData.initialized && (new Date() - tffData.initializationTime) < tffTools.cacheTimeMsec ) return;
 		await tffTools._initializeTffData();
-		tffTools._initializeSchedules();
-		tffData.initialized = true;
 	},
 
 	async _initializeTffData() {
+		tffTools._log('Load data from STFV');
+		$('#refreshData').addClass('inactive');
 		tffData.leagueData = await stfvData.collectLeagueData(tffTools.getTeam());
 		// tffData.termine.filter(function(value, index, arr){ 
 		// 	return !generated;
@@ -489,13 +480,15 @@ tffTools = {
 			})
 		});
 		tffData.termine.sort((a, b) => (a.datetime > b.datetime) ? 1 : -1);
+		tffTools._initializeSchedules();
+		tffData.initialized = true;
 		tffData.initializationTime = new Date();
+		$('#refreshData').removeClass('inactive');
+		setTimeout(tffTools._initializeTffData, tffTools.cacheTimeMsec);
 	},
 
 	_log(logMessage) {
-		if (false) {
-			console.log(logMessage);
-		}
+		// console.log(logMessage);
 	},
 
 	getLeague() {
