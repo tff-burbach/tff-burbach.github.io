@@ -45,8 +45,8 @@ stfvData = {
 			var textDate = option.text.split(", ")[1];
 			var d = textDate.split(".");
 			var tmpDate = new Date('20' + d[2], d[1] - 1, d[0]);
-			if (1 > 0 && currentDate > tmpDate) {
-				currentIndex = i - 1;
+			if (currentDate > tmpDate) {
+				currentIndex = i;
 			}
 			tmpDate.setHours(21);
 			var matchDay = { no: parseInt(option.value), text: option.text, date: tmpDate, games: [] };
