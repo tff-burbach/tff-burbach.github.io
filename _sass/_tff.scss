@@ -961,6 +961,11 @@ img::-moz-selection {
   // color: $template-color-muted;
 }
 
+.status{
+  color: gray;
+  font-style: italic;
+}
+
 body {
   // background-color: #800404;
   background-image: $body-background-image;

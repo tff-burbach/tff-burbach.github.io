@@ -358,7 +358,6 @@ tffTools = {
 		if (nextMatchDay) {
 			tffTools._buildMatchdayGames($contentTable.find('#nextMatchDayGames'), teamname, nextMatchDay, nextIndex);
 		}
-		$contentTable.find('#status').addClass('d-none');
 	},
 
 	_buildMatchdayGames($matchdayGames, teamname, matchday, matchdayIndex) {
@@ -483,6 +482,7 @@ tffTools = {
 		tffTools._initializeSchedules();
 		tffData.initialized = true;
 		tffData.initializationTime = new Date();
+		$('.status').text(tffData.initializationTime.toLocaleDateString("de-de") + ", " + tffData.initializationTime.toLocaleTimeString("de-de"));
 		$('#refreshData').removeClass('inactive');
 		setTimeout(tffTools._initializeTffData, tffTools.cacheTimeMsec);
 	},
