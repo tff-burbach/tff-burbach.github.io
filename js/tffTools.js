@@ -457,10 +457,10 @@ tffTools = {
 	async _initializeData(force) {
 		// Keep data for cacheTimeMsec in memory and refresh automatically
 		if (!force && tffData.initialized && (new Date() - tffData.initializationTime) < tffTools.cacheTimeMsec ) return;
-		await tffTools._initializeTffData();
+		await tffTools._initializeTffData(force);
 	},
 
-	async _initializeTffData() {
+	async _initializeTffData(force) {
 		tffTools._log('Load data from STFV');
 		$('#refreshData').addClass('inactive');
 		tffData.leagueData = await stfvData.collectLeagueData(tffTools.getTeam());
@@ -488,7 +488,9 @@ tffTools = {
 		tffData.initializationTime = new Date();
 		$('.status').text(tffData.initializationTime.toLocaleDateString("de-de") + ", " + tffData.initializationTime.toLocaleTimeString("de-de"));
 		$('#refreshData').removeClass('inactive');
-		setTimeout(tffTools._initializeTffData, tffTools.cacheTimeMsec);
+		if (!force) {
+			setTimeout(tffTools._initializeTffData, tffTools.cacheTimeMsec);
+		}
 	},
 
 	_createTFFResult(match) {
