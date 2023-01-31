@@ -1,7 +1,7 @@
 tffTools = {
 
 	cacheTimeMsec: 5 * 60 * 1000,
-	// cacheTimeMsec: 5 * 1000,
+	// cacheTimeMsec: 20 * 1000,
 
 	months: [
 		'JAN', 'FEB', 'MÄR', 'APR', 'MAI', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DEZ'
@@ -24,9 +24,10 @@ tffTools = {
 		// firstScrollSpyEl.addEventListener('activate.bs.scrollspy', function (event) {
 		// 	tffTools._log(`activate.bs.scrollspy: event: ${event}, source: ${event.srcElement}, target: ${event.relatedTarget}`);
 		// })
-		if (!force) {
-			setTimeout(tffTools.showTFFData, tffTools.cacheTimeMsec);
+		if (tffData.timer) {
+			clearTimeout(tffData.timer);
 		}
+		tffData.timer = setTimeout(tffTools.showTFFData, tffTools.cacheTimeMsec);
 	},
 
 	async showSchedules(view) {
