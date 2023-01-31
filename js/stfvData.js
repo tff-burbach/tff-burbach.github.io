@@ -23,13 +23,14 @@ stfvData = {
 		leaguename = leaguename.replace(' ', '+').replace('ü','%FC');
 		const stfvURLEncoded = `https%3A//www.stfv.de/stfv/ligabetrieb/ligatabelle.php%3FJahr%3D${year}%26Kategorie%3D${category}%26Liga%3D${leaguename}%26Ansicht%3DKreuztabelle`;
 		// const stfvURLEncoded = `https%3A//www.stfv.de/stfv/ligabetrieb/ligatabelle.php%3FJahr%3D${year}%26Kategorie%3D${category}%26Liga%3D${leaguename}%26Spieltag_Nr%3D${matchdayno}%26Ansicht%3DKreuztabelle`;
-		return `https://api.allorigins.win/get?url=${stfvURLEncoded}`;
+		// return `https://api.allorigins.win/get?url=${stfvURLEncoded}`;
+		return `https://corsproxy.io/?${stfvURLEncoded}`;
 	},
 
 	async fetchTableFromStfv(team, matchdayno, category) {
 		const url = stfvData.getLeagueUrl(team.league, matchdayno, team.year, category);
 		const response = await $.get({url: url, cache: false});
-		var html = response.contents;
+		var html = response;	//.contents;
 		var stfvTable = document.createElement('div');
 		stfvTable.innerHTML = html; //stfvData.fixEncoding(html);
 		return stfvTable;
