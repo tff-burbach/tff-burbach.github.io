@@ -13,7 +13,7 @@ tffTools = {
 
 	async showTFFData() {
 		await tffTools._initializeData(true);
-		await tffTools.showSchedules('normalSchedules');
+		await tffTools.showSchedules();
 		await tffTools.showTable();
 		// var dataSpyList = [].slice.call(document.querySelectorAll('[data-bs-spy="scroll"]'))
 		// dataSpyList.forEach(function (dataSpyEl) {
@@ -27,6 +27,9 @@ tffTools = {
 	},
 
 	async showSchedules(view) {
+		if (!view) {
+			view = $('#contentView').attr('view');
+		}
 		var eventId = '#' + view;
 		$(eventId).parent().find('.btn').removeClass('active')
 		switch(view) {
@@ -49,6 +52,7 @@ tffTools = {
 				tffTools._showCurrentSchedules(3, 6, true, true);
 		}
 		$(eventId).addClass('active');
+		$('#contentView').attr('view',view);
 	},
 
 	async _showCurrentSchedules(noPast, noFuture, animate, onlyImportant, types) {
