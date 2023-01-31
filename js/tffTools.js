@@ -11,10 +11,10 @@ tffTools = {
 		'So.', 'Mo.', 'Di.', 'Mi.', 'Do.', 'Fr.', 'Sa.'
 	],
 
-	async showTFFData() {
-		await tffTools._initializeData(true);
+	async showTFFData(force) {
+		await tffTools._initializeData(force);
 		await tffTools.showSchedules();
-		await tffTools.showTable();
+		await tffTools.showTable(force);
 		// var dataSpyList = [].slice.call(document.querySelectorAll('[data-bs-spy="scroll"]'))
 		// dataSpyList.forEach(function (dataSpyEl) {
 		// 	bootstrap.ScrollSpy.getInstance(dataSpyEl)
@@ -24,6 +24,9 @@ tffTools = {
 		// firstScrollSpyEl.addEventListener('activate.bs.scrollspy', function (event) {
 		// 	tffTools._log(`activate.bs.scrollspy: event: ${event}, source: ${event.srcElement}, target: ${event.relatedTarget}`);
 		// })
+		if (!force) {
+			setTimeout(tffTools.showTFFData, tffTools.cacheTimeMsec);
+		}
 	},
 
 	async showSchedules(view) {
@@ -350,14 +353,15 @@ tffTools = {
 		}
 	},
 
-	async showTable() {
+	async showTable(force) {
 		await tffTools._initializeData();
 		const teamname = tffTools.getTeam().name;
 		const $contentTable = $('#contentTable');
 		var matchDay = tffData.leagueData.currentMatchDay;
 		tffTools._buildMatchdayGames($contentTable.find('#currentMatchDayGames'), teamname, matchDay, matchDay.index);
 		tffTools._buildMatchdayTable($contentTable.find('#currentMatchDayTable'), teamname, matchDay);
-		const nextIndex = tffData.leagueData.matchDays.findIndex(entry => entry.no === matchDay.no) + 1;
+		var nextIndex = $contentTable.find('#nextMatchDayGames').attr('matchdayIndex');
+		nextIndex = force || !nextIndex ? tffData.leagueData.matchDays.findIndex(entry => entry.no === matchDay.no) + 1 : nextIndex;
 		const nextMatchDay = tffData.leagueData.matchDays[nextIndex];
 		if (nextMatchDay) {
 			tffTools._buildMatchdayGames($contentTable.find('#nextMatchDayGames'), teamname, nextMatchDay, nextIndex);
@@ -488,9 +492,9 @@ tffTools = {
 		tffData.initializationTime = new Date();
 		$('.status').text(tffData.initializationTime.toLocaleDateString("de-de") + ", " + tffData.initializationTime.toLocaleTimeString("de-de"));
 		$('#refreshData').removeClass('inactive');
-		if (!force) {
-			setTimeout(tffTools._initializeTffData, tffTools.cacheTimeMsec);
-		}
+		// if (!force) {
+		// 	setTimeout(tffTools._initializeTffData, tffTools.cacheTimeMsec);
+		// }
 	},
 
 	_createTFFResult(match) {
