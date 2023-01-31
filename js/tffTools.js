@@ -474,7 +474,7 @@ tffTools = {
 				typ: tffData.typL,
 				gegner: match.opponent,
 				ort: match.home ? 'H' : 'A',
-				ergebnis: match.result,
+				ergebnis: tffTools._createTFFResult(match),
 				generated: new Date()
 			})
 		});
@@ -485,6 +485,14 @@ tffTools = {
 		$('.status').text(tffData.initializationTime.toLocaleDateString("de-de") + ", " + tffData.initializationTime.toLocaleTimeString("de-de"));
 		$('#refreshData').removeClass('inactive');
 		setTimeout(tffTools._initializeTffData, tffTools.cacheTimeMsec);
+	},
+
+	_createTFFResult(match) {
+		if (match.home || match.result.indexOf(':') < 0) {
+			return match.result;
+		}
+		resultSplit = match.result.split(':');
+		return `${resultSplit[1]}:${resultSplit[0]}`;
 	},
 
 	_log(logMessage) {
