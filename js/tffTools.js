@@ -393,7 +393,7 @@ tffTools = {
 			highlightTeam = game.team1 === teamname ? '#team1' : highlightTeam
 			highlightTeam = game.team2 === teamname ? '#team2' : highlightTeam
 			if (highlightTeam) {
-				$gamesRow.find('#no').addClass('ownTeam');
+				// $gamesRow.find('#no').addClass('ownTeam');
 				$gamesRow.find(highlightTeam).addClass('ownTeam');
 				$gamesRow.find('#result').addClass('ownTeam');
 			}
@@ -468,6 +468,7 @@ tffTools = {
 	async _initializeTffData(force) {
 		tffTools._log('Load data from STFV');
 		$('#refreshData').addClass('inactive');
+		$('.status').text('loading');
 		tffData.leagueData = await stfvData.collectLeagueData(tffTools.getTeam());
 		// tffData.termine.filter(function(value, index, arr){ 
 		// 	return !generated;
@@ -491,7 +492,7 @@ tffTools = {
 		tffTools._initializeSchedules();
 		tffData.initialized = true;
 		tffData.initializationTime = new Date();
-		$('.status').text(tffData.initializationTime.toLocaleDateString("de-de") + ", " + tffData.initializationTime.toLocaleTimeString("de-de"));
+		$('.status').text(tffData.initializationTime.toLocaleDateString("de-de", { month:"numeric", day:"numeric"}) + " " + tffData.initializationTime.toLocaleTimeString("de-de"));
 		$('#refreshData').removeClass('inactive');
 		// if (!force) {
 		// 	setTimeout(tffTools._initializeTffData, tffTools.cacheTimeMsec);

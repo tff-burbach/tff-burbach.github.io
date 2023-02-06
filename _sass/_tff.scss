@@ -951,7 +951,7 @@ img::-moz-selection {
 }
 
 .tableseparator{
-  height: 100px;
+  height: 50px;
 }
 
 #tableSTFVLink,
@@ -968,6 +968,11 @@ img::-moz-selection {
 .status{
   color: gray;
   font-style: italic;
+  // font-size: medium;
+}
+
+.statusbar{
+  padding-top: 20px;
 }
 
 body {

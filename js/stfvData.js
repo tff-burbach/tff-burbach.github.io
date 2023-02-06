@@ -27,9 +27,20 @@ stfvData = {
 		return `https://corsproxy.io/?${stfvURLEncoded}`;
 	},
 
+	getBackupLeagueUrl(leaguename, matchdayno, year, category) {
+		return '/stfv/kreuztabelle.html';
+	},
+
 	async fetchTableFromStfv(team, matchdayno, category) {
-		const url = stfvData.getLeagueUrl(team.league, matchdayno, team.year, category);
-		const response = await $.get({url: url, cache: false});
+		var response;
+		try {
+			const url = stfvData.getLeagueUrl(team.league, matchdayno, team.year, category);
+			response = await $.get({url: url, cache: false});
+		}
+		catch (ex) {
+			const url = stfvData.getBackupLeagueUrl(team.league, matchdayno, team.year, category);
+			response = await $.get({url: url, cache: false});
+		}
 		var html = response;	//.contents;
 		var stfvTable = document.createElement('div');
 		stfvTable.innerHTML = html; //stfvData.fixEncoding(html);
