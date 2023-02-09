@@ -1,1 +1,4 @@
 Sitemap: https://tff-burbach.github.io/sitemap.xml
+
+User-agent: *
+Disallow:
