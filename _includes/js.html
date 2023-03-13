@@ -40,10 +40,10 @@
             {datetime: '{{ info.datum }}T{{ info.zeit | default:'00:00' }}' ,datum:'{{ info.datum }}', zeit:'{{ info.zeit }}', typ:'I', titel: '{{ info.titel }}', treff:'{{ info.treff }}', ort:'{{ info.ort }}', ergebnis:'{{ info.ergebnis }}', adresse:'{{ info.adresse }}', adress_url:'{{ info.adress_url }}'},
          {% endfor %}
          {% for spiel in site.data.freundschaftspiele %}
-            {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'F', gegner:'{{ spiel.gegner }}', ergebnis:'{{ info.ergebnis }}', ort:'{{ spiel.ort }}', adresse:'{{ spiel.adresse }}', adress_url:'{{ spiel.adress_url }}'},
+            {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'F', gegner:'{{ spiel.gegner }}', ergebnis:'{{ spiel.ergebnis }}', ort:'{{ spiel.ort }}', adresse:'{{ spiel.adresse }}', adress_url:'{{ spiel.adress_url }}'},
          {% endfor %}
          {% for spiel in site.data.pokalspiele %}
-            {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'P', gegner:'{{ spiel.gegner }}', ergebnis:'{{ info.ergebnis }}', ort:'{{ spiel.ort }}', adresse:'{{ spiel.adresse }}', adress_url:'{{ spiel.adress_url }}'},
+            {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'P', gegner:'{{ spiel.gegner }}', ergebnis:'{{ spiel.ergebnis }}', ort:'{{ spiel.ort }}', adresse:'{{ spiel.adresse }}', adress_url:'{{ spiel.adress_url }}'},
          {% endfor %}
       ]
 
