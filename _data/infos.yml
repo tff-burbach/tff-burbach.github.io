@@ -37,7 +37,9 @@
 - datum: 2023-04-08
   zeit: "11:00"
   titel: TFF Osterturnier
-  ort: 
+  ort: Turnhalle Gersweiler
+  adresse: Turnhalle Gersweiler, Krughütter Str. 92, 66128 Saarbrücken
+  adress_url: https://www.google.de/maps/place/Krugh%C3%BCtter+Str.+92,+66128+Saarbr%C3%BCcken/@49.2318368,6.9225461,19z/data=!3m1!4b1!4m6!3m5!1s0x4795b22ef8d59c0f:0xeb918348bf4761cb!8m2!3d49.2318359!4d6.9230946!16s%2Fg%2F11c22qg3vv
 - datum: 2023-05-18
   zeit: "11:00"
   titel: TFF Vatertagstreffen
