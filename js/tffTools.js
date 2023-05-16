@@ -378,6 +378,15 @@ tffTools = {
 		$matchdayGames.attr('matchdayIndex', matchdayIndex);
 		var index = 1;
 		games.forEach(game => {
+			var matchDayDate = new Date(game.datetime)
+			if (!game.result) {
+				if (matchday.date.getDate() != matchDayDate.getDate() || matchday.date.getMonth() != matchDayDate.getMonth()) {
+					game.result = `(${matchDayDate.getDate()}.${matchDayDate.getMonth()+1}.)`;
+				}
+				else {
+					game.result = ":";
+				}
+			}
 			$gamesRow = $matchdayGames.find('#gamesRowTemplate').clone();
 			var no = game.no ? game.no : index;
 			$gamesRow.attr('id', 'gamesRowGenerated' + index);
@@ -385,7 +394,10 @@ tffTools = {
 			$gamesRow.find('#no').text(no);
 			$gamesRow.find('#team1').text(game.team1);
 			$gamesRow.find('#team2').text(game.team2);
-			$gamesRow.find('#result').text(game.result ? game.result : ":");
+			$gamesRow.find('#result').text(game.result);
+			if (game.result.indexOf(':') < 0) {
+				$gamesRow.find('#result').css('font-style','italic');
+			}
 			// Show
 			$gamesRow.removeClass('d-none');
 			// Highlight
@@ -393,7 +405,6 @@ tffTools = {
 			highlightTeam = game.team1 === teamname ? '#team1' : highlightTeam
 			highlightTeam = game.team2 === teamname ? '#team2' : highlightTeam
 			if (highlightTeam) {
-				// $gamesRow.find('#no').addClass('ownTeam');
 				$gamesRow.find(highlightTeam).addClass('ownTeam');
 				$gamesRow.find('#result').addClass('ownTeam');
 			}
