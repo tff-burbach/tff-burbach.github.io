@@ -370,7 +370,7 @@ tffTools = {
 	},
 
 	_buildMatchdayGames($matchdayGames, teamname, matchday, matchdayIndex) {
-		games = matchday.games;
+		var games = matchday.games;
 		var loaded = false;
 		$matchdayGames.find('.gamesRowGenerated').remove();
 		$matchdayGames.find('#gamesTitle').text(matchday.text);
@@ -380,14 +380,18 @@ tffTools = {
 		games.forEach(game => {
 			var matchDayDate = new Date(game.datetime)
 			if (!game.result) {
-				if (matchday.date.getDate() != matchDayDate.getDate() || matchday.date.getMonth() != matchDayDate.getMonth()) {
-					game.result = `(${matchDayDate.getDate()}.${matchDayDate.getMonth()+1}.)`;
+				if (matchday.date.getDate() !== matchDayDate.getDate() || matchday.date.getMonth() !== matchDayDate.getMonth()) {
+					if (isNaN(matchDayDate) || (matchDayDate.getDate() === 31 && matchDayDate.getMonth() === 11)) {
+						game.result = '(offen)';
+					} else {
+						game.result = `(${matchDayDate.getDate()}.${matchDayDate.getMonth()+1}.)`;
+					}
 				}
 				else {
 					game.result = ":";
 				}
 			}
-			$gamesRow = $matchdayGames.find('#gamesRowTemplate').clone();
+			var $gamesRow = $matchdayGames.find('#gamesRowTemplate').clone();
 			var no = game.no ? game.no : index;
 			$gamesRow.attr('id', 'gamesRowGenerated' + index);
 			$gamesRow.addClass('gamesRowGenerated');
