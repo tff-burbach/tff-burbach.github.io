@@ -6,55 +6,22 @@
 #   adresse:
 #   adress_url: Google Maps URL
 #
-- datum: 2023-01-06
-  zeit: "19:00"
-  titel: TFF Jahreshauptversammlung mit anschließendem Turnier
-  ort: Gasthaus Schank
-- datum: 2023-01-14
-  titel: Mannschaftsturnier
-  treff: 9:45, Gasthaus Schank
-  zeit: "11:00"
-  ort: Lautenbach
-  adresse: Halle, Schönbachstrasse 7, 66564 Lautenbach
-  adress_url: https://www.google.com/maps/place/Sch%C3%B6nbachstra%C3%9Fe+7,+66564+Ottweiler,+Germany/@49.4193925,7.2642048,68m/data=!3m1!1e3!4m5!3m4!1s0x4795c3b3a623b077:0x4b152144b5246eed!8m2!3d49.4195407!4d7.2641916
-  ergebnis: 4. Platz
-- datum: 2023-01-15
-  titel: STFV Mitgliederversammlung
-  treff: 9:45, Gasthaus Schank
-  zeit: "13:00"
-  ort: Eppelborn
-  adresse: Big Eppel, Europaplatz 4, 66571 Eppelborn
-  adress_url: https://www.google.com/maps/place/big+Eppel/@49.4072516,6.9672644,17z/data=!3m2!4b1!5s0x4795bc8687b3b98d:0x3efc904337e0b09f!4m5!3m4!1s0x4795bc8680b080bb:0xbf3b1722c1199716!8m2!3d49.4072535!4d6.969449
-- datum: 2023-01-21
-  treff: "13:30"
-  zeit: "14:00"
-  titel: TFF Vereinsmeisterschaft Einzel und Doppel
-  ort: Gasthaus Schank
-- datum: 2023-02-20
-  zeit: "13:00"
-  titel: TFF Rosenmontagstreffen
-  ort: Gasthaus Schank
-- datum: 2023-04-08
-  zeit: "11:00"
-  titel: TFF Osterturnier
-  ort: Turnhalle Gersweiler
-  adresse: Turnhalle Gersweiler, Krughütter Str. 92, 66128 Saarbrücken
-  adress_url: https://www.google.de/maps/place/Krugh%C3%BCtter+Str.+92,+66128+Saarbr%C3%BCcken/@49.2318368,6.9225461,19z/data=!3m1!4b1!4m6!3m5!1s0x4795b22ef8d59c0f:0xeb918348bf4761cb!8m2!3d49.2318359!4d6.9230946!16s%2Fg%2F11c22qg3vv
-- datum: 2023-08-19
-  zeit: "14:00"
-  titel: TFF Sommerfest
-  ort: bei Marcus
-  adresse: Lüderitz Straße 16, Völklingen-Heidstock
-  adress_url: https://www.google.de/maps/place/L%C3%BCderitzstra%C3%9Fe+16,+66333+V%C3%B6lklingen/@49.2587564,6.881947,17z/data=!3m1!4b1!4m6!3m5!1s0x4795ae1eef4a5405:0x921ac01ac202b2c2!8m2!3d49.2587529!4d6.8845273!16s%2Fg%2F11c24bcnyh!5m1!1e1?hl=de&entry=ttu
-- datum: 2023-10-13
-  zeit: "19:00"
-  titel: TFF Bayrischer Abend mit Turnier
-  ort: Gasthaus Schank
 - datum: 2023-12-09
   zeit: "19:00"
   titel: TFF Weihnachtsfeier
   ort: Gasthaus Schank
-- datum: 2023-12-08
-  titel: Relegationsspiele
-- datum: 2023-12-09
-  titel: Relegationsspiele
+- datum: 2023-12-29
+  titel: Jahresabschlusstreffen
+  zeit: "20:00"
+  ort: Gasthaus Schank
+- datum: 2024-01-19
+  zeit: "19:00"
+  titel: TFF Jahreshauptversammlung mit anschließendem Turnier
+  ort: Gasthaus Schank
+- datum: 2024-01-21
+  titel: STFV Mitgliederversammlung
+  treff: 12:00, Gasthaus Schank
+  zeit: "13:00"
+  ort: Eppelborn
+  adresse: Big Eppel, Europaplatz 4, 66571 Eppelborn
+  adress_url: https://www.google.com/maps/place/big+Eppel/@49.4072516,6.9672644,17z/data=!3m2!4b1!5s0x4795bc8687b3b98d:0x3efc904337e0b09f!4m5!3m4!1s0x4795bc8680b080bb:0xbf3b1722c1199716!8m2!3d49.4072535!4d6.969449
