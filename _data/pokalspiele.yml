@@ -1,31 +1,25 @@
 # Felder:
-#  datum: Format JJJJ-MM-TT (Beispiel: 2023-03-17)
+#  datum: Format JJJJ-MM-TT (Beispiel: 2024-03-17)
 #  zeit: optional, Standard 21:00
 #  gegner: Mannschaftname wie bei STFV
 #  ort: H - Heim oder A - Auswärts
 #  ergebnis:
 #
-- datum: 2023-03-10
-  gegner: TFC Blau Rot Ensdorf
-  ort: A
-  ergebnis: "9:15"
-- datum: 2023-05-05
+- datum: 2024-03-01
+  gegner: Vorrunde
+  ort: 
+- datum: 2024-05-10
   gegner: Hauptrunde
   ort: 
-  ergebnis: spielfrei
-- datum: 2023-07-14
+- datum: 2024-09-06
   gegner: Achtelfinale
   ort: 
-  ergebnis: spielfrei
-- datum: 2023-10-13
+- datum: 2024-10-11
   gegner: Viertelfinale
   ort: 
-  ergebnis: spielfrei
-- datum: 2023-11-24
+- datum: 2024-11-02
   gegner: Halbfinale
   ort: 
-  ergebnis: spielfrei
-- datum: 2023-12-09
+- datum: 2024-11-30
   gegner: Finale
   ort: 
-  ergebnis: spielfrei
