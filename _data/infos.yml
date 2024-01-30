@@ -18,6 +18,12 @@
   zeit: "19:00"
   titel: TFF Jahreshauptversammlung mit anschließendem Turnier
   ort: Gasthaus Schank
+- datum: 2024-01-20
+  zeit: "11:00"
+  titel: Mannschaftsturnier
+  ort: Gasthaus Schank
+  adresse: Schönbachstrasse 7, Ottweiler-Lautenbach
+  adress_url: https://www.google.de/maps/place/Sch%C3%B6nbachstra%C3%9Fe+7,+66564+Ottweiler/@49.4195442,7.2616167,17z/data=!3m1!4b1!4m6!3m5!1s0x4795c3b3a623b077:0x4b152144b5246eed!8m2!3d49.4195407!4d7.2641916!16s%2Fg%2F11c5m3lgrr?entry=ttu
 - datum: 2024-01-21
   titel: STFV Mitgliederversammlung
   treff: 12:00, Gasthaus Schank
@@ -25,6 +31,18 @@
   ort: Eppelborn
   adresse: Big Eppel, Europaplatz 4, 66571 Eppelborn
   adress_url: https://www.google.com/maps/place/big+Eppel/@49.4072516,6.9672644,17z/data=!3m2!4b1!5s0x4795bc8687b3b98d:0x3efc904337e0b09f!4m5!3m4!1s0x4795bc8680b080bb:0xbf3b1722c1199716!8m2!3d49.4072535!4d6.969449
+- datum: 2024-01-26
+  zeit: "21:00"
+  titel: Ligapokal - Viertelfinale
+  ort: STFV Leistungszentrum
+  adresse: Am alten Weiher, Ottweiler
+  adress_url: https://www.google.de/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053192,7.1527105,17z/data=!3m1!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?entry=ttu
+- datum: 2024-01-27
+  zeit: "15:30"
+  titel: Ligapokal - Halbfinale/Finale
+  ort: STFV Leistungszentrum
+  adresse: Am alten Weiher, Ottweiler
+  adress_url: https://www.google.de/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053192,7.1527105,17z/data=!3m1!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?entry=ttu
 - datum: 2024-10-12
   zeit: 
   titel: Saarlandmeisterschaften

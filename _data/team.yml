@@ -11,11 +11,11 @@
 - vorname: Patric
   nachname: Schneider
   rolle: Kassenwart
-- vorname: Timo
-  nachname: Tausend
-  rolle: 1. Spielführer
 - vorname: Michael
   nachname: Alles
+  rolle: 1. Spielführer
+- vorname: Mirco
+  nachname: Bilke
   rolle: 2. Spielführer
 - vorname: Marcus
   nachname: Kollmannsperger
