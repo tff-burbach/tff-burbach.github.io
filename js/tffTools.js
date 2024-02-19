@@ -482,7 +482,7 @@ tffTools = {
 
 	async _initializeTffData(force) {
 		tffTools._log('Load data from STFV');
-		$('#refreshData').addClass('inactive');
+		// $('#refreshData').addClass('inactive');
 		$('.status').text('loading');
 		tffData.leagueData = await stfvData.collectLeagueData(tffTools.getTeam());
 		// tffData.termine.filter(function(value, index, arr){ 
@@ -508,7 +508,7 @@ tffTools = {
 		tffData.initialized = true;
 		tffData.initializationTime = new Date();
 		$('.status').text(tffData.initializationTime.toLocaleDateString("de-de", { month:"numeric", day:"numeric"}) + " " + tffData.initializationTime.toLocaleTimeString("de-de"));
-		$('#refreshData').removeClass('inactive');
+		// $('#refreshData').removeClass('inactive');
 		// if (!force) {
 		// 	setTimeout(tffTools._initializeTffData, tffTools.cacheTimeMsec);
 		// }
