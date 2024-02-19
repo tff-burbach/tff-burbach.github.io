@@ -508,7 +508,7 @@ tffTools = {
 		tffData.initialized = true;
 		tffData.initializationTime = new Date();
 		$('.status').text(tffData.initializationTime.toLocaleDateString("de-de", { month:"numeric", day:"numeric"}) + " " + tffData.initializationTime.toLocaleTimeString("de-de"));
-		// $('#refreshData').removeClass('inactive');
+		$('#refreshData').removeClass('inactive');
 		// if (!force) {
 		// 	setTimeout(tffTools._initializeTffData, tffTools.cacheTimeMsec);
 		// }
