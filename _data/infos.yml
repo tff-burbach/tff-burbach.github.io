@@ -1,6 +1,6 @@
 # Felder:
 #   datum: Format JJJJ-MM-TT (Beispiel: 2023-12-31)
-#   zeit: optional
+#   zeit: optional (in Anführungszeichen, Beispiel: "21:00")
 #   titel:
 #   ort:
 #   adresse:
