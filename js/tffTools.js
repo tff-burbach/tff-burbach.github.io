@@ -433,9 +433,9 @@ tffTools = {
 			$tableRow.addClass('tableRowGenerated');
 			$tableRow.find('#place').text(tableRow.place);
 			$tableRow.find('#team').text(tableRow.team);
-			$tableRow.find('#goals').text(tableRow.goals);
-			$tableRow.find('#sets').text(tableRow.sets);
-			$tableRow.find('#score').text(tableRow.scores);
+			$tableRow.find('#goals').text(tffTools._formatNumberColumn(tableRow.goals, 4));
+			$tableRow.find('#sets').text(tffTools._formatNumberColumn(tableRow.sets, 3));
+			$tableRow.find('#score').text(tffTools._formatNumberColumn(tableRow.scores, 2));
 			// Show
 			$tableRow.removeClass('d-none');
 			// Highlight
@@ -448,6 +448,11 @@ tffTools = {
 		if (loaded) {
 			$matchdayTable.removeClass('d-none');
 		}
+	},
+
+	_formatNumberColumn(value, size) {
+		var values = value.split(':');
+		return ' '.repeat(size - values[0].length) + values[0] + ':' + ' '.repeat(size - values[1].length) + values[1];
 	},
 
 	_initializeSchedules(fromDate, toDate) {
