@@ -109,9 +109,9 @@ stfvData = {
 				leagueRow.place = row.childNodes[1].textContent;
 				leagueRow.team = row.childNodes[3].textContent;
 				// 5 - 27: Spiele gegen 1. - 12.
-				leagueRow.goals = row.childNodes[row.childNodes.length-6].textContent;
-				leagueRow.sets = row.childNodes[row.childNodes.length-4].textContent;
-				leagueRow.scores = row.childNodes[row.childNodes.length-2].textContent;
+				leagueRow.goals = row.childNodes[row.childNodes.length-6].textContent.replaceAll(' ','');
+				leagueRow.sets = row.childNodes[row.childNodes.length-4].textContent.replaceAll(' ','');
+				leagueRow.scores = row.childNodes[row.childNodes.length-2].textContent.replaceAll(' ','');
 				leagueTable.push(leagueRow);
 				stfvData.extractGames(team, row, allMatchdays, matches);
 			}
