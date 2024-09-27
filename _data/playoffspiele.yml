@@ -1,0 +1,25 @@
+# Felder:
+#  datum: Format JJJJ-MM-TT (Beispiel: 2024-03-17)
+#  zeit: optional, Standard 21:00
+#  gegner: Mannschaftname wie bei STFV
+#  ort: H - Heim oder A - Auswärts
+#  ergebnis: optional (in Anführungszeichen, Beispiel: "13:11")
+#
+- datum: 2024-09-27
+  gegner: OTC Ottweiler
+  ort: A
+- datum: 2024-10-04
+  gegner: TFC Roden 1
+  ort: H
+- datum: 2024-10-25
+  gegner: TFC Schiffweiler 1 
+  ort: A
+- datum: 2024-11-08
+  gegner: TFC Schiffweiler 1 
+  ort: H
+- datum: 2024-11-15
+  gegner: TFC Roden 1
+  ort: A
+- datum: 2024-11-22
+  gegner: OTC Ottweiler
+  ort: H

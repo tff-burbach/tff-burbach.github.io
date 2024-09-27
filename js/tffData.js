@@ -20,6 +20,7 @@ tffData = {
 	typP2 : 'P2',
 	typF : 'F',
 	typF2 : 'F2',
+	typO : 'O',
 	typLString : 'Info',
 	typLString : 'Landesliga',
 	typL2String : 'Bezirksliga Süd',
@@ -31,6 +32,7 @@ tffData = {
 	typP2String : 'Pokal (II.)',
 	typFString : 'Freundschaftspiel',
 	typF2String : 'Freundschaftspiel (II.)',
+	typOString : 'Play-Off',
 	spieltag : 'Spieltag',
 
 	einstellungen : {
@@ -64,6 +66,7 @@ tffData = {
 		if (type === tffData.typP2) return tffData.typP2String;
 		if (type === tffData.typF) return tffData.typFString;
 		if (type === tffData.typF2) return tffData.typF2String;
+		if (type === tffData.typO) return tffData.typOString;
 		return '';
 	},
 
