@@ -492,6 +492,7 @@ tffTools = {
 		tffTools._log('Load data from STFV');
 		// $('#refreshData').addClass('inactive');
 		$('.status').text('loading');
+		try {
 		tffData.leagueData = await stfvData.collectLeagueData(tffTools.getTeam());
 		// tffData.termine.filter(function(value, index, arr){ 
 		// 	return !generated;
@@ -499,7 +500,7 @@ tffTools = {
 		tffData.termine = tffData.termine.filter(termin => { 
 			return !termin.generated;
 		});
-	tffData.leagueData.matches.forEach(match => {
+		tffData.leagueData.matches.forEach(match => {
 			tffData.termine.push({
 				datetime: match.datetime,
 				datum: match.date,
@@ -511,6 +512,10 @@ tffTools = {
 				generated: new Date()
 			})
 		});
+		}
+		catch(ex){
+			console.log('Error fetching STFV data!')
+		}
 		tffData.termine.sort((a, b) => (a.datetime > b.datetime) ? 1 : -1);
 		tffTools._initializeSchedules();
 		tffData.initialized = true;

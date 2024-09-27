@@ -52,17 +52,21 @@ stfvData = {
 		var allMatchdays = [];
 		var currentDate = stfvData.getCurrentDate();
 		var currentIndex = 0;
+		var counter = 0;
 		for (i = 0; i < matchDayOptions.length; i++) {
 			var option = matchDayOptions[i];
-			var textDate = option.text.split(", ")[1];
-			var d = textDate.split(".");
-			var tmpDate = new Date('20' + d[2], d[1] - 1, d[0]);
-			if (currentDate > tmpDate) {
-				currentIndex = i;
+			if (option.text.indexOf(',') > 0) {
+				var textDate = option.text.split(", ")[1];
+				var d = textDate.split(".");
+				var tmpDate = new Date('20' + d[2], d[1] - 1, d[0]);
+				if (currentDate > tmpDate) {
+					currentIndex = counter;
+				}
+				tmpDate.setHours(21);
+				var matchDay = { no: parseInt(option.value), text: option.text, date: tmpDate, games: [] };
+				allMatchdays[i] = matchDay;
+				counter++;
 			}
-			tmpDate.setHours(21);
-			var matchDay = { no: parseInt(option.value), text: option.text, date: tmpDate, games: [] };
-			allMatchdays[i] = matchDay;
 		};
 		allMatchdays.sort((a, b) => (a.no > b.no) ? 1 : (b.no > a.no) ? -1 : 0);
 		currentMatchDay = Object.assign({}, allMatchdays[currentIndex]);
@@ -79,7 +83,7 @@ stfvData = {
 
 		var tables = $('.ligatabelle', stfvTableHtml);
 		// var games = tables[0].childNodes[1].childNodes;
-		var table = tables[1].childNodes[2].childNodes;
+		var table = tables[0].childNodes[2].childNodes;
 
 		// // Games
 		// var gamesTable = [];
