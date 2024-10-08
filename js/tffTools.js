@@ -343,19 +343,39 @@ tffTools = {
 	showPreviousGames(element) {
 		var tableParent = $(element).closest('.tableParent');
 		const leagueData = tableParent[0].id == 'contentPlayoffTable' ? tffData.playoffLeagueData : tffData.leagueData;
-		var currentIndex = parseInt($('#nextMatchDayGames').attr('matchdayindex'));
-		tffTools._showGames(currentIndex > 0 ? currentIndex - 1 : 0, leagueData);
+		const $contentTable = $(`#${tableParent[0].id}`);
+		var currentIndex = parseInt($('#nextMatchDayGames', $contentTable).attr('matchdayindex'));
+		tffTools._showGames($contentTable, tffTools.getPreviousMatchdayIndex(currentIndex, leagueData), leagueData);
+	},
+
+	getPreviousMatchdayIndex(currentIndex, leagueData) {
+		for (i = currentIndex - 1; i >= 0; i--) {
+			if (leagueData.matchDays[i].games.length > 0) {
+				return i;
+			}
+		}
+		return currentIndex;
 	},
 
 	showNextGames(element) {
 		var tableParent = $(element).closest('.tableParent');
 		const leagueData = tableParent[0].id == 'contentPlayoffTable' ? tffData.playoffLeagueData : tffData.leagueData;
-		var currentIndex = parseInt($('#nextMatchDayGames').attr('matchdayindex'));
-		tffTools._showGames(currentIndex < leagueData.matchDays.length - 1 ? currentIndex + 1 : leagueData.matchDays.length, leagueData);
+		const $contentTable = $(`#${tableParent[0].id}`);
+		var currentIndex = parseInt($('#nextMatchDayGames', $contentTable).attr('matchdayindex'));
+		tffTools._showGames($contentTable, tffTools.getNextMatchdayIndex(currentIndex, leagueData), leagueData);
 	},
 
-	_showGames(index, leagueData) {
-		tffTools._buildMatchdayGames($('#nextMatchDayGames'), tffTools.getTeam().name, index, leagueData);
+	getNextMatchdayIndex(currentIndex, leagueData) {
+		for (i = currentIndex + 1; i < leagueData.matchDays.length; i++) {
+			if (leagueData.matchDays[i] && leagueData.matchDays[i].games.length > 0) {
+				return i;
+			}
+		}
+		return currentIndex;
+	},
+
+	_showGames($contentTable, index, leagueData) {
+		tffTools._buildMatchdayGames($contentTable, $('#nextMatchDayGames', $contentTable), tffTools.getTeam().name, index, leagueData);
 	},
 
 	async showTable(force) {
@@ -373,18 +393,22 @@ tffTools = {
 		}
 		$contentTable.removeClass('d-none');
 		var matchDay = leagueData.currentMatchDay;
-		tffTools._buildMatchdayGames($contentTable.find('#currentMatchDayGames'), teamname, matchDay.index, leagueData);
-		tffTools._buildMatchdayTable($contentTable.find('#currentMatchDayTable'), teamname, matchDay);
-		var nextIndex = $contentTable.find('#nextMatchDayGames').attr('matchdayIndex');
-		nextIndex = force || !nextIndex ? leagueData.matchDays.findIndex(entry => entry.no === matchDay.no) + 1 : nextIndex;
-		const nextMatchDay = leagueData.matchDays[nextIndex];
-		if (nextMatchDay) {
-			tffTools._buildMatchdayGames($contentTable.find('#nextMatchDayGames'), teamname, nextIndex, leagueData);
-		}
+		tffTools._buildMatchdayGames($contentTable, $contentTable.find('#currentMatchDayGames'), teamname, matchDay.index, leagueData);
+		tffTools._buildMatchdayTable($contentTable, $contentTable.find('#currentMatchDayTable'), teamname, matchDay);
+		const nextIndex = tffTools.getNextMatchdayIndex(matchDay.index, leagueData);
+		// var nextIndex = $contentTable.find('#nextMatchDayGames').attr('matchdayIndex');
+		// nextIndex = force || !nextIndex ? leagueData.matchDays.findIndex(entry => entry.no === matchDay.no) + 1 : nextIndex;
+		// const nextMatchDay = leagueData.matchDays[nextIndex];
+		// if (nextMatchDay) {
+			tffTools._buildMatchdayGames($contentTable, $contentTable.find('#nextMatchDayGames'), teamname, nextIndex, leagueData);
+		// }
 	},
 
-	_buildMatchdayGames($matchdayGames, teamname, matchdayIndex, leagueData) {
-		const matchday = leagueData.matchDays[matchdayIndex];
+	_buildMatchdayGames($contentTable, $matchdayGames, teamname, matchdayIndex, leagueData) {
+		var matchday = leagueData.matchDays[matchdayIndex];
+		if (!matchday) {
+			return;
+		}
 		var games = matchday.games;
 		var loaded = false;
 		$matchdayGames.find('.gamesRowGenerated').remove();
@@ -433,12 +457,14 @@ tffTools = {
 		})
 		if (loaded) {
 			$matchdayGames.removeClass('d-none');
-			matchdayIndex <= 0 ? $('#previousGames').addClass('inactive') : $('#previousGames').removeClass('inactive');
-			matchdayIndex >= leagueData.matchDays.length - 1 ? $('#nextGames').addClass('inactive') : $('#nextGames').removeClass('inactive');
+			var previousIndex = tffTools.getPreviousMatchdayIndex(matchdayIndex, leagueData);
+			var nextIndex = tffTools.getNextMatchdayIndex(matchdayIndex, leagueData);
+			previousIndex == matchdayIndex ? $('#previousGames', $contentTable).addClass('inactive') : $('#previousGames', $contentTable).removeClass('inactive');
+			nextIndex == matchdayIndex ? $('#nextGames', $contentTable).addClass('inactive') : $('#nextGames', $contentTable).removeClass('inactive');
 		}
 	},
 
-	_buildMatchdayTable($matchdayTable, teamname, matchday) {
+	_buildMatchdayTable($contentTable, $matchdayTable, teamname, matchday) {
 		table = matchday.table;
 		var loaded = false;
 		$matchdayTable.find('.tableRowGenerated').remove();
@@ -578,8 +604,7 @@ tffTools = {
 
 	getCurrentDate() {
 		return new Date();
-		// return new Date('2023-02-04T11:01');
-		// return new Date('2019-05-01T11:01');
+		// return new Date('2024-06-04T11:01');
 	},
 
 }
