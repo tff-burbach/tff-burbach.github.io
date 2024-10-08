@@ -2,7 +2,7 @@
  * STFV data access
  */
 
-const USE_PROXY = false;
+const USE_PROXY = true;
 
 stfvData = {
 
