@@ -1,11 +1,11 @@
 /**
  * STFV data access
  */
-//  const fetch = require('node-fetch');
- // const axios = require('axios').default;
- // const { JSDOM } = require( "jsdom" );
+
+const USE_PROXY = false;
 
 stfvData = {
+
 
 	async getLeagueData(team, matchdayno, category) {
 		const stfvTableHTML = await stfvData.fetchTableFromStfv(team, matchdayno, category);
@@ -17,14 +17,16 @@ stfvData = {
 		return stfvData.getLeagueData(team, 1, category);
 	},
 
-	getLeagueUrl(leaguename, matchdayno, year, category) {
+	getLeagueUrl(leaguename, matchdayno, year, category, groupNo) {
 		year = year ? year : 2023;
 		category = category ? encodeURIComponent(category) : 'Ligabetrieb+Classic';
 		leaguename = leaguename.replace(' ', '+').replace('ü','%FC');
-		const stfvURLEncoded = `https%3A//www.stfv.de/stfv/ligabetrieb/ligatabelle.php%3FJahr%3D${year}%26Kategorie%3D${category}%26Liga%3D${leaguename}%26Ansicht%3DKreuztabelle`;
+		groupNo = groupNo ? groupNo : 'Ligaphase';
+		const stfvURL = `https://www.stfv.de/stfv/ligabetrieb/ligatabelle.php?Jahr=${year}&Kategorie=${category}&Liga=${leaguename}&Gruppe_Nr=${groupNo}&Ansicht=Kreuztabelle`;
+		const stfvURLEncoded = encodeURI(stfvURL);
 		// const stfvURLEncoded = `https%3A//www.stfv.de/stfv/ligabetrieb/ligatabelle.php%3FJahr%3D${year}%26Kategorie%3D${category}%26Liga%3D${leaguename}%26Spieltag_Nr%3D${matchdayno}%26Ansicht%3DKreuztabelle`;
 		// return `https://api.allorigins.win/get?url=${stfvURLEncoded}`;
-		return `https://corsproxy.io/?${stfvURLEncoded}`;
+		return USE_PROXY ? `https://corsproxy.io/?${stfvURLEncoded}` : stfvURL;
 	},
 
 	getBackupLeagueUrl(leaguename, matchdayno, year, category) {
@@ -81,9 +83,11 @@ stfvData = {
 		var allMatchdays = matchDays.allMatchdays;
 		var matches = [];
 
+		var tableRows = $('.ligatabelle > tbody > tr', stfvTableHtml);
+
 		var tables = $('.ligatabelle', stfvTableHtml);
 		// var games = tables[0].childNodes[1].childNodes;
-		var table = tables[0].childNodes[2].childNodes;
+		var table = tables[0].childNodes[1].childNodes;
 
 		// // Games
 		// var gamesTable = [];
@@ -106,9 +110,9 @@ stfvData = {
 		// League Table
 		var leagueTable;
 		leagueTable = [];
-		for (var i = 0; i < table.length; i++) {
-			var row = table[i];
-			if (row.nodeName === 'TR') {
+
+		for (var i = 0; i < tableRows.length; i++) {
+			var row = tableRows[i];
 				var leagueRow = {};
 				leagueRow.place = row.childNodes[1].textContent;
 				leagueRow.team = row.childNodes[3].textContent;
@@ -118,8 +122,22 @@ stfvData = {
 				leagueRow.scores = row.childNodes[row.childNodes.length-2].textContent.replaceAll(' ','');
 				leagueTable.push(leagueRow);
 				stfvData.extractGames(team, row, allMatchdays, matches);
-			}
 		}
+
+		// for (var i = 0; i < table.length; i++) {
+		// 	var row = table[i];
+		// 	if (row.nodeName === 'TR') {
+		// 		var leagueRow = {};
+		// 		leagueRow.place = row.childNodes[1].textContent;
+		// 		leagueRow.team = row.childNodes[3].textContent;
+		// 		// 5 - 27: Spiele gegen 1. - 12.
+		// 		leagueRow.goals = row.childNodes[row.childNodes.length-6].textContent.replaceAll(' ','');
+		// 		leagueRow.sets = row.childNodes[row.childNodes.length-4].textContent.replaceAll(' ','');
+		// 		leagueRow.scores = row.childNodes[row.childNodes.length-2].textContent.replaceAll(' ','');
+		// 		leagueTable.push(leagueRow);
+		// 		stfvData.extractGames(team, row, allMatchdays, matches);
+		// 	}
+		// }
 		currentMatchDay.table = leagueTable;
 
 		// Sort Matches
