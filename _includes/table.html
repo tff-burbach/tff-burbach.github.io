@@ -1,10 +1,10 @@
 <!-- About Section -->
     <section id="table">
-        <div id="contentTable">
+        <div id="contentPlayoffTable" class="tableParent d-none">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h2 class="section-heading">Tabelle</h2>
-                    <h3 class="section-subheading text-muted">Landesliga Spieltag und Tabelle vom STFV.</h3>
+                    <h2 class="section-heading">Abstiegsrunde</h2>
+                    <h3 class="section-subheading text-muted">Landesliga Ergebnisse und Tabelle vom STFV.</h3>
                 </div>
             </div>
             <div class="row"></div>
@@ -74,10 +74,95 @@
             </div>                    
             <div id="gamesNavigation" class="row">
                 <div id="empty" class="col d-none d-md-block"></div>
-                <button id="previousGames" type="button" class="col-1 text-start btn btn-link fs-4 fw-bold inactive" onclick="tffTools.showPreviousGames()"><<</button>
+                <button id="previousGames" type="button" class="col-1 text-start btn btn-link fs-4 fw-bold inactive" onclick="tffTools.showPreviousGames(this)"><<</button>
                 <a class="col text-center fs-4" target="_blank" href="https://www.stfv.de/stfv/index.php">STFV Datenbank</a>
                 <!-- <button id="refreshData" type="button" class="col text-center btn btn-link fs-4 inactive" onclick="tffTools.showTFFData(true)">aktualisieren</button> -->
-                <button id="nextGames" type="button" class="col-1 text-end btn btn-link fs-4 fw-bold inactive" onclick="tffTools.showNextGames()">>></button>
+                <button id="nextGames" type="button" class="col-1 text-end btn btn-link fs-4 fw-bold inactive" onclick="tffTools.showNextGames(this)">>></button>
+                <div id="empty" class="col d-none d-md-block"></div>
+            </div>
+            <!-- <div id="tableSTFVLink" class="row text-center">
+                <a class="fs-4" target="_blank" href="https://www.stfv.de/stfv/index.php">STFV Datenbank</a>
+            </div> -->
+            <div class="tableseparator row"></div>
+        </div>
+        <div id="contentTable" class="tableParent d-none">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="section-heading">Ligaphase</h2>
+                    <h3 class="section-subheading text-muted">Landesliga Ergebnisse und Tabelle vom STFV.</h3>
+                </div>
+            </div>
+            <div class="row"></div>
+            <div id="currentMatchDayGames" class="row d-none">
+                <h3 id="gamesTitle" class="gamesTitle text-center">Spieltag</h3>
+                <h5 id="gamesRowHeader" class="row gamesHeader fs-4 fw-bold">
+                    <div id="empty" class="col-1 d-none d-md-block"></div>
+                    <div id="no" class="col-1 text-center">Nr.</div>
+                    <div id="team1" class="col">Heim</div>
+                    <div id="team2" class="col">Gast</div>
+                    <div id="result" class="col-1 text-center">Erg.</div>
+                    <div id="empty" class="col-1 d-none d-md-block"></div>
+                </h5>
+                <div id="gamesRowTemplate" class="row gamesRow fs-4 d-none">
+                    <div id="empty" class="col-1 d-none d-md-block"></div>
+                    <div id="no" class="col-1 text-center"></div>
+                    <div id="team1" class="col text-nowrap text-truncate"></div>
+                    <div id="team2" class="col text-nowrap text-truncate"></div>
+                    <div id="result" class="col-1 text-center"></div>
+                    <div id="empty" class="col-1 d-none d-md-block"></div>
+                </div>
+            </div>
+            <div id="statusbar" class="statusbar row">
+                <div id="empty" class="col-1 d-none d-md-block"></div>
+                <div id="empty" class="col"></div>
+                <button id="refreshData" type="button" class="col text-center btn btn-link fs-4" onclick="tffTools.showTFFData(true)">aktualisieren</button>
+                <div id="status" class="col status text-end fs-6">loading</div>
+                <div id="empty" class="col-1 d-none d-md-block"></div>
+            </div>
+            <div class="tableseparator row"></div>
+            <div id="currentMatchDayTable" class="leagueHeader row d-none">
+                <h3 id="tableTitle" class="tableTitle text-center">Tabelle</h3>
+                <h5 id="tableRowHeader" class="row tableHeader fs-4 fw-bold">
+                    <div id="place" class="col-1 text-center">Pl.</div>
+                    <div id="team" class="col-6">Verein</div>
+                    <div id="goals" class="col text-center d-none d-lg-block">Tore</div>
+                    <div id="sets" class="col text-center">Sätze</div>
+                    <div id="score" class="col col-sm text-center">Punkte</div>
+                </h5>
+                <div id="tableRowTemplate" class="row tableRow fs-4 d-none">
+                    <div id="place" class="col-1 text-center"></div>
+                    <div id="team" class="col-6 text-nowrap text-truncate"></div>
+                    <div id="goals" class="col  text-nowrap text-center d-none d-lg-block"></div>
+                    <div id="sets" class="col text-nowrap text-center"></div>
+                    <div id="score" class="col col-sm text-nowrap text-center"></div>
+                </div>
+            </div>
+            <div class="tableseparator row"></div>
+            <div id="nextMatchDayGames" class="row d-none">
+                <h3 id="gamesTitle" class="gamesTitle text-center">Spieltag</h3>
+                <h5 id="gamesRowHeader" class="row gamesHeader fs-4 fw-bold">
+                    <div id="empty" class="col-1 d-none d-md-block"></div>
+                    <div id="no" class="col-1 text-center">Nr.</div>
+                    <div id="team1" class="col">Heim</div>
+                    <div id="team2" class="col">Gast</div>
+                    <div id="result" class="col-1 text-center">Erg.</div>
+                    <div id="empty" class="col-1 d-none d-md-block"></div>
+                </h5>
+                <div id="gamesRowTemplate" class="row gamesRow fs-4 d-none">
+                    <div id="empty" class="col-1 d-none d-md-block"></div>
+                    <div id="no" class="col-1 text-center"></div>
+                    <div id="team1" class="col text-nowrap text-truncate"></div>
+                    <div id="team2" class="col text-nowrap text-truncate"></div>
+                    <div id="result" class="col-1 text-center"></div>
+                    <div id="empty" class="col-1 d-none d-md-block"></div>
+                </div>
+            </div>                    
+            <div id="gamesNavigation" class="row">
+                <div id="empty" class="col d-none d-md-block"></div>
+                <button id="previousGames" type="button" class="col-1 text-start btn btn-link fs-4 fw-bold inactive" onclick="tffTools.showPreviousGames(this)"><<</button>
+                <a class="col text-center fs-4" target="_blank" href="https://www.stfv.de/stfv/index.php">STFV Datenbank</a>
+                <!-- <button id="refreshData" type="button" class="col text-center btn btn-link fs-4 inactive" onclick="tffTools.showTFFData(true)">aktualisieren</button> -->
+                <button id="nextGames" type="button" class="col-1 text-end btn btn-link fs-4 fw-bold inactive" onclick="tffTools.showNextGames(this)">>></button>
                 <div id="empty" class="col d-none d-md-block"></div>
             </div>
             <!-- <div id="tableSTFVLink" class="row text-center">
