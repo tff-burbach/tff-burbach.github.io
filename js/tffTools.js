@@ -493,25 +493,38 @@ tffTools = {
 		// $('#refreshData').addClass('inactive');
 		$('.status').text('loading');
 		try {
-		tffData.leagueData = await stfvData.collectLeagueData(tffTools.getTeam());
-		// tffData.termine.filter(function(value, index, arr){ 
-		// 	return !generated;
-		// });
-		tffData.termine = tffData.termine.filter(termin => { 
-			return !termin.generated;
-		});
-		tffData.leagueData.matches.forEach(match => {
-			tffData.termine.push({
-				datetime: match.datetime,
-				datum: match.date,
-				zeit: match.time,
-				typ: tffData.typL,
-				gegner: match.opponent,
-				ort: match.home ? 'H' : 'A',
-				ergebnis: tffTools._createTFFResult(match),
-				generated: new Date()
-			})
-		});
+			tffData.leagueData = await stfvData.collectLeagueData(tffTools.getTeam());
+			tffData.playoffLeagueData = await stfvData.collectPlayoffLeagueData(tffTools.getTeam());
+			// tffData.termine.filter(function(value, index, arr){ 
+			// 	return !generated;
+			// });
+			tffData.termine = tffData.termine.filter(termin => { 
+				return !termin.generated;
+			});
+			tffData.leagueData.matches.forEach(match => {
+				tffData.termine.push({
+					datetime: match.datetime,
+					datum: match.date,
+					zeit: match.time,
+					typ: tffData.typL,
+					gegner: match.opponent,
+					ort: match.home ? 'H' : 'A',
+					ergebnis: tffTools._createTFFResult(match),
+					generated: new Date()
+				})
+			});
+			tffData.playoffLeagueData.matches.forEach(match => {
+				tffData.termine.push({
+					datetime: match.datetime,
+					datum: match.date,
+					zeit: match.time,
+					typ: tffData.typO,
+					gegner: match.opponent,
+					ort: match.home ? 'H' : 'A',
+					ergebnis: tffTools._createTFFResult(match),
+					generated: new Date()
+				})
+			});
 		}
 		catch(ex){
 			console.log('Error fetching STFV data!')

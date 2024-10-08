@@ -45,9 +45,6 @@
          {% for spiel in site.data.pokalspiele %}
             {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'P', gegner:'{{ spiel.gegner }}', ergebnis:'{{ spiel.ergebnis }}', ort:'{{ spiel.ort }}', adresse:'{{ spiel.adresse }}', adress_url:'{{ spiel.adress_url }}'},
          {% endfor %}
-         {% for spiel in site.data.playoffspiele %}
-            {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'O', gegner:'{{ spiel.gegner }}', ergebnis:'{{ spiel.ergebnis }}', ort:'{{ spiel.ort }}', adresse:'{{ spiel.adresse }}', adress_url:'{{ spiel.adress_url }}'},
-         {% endfor %}
       ]
 
    </script>

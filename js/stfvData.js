@@ -7,14 +7,19 @@ const USE_PROXY = false;
 stfvData = {
 
 
-	async getLeagueData(team, matchdayno, category) {
-		const stfvTableHTML = await stfvData.fetchTableFromStfv(team, matchdayno, category);
+	async getLeagueData(team, matchdayno, category, groupNo) {
+		const stfvTableHTML = await stfvData.fetchTableFromStfv(team, matchdayno, category, groupNo);
 		return stfvData.extractLeagueData(team, stfvTableHTML);
 	},
 
 	async collectLeagueData(team, category) {
 		// const matchDays = await stfvData.getMatchDays(team, year, category);
 		return stfvData.getLeagueData(team, 1, category);
+	},
+
+	async collectPlayoffLeagueData(team, category) {
+		// const matchDays = await stfvData.getMatchDays(team, year, category);
+		return stfvData.getLeagueData(team, 1, category, 'Abstiegsrunde');
 	},
 
 	getLeagueUrl(leaguename, matchdayno, year, category, groupNo) {
@@ -29,18 +34,23 @@ stfvData = {
 		return USE_PROXY ? `https://corsproxy.io/?${stfvURLEncoded}` : stfvURL;
 	},
 
-	getBackupLeagueUrl(leaguename, matchdayno, year, category) {
-		return '/stfv/kreuztabelle.html';
+	getBackupLeagueUrl(leaguename, matchdayno, year, category, groupNo) {
+		if (!groupNo || groupNo === 'Ligaphase') {
+			return '/stfv/kreuztabelle.html';
+		}
+		else {
+			return `/stfv/${groupNo}_kreuztabelle.html`;
+		}
 	},
 
-	async fetchTableFromStfv(team, matchdayno, category) {
+	async fetchTableFromStfv(team, matchdayno, category, groupNo) {
 		var response;
 		try {
-			const url = stfvData.getLeagueUrl(team.league, matchdayno, team.year, category);
+			const url = stfvData.getLeagueUrl(team.league, matchdayno, team.year, category, groupNo);
 			response = await $.get({url: url, cache: false});
 		}
 		catch (ex) {
-			const url = stfvData.getBackupLeagueUrl(team.league, matchdayno, team.year, category);
+			const url = stfvData.getBackupLeagueUrl(team.league, matchdayno, team.year, category, groupNo);
 			response = await $.get({url: url, cache: false});
 		}
 		var html = response;	//.contents;
@@ -153,10 +163,11 @@ stfvData = {
 	},
 
 	extractGames(team, row, allMatchdays, matches) {
-		for (var i = 5; i <= 27; i = i + 2) {
-			if (row.childNodes[i].outerHTML.indexOf("Tip") > '') {
-				var game = stfvData.extractGame(team, row.childNodes[i].attributes.onmouseover.textContent, row.childNodes[i].textContent, matches);
-				var matchday = allMatchdays.find(entry => {
+		for (var i = 0; i < row.childNodes.length; i++) {
+			if (row.childNodes[i].outerHTML && row.childNodes[i].outerHTML.indexOf("Tip") > '') {
+				var game = stfvData.extractGame(team, row.childNodes[i].attributes.onmouseover.textContent, row.childNodes[i].textContent, matches, allMatchdays);
+				var matchday;
+				matchday = allMatchdays.find(entry => {
 					return entry.no === game.matchDay;
 				})
 				matchday.games.push(game);
@@ -165,7 +176,7 @@ stfvData = {
 		}
 	},
 
-	extractGame(team, tooltip, result, matches) {
+	extractGame(team, tooltip, result, matches, allMatchdays) {
 		var game = {};
 		// Tip('21. Spieltag, 15.11.2019 21:00:00:<br>TFF Burbach 1 - TFC Hülzweiler/Saarwellingen 1', TEXTALIGN, 'center', BGCOLOR, '#FFF000')
 		var tipInfo = tooltip.split("'")[1];
@@ -178,6 +189,13 @@ stfvData = {
 		var timeSplit = dateTimeSplit[1].split(":");
 		// game.datetime = new Date(dateSplit[2], dateSplit[1] - 1, dateSplit[0], timeSplit[0], timeSplit[1]);
 		game.datetime = `${dateSplit[2]}-${dateSplit[1]}-${dateSplit[0]}T${timeSplit[0]}:${timeSplit[1]}:${timeSplit[2]}`;
+		// Matchday sometimes not part of tooltip e.g. outside Ligaphase
+		if (!game.matchDay) {
+			var matchday = allMatchdays.find(entry => {
+				return entry.date.toJSON().split('T')[0] == game.datetime.split('T')[0];
+			})
+			game.matchDay = matchday.no;
+		}
 		game.date = `${dateSplit[2]}-${dateSplit[1]}-${dateSplit[0]}`;
 		game.time = `${timeSplit[0]}:${timeSplit[1]}`
 		var teamSplit = matchSplit[1].split(" - ");
