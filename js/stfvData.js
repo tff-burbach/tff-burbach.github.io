@@ -170,7 +170,9 @@ stfvData = {
 				matchday = allMatchdays.find(entry => {
 					return entry.no === game.matchDay;
 				})
-				matchday.games.push(game);
+				if (matchday) {
+					matchday.games.push(game);
+				}
 				delete game.matchDay;
 			}
 		}
@@ -194,7 +196,7 @@ stfvData = {
 			var matchday = allMatchdays.find(entry => {
 				return entry.date.toJSON().split('T')[0] == game.datetime.split('T')[0];
 			})
-			game.matchDay = matchday.no;
+			game.matchDay = matchday ? matchday.no : '?';
 		}
 		game.date = `${dateSplit[2]}-${dateSplit[1]}-${dateSplit[0]}`;
 		game.time = `${timeSplit[0]}:${timeSplit[1]}`
