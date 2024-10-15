@@ -121,6 +121,7 @@ stfvData = {
 		var leagueTable;
 		leagueTable = [];
 
+		var lostGames = [];
 		for (var i = 0; i < tableRows.length; i++) {
 			var row = tableRows[i];
 				var leagueRow = {};
@@ -131,8 +132,29 @@ stfvData = {
 				leagueRow.sets = row.childNodes[row.childNodes.length-4].textContent.replaceAll(' ','');
 				leagueRow.scores = row.childNodes[row.childNodes.length-2].textContent.replaceAll(' ','');
 				leagueTable.push(leagueRow);
-				stfvData.extractGames(team, row, allMatchdays, matches);
+				lostGames.push(...stfvData.extractGames(team, row, allMatchdays, matches));
 		}
+
+		// If game has been moved to another date and no matchday number information is available
+		for (var i = 0; i < lostGames.length; i++) {
+			const expectedGamesCount = ((allMatchdays.length / 2 + 1) / 2);
+			var lostGame = lostGames[i];
+			var incompleteMatchday = allMatchdays.find(entry => {
+				if (entry.games.length < expectedGamesCount) {
+					return !entry.games.find(game => {
+						game.team1 != lostGame.team1 &&
+						game.team2 != lostGame.team1 &&
+						game.team1 != lostGame.team2 &&
+						game.team2 != lostGame.team2;
+					})
+				}
+				return false;
+			})
+			if (incompleteMatchday) {
+				incompleteMatchday.games.push(lostGame);
+			}
+		}
+
 
 		// for (var i = 0; i < table.length; i++) {
 		// 	var row = table[i];
@@ -163,6 +185,7 @@ stfvData = {
 	},
 
 	extractGames(team, row, allMatchdays, matches) {
+		var lostGames = [];
 		for (var i = 0; i < row.childNodes.length; i++) {
 			if (row.childNodes[i].outerHTML && row.childNodes[i].outerHTML.indexOf("Tip") > '') {
 				var game = stfvData.extractGame(team, row.childNodes[i].attributes.onmouseover.textContent, row.childNodes[i].textContent, matches, allMatchdays);
@@ -173,9 +196,13 @@ stfvData = {
 				if (matchday) {
 					matchday.games.push(game);
 				}
+				else {
+					lostGames.push(game);
+				}
 				delete game.matchDay;
 			}
 		}
+		return lostGames;
 	},
 
 	extractGame(team, tooltip, result, matches, allMatchdays) {
