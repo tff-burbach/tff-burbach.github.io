@@ -1,33 +1,31 @@
 # Felder:
-#  datum: Format JJJJ-MM-TT (Beispiel: 2024-03-17)
+#  datum: Format JJJJ-MM-TT (Beispiel: 2025-03-17)
 #  zeit: optional, Standard 21:00
 #  gegner: Mannschaftname wie bei STFV
 #  ort: H - Heim oder A - Auswärts
 #  ergebnis: optional (in Anführungszeichen, Beispiel: "13:11")
 #
-- datum: 2024-03-01
-  gegner: TFK Schwalbach
-  ort: A
-  ergebnis: "21:3"
-- datum: 2024-05-10
-  gegner: Kickers Neunkirchen 1
-  ort: H
-  ergebnis: "13:11"
-- datum: 2024-09-06
-  gegner: TFC Heusweiler
-  ort: H
-  ergebnis: "15:9"
-- datum: 2024-10-11
-  gegner: TFC Bliesen 1
-  ort: A
-  ergebnis: "7:13"
-  adresse: Illtalhalle, Hüttigweiler
-  adress_url: https://www.google.de/maps/place/Illtalhalle+H%C3%BCttigweiler/@49.3862045,7.0701809,14z/data=!3m1!5s0x4795b8d70d9e5d61:0xad3f5cfb729e480b!4m6!3m5!1s0x4795b8d71276fce3:0xc5c2a218a07b80e1!8m2!3d49.38457!4d7.0742201!16s%2Fg%2F11dz_rhwmq?entry=ttu&g_ep=EgoyMDI0MDkyNC4wIKXMDSoASAFQAw%3D%3D
-- datum: 2024-11-02
+- datum: 2025-03-14
+  gegner: Vorrunde
+  ort: 
+  ergebnis: ""
+- datum: 2025-05-02
+  gegner: Hauptrunde
+  ort: 
+  ergebnis: ""
+- datum: 2025-09-12
+  gegner: Achtelfinale
+  ort: 
+  ergebnis: ""
+- datum: 2025-10-10
+  gegner: Viertelfinale
+  ort: 
+  ergebnis: ""
+- datum: 2025-11-08
   gegner: Halbfinale
   ort: 
-  ergebnis: "spielfrei"
-- datum: 2024-11-30
+  ergebnis: ""
+- datum: 2025-11-29
   gegner: Finale
   ort: 
-  ergebnis: "spielfrei"
+  ergebnis: ""

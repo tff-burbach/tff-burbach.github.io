@@ -381,7 +381,9 @@ tffTools = {
 	async showTable(force) {
 		await tffTools._initializeData();
 		tffTools.showTableGeneric(force, '#contentTable', tffData.leagueData);
-		tffTools.showTableGeneric(force, '#contentPlayoffTable', tffData.playoffLeagueData);
+		if (tffData.playoffLeagueData) {
+			tffTools.showTableGeneric(force, '#contentPlayoffTable', tffData.playoffLeagueData);
+		}
 	},
 
 	showTableGeneric(force, tableId, leagueData) {
@@ -532,10 +534,6 @@ tffTools = {
 		$('.status').text('loading');
 		try {
 			tffData.leagueData = await stfvData.collectLeagueData(tffTools.getTeam());
-			tffData.playoffLeagueData = await stfvData.collectPlayoffLeagueData(tffTools.getTeam());
-			// tffData.termine.filter(function(value, index, arr){ 
-			// 	return !generated;
-			// });
 			tffData.termine = tffData.termine.filter(termin => { 
 				return !termin.generated;
 			});
@@ -551,18 +549,21 @@ tffTools = {
 					generated: new Date()
 				})
 			});
-			tffData.playoffLeagueData.matches.forEach(match => {
-				tffData.termine.push({
-					datetime: match.datetime,
-					datum: match.date,
-					zeit: match.time,
-					typ: tffData.typO,
-					gegner: match.opponent,
-					ort: match.home ? 'H' : 'A',
-					ergebnis: tffTools._createTFFResult(match),
-					generated: new Date()
-				})
-			});
+			if (tffData.leagueData.matchDays[tffData.leagueData.matchDays.length - 1].date < tffTools.getCurrentDate()) {
+				tffData.playoffLeagueData = await stfvData.collectPlayoffLeagueData(tffTools.getTeam());
+				tffData.playoffLeagueData.matches.forEach(match => {
+					tffData.termine.push({
+						datetime: match.datetime,
+						datum: match.date,
+						zeit: match.time,
+						typ: tffData.typO,
+						gegner: match.opponent,
+						ort: match.home ? 'H' : 'A',
+						ergebnis: tffTools._createTFFResult(match),
+						generated: new Date()
+					})
+				});
+			}
 		}
 		catch(ex){
 			console.log('Error fetching STFV data!')
@@ -604,7 +605,7 @@ tffTools = {
 
 	getCurrentDate() {
 		return new Date();
-		// return new Date('2024-06-04T11:01');
+		// return new Date('2025-09-06T11:01');
 	},
 
 }
