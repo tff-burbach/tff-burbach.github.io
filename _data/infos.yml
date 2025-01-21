@@ -20,14 +20,12 @@
 - datum: 2025-01-24
   zeit: "21:00"
   titel: Ligapokal - Viertelfinale
-  ort: Bruche Wirtschaft
-  adresse: Dirminger Str. 1, Berschweiler
+  adresse: Bruche Wirtschaft, Dirminger Str. 1, Berschweiler
   adress_url: https://maps.google.de/maps?f=q&source=s_q&hl=de&geocode=&z=15&q=Dirminger%20Str.%201,66646
 - datum: 2025-01-25
   zeit: "15:30"
   titel: Ligapokal - Halbfinale/Finale
-  ort: Bruche Wirtschaft
-  adresse: Dirminger Str. 1, Berschweiler
+  adresse: Bruche Wirtschaft, Dirminger Str. 1, Berschweiler
   adress_url: https://maps.google.de/maps?f=q&source=s_q&hl=de&geocode=&z=15&q=Dirminger%20Str.%201,66646
 - datum: 2025-09-26
   zeit: 
