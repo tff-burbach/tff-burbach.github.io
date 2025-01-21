@@ -141,9 +141,12 @@ tffTools = {
 			scheduleTitleMain += ' ' + termin.zeit + '';
 		}
 		scheduleTitleMain += " - ";
-		scheduleTitleMain += tffData.getTypeAsString(termin.typ);
-		if (termin.titel !== undefined) {
+		// if (termin.titel == undefined || termin.title.length == 0) {
+		if (!!termin.titel) {
 			scheduleTitleMain += ' ' + termin.titel;
+		}
+		else {
+			scheduleTitleMain += tffData.getTypeAsString(termin.typ);
 		}
 		if (termin.spieltag !== undefined && termin.spieltag !== '') {
 			scheduleTitleMain += ', ' + termin.spieltag + '. ' + tffData.spieltag;
