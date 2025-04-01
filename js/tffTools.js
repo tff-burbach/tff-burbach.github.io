@@ -43,7 +43,10 @@ tffTools = {
 			case 'leagueSchedules':
 				tffTools._showSchedulesByType('#contentSchedules', tffData.typL);
 				break;
-			case 'playoffSchedules':
+			case 'bonziniSchedules':
+				tffTools._showSchedulesByType('#contentSchedules', tffData.typB);
+				break;
+				case 'playoffSchedules':
 				tffTools._showSchedulesByType('#contentSchedules', tffData.typO);
 				break;
 			case 'cupSchedules':

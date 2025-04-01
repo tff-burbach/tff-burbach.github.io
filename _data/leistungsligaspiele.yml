@@ -1,0 +1,103 @@
+# Felder:
+#  datum: Format JJJJ-MM-TT (Beispiel: 2025-03-17)
+#  zeit: optional, Standard 21:00
+#  gegner: Mannschaftname wie bei STFV
+#  ort: H - Heim oder A - Auswärts
+#  ergebnis: optional (in Anführungszeichen, Beispiel: "13:11")
+#
+- datum: 2025-04-11
+  zeit: "20:00"
+  gegner: "TFC Illingen"
+  ort: H
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-04-11
+  zeit: "22:00"
+  gegner: "TFC Hülzweiler/Saarwellingen 4"
+  ort: A
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-04-25
+  zeit: "20:00"
+  gegner: "TFC Riegelsberg"
+  ort: H
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-05-28
+  zeit: "20:00"
+  gegner: "TFK Schwalbach"
+  ort: H
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-05-28
+  zeit: "22:00"
+  gegner: "TFC Ludweiler 2"
+  ort: A
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-06-18
+  zeit: "20:00"
+  gegner: "TFC Roden 2"
+  ort: A
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-06-18
+  zeit: "22:00"
+  gegner: "TFC St. Wendel 3"
+  ort: H
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-07-05
+  zeit: "12:00"
+  gegner: "TFC Hülzweiler/Saarwellingen 3"
+  ort: H
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-07-05
+  zeit: "14:00"
+  gegner: "TFC Illingen"
+  ort: A
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-07-05
+  zeit: "16:00"
+  gegner: "TFC Hülzweiler/Saarwellingen 4"
+  ort: H
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-07-05
+  zeit: "18:00"
+  gegner: "TFC Riegelsberg"
+  ort: A
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-09-13
+  zeit: "14:00"
+  gegner: "TFK Schwalbach"
+  ort: A
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-09-13
+  zeit: "16:00"
+  gegner: "TFC Ludweiler 2"
+  ort: H
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-09-13
+  zeit: "18:00"
+  gegner: "TFC Hülzweiler/Saarwellingen 3"
+  ort: A
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-10-17
+  zeit: "20:00"
+  gegner: "TFC Roden 2"
+  ort: H
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-10-17
+  zeit: "22:00"
+  gegner: "TFC St. Wendel 3"
+  ort: A
+  adresse: STFV Leistungszentrum, Ottweiler
+  adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D

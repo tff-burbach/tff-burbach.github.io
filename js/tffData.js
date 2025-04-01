@@ -24,7 +24,7 @@ tffData = {
 	typLString : 'Info',
 	typLString : 'Landesliga',
 	typL2String : 'Bezirksliga Süd',
-	typBString : 'Landesliga pro',
+	typBString : 'Verbandsliga pro',
 	typCString : 'Classic Cup A',
 	typCBString : 'Classic Cup B',
 	typKPString : 'Kreisligapokal',
@@ -44,8 +44,8 @@ tffData = {
 		ligaNameEncoded : 'Landesliga',
 		ligaName2 : 'Bezirksliga Süd',
 		ligaNameEncoded2 : 'Bezirksliga+S%FCd',
-		ligaNamePro : 'Landesliga Pro',
-		ligaNameProEncoded : 'Landesliga+pro'
+		ligaNamePro : 'Verbandsliga Pro',
+		ligaNameProEncoded : 'Verbandsliga+pro'
 	},
 	
 	infos : [ 
