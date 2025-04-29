@@ -27,7 +27,7 @@ stfvData = {
 		category = category ? encodeURIComponent(category) : 'Ligabetrieb+Classic';
 		leaguename = leaguename.replace(' ', '+').replace('ü','%FC');
 		groupNo = groupNo ? groupNo : 'Ligaphase';
-		const stfvURL = `https://www.stfv.de/stfv/ligabetrieb/ligatabelle.php?Jahr=${year}&Kategorie=${category}&Liga=${leaguename}&Gruppe_Nr=${groupNo}&Ansicht=Kreuztabelle`;
+		const stfvURL = `https://alt.stfv.de/stfv/ligabetrieb/ligatabelle.php?Jahr=${year}&Kategorie=${category}&Liga=${leaguename}&Gruppe_Nr=${groupNo}&Ansicht=Kreuztabelle`;
 		const stfvURLEncoded = encodeURI(stfvURL);
 		// const stfvURLEncoded = `https%3A//www.stfv.de/stfv/ligabetrieb/ligatabelle.php%3FJahr%3D${year}%26Kategorie%3D${category}%26Liga%3D${leaguename}%26Spieltag_Nr%3D${matchdayno}%26Ansicht%3DKreuztabelle`;
 		// return `https://api.allorigins.win/get?url=${stfvURLEncoded}`;
