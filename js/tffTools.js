@@ -555,6 +555,7 @@ tffTools = {
 					generated: new Date()
 				})
 			});
+			tffData.leagueData.matchDays.length = tffData.leagueData.matchDays.filter(element => element !== undefined).length;
 			if (tffData.leagueData.matchDays[tffData.leagueData.matchDays.length - 1].date < tffTools.getCurrentDate()) {
 				tffData.playoffLeagueData = await stfvData.collectPlayoffLeagueData(tffTools.getTeam());
 				tffData.playoffLeagueData.matches.forEach(match => {
