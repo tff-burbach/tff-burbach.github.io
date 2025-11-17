@@ -101,3 +101,15 @@
   ort: A
   adresse: STFV Leistungszentrum, Ottweiler
   adress_url: https://www.google.com/maps/place/STFV+Landesleistungszentrum+Ottweiler/@49.4053193,7.1550065,1053m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795c183ad935ff5:0x24525909b7fa26c!8m2!3d49.4053158!4d7.1575814!16s%2Fg%2F11fq_v7nmt?hl=de&entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D
+- datum: 2025-11-28
+  zeit: "20:00"
+  gegner: "TFC Illingen"
+  ort: H
+  adresse: Talbachhalle, Schmelz
+  adress_url: https://www.google.de/maps/place/Talbachhalle/@49.4765998,6.8919797,1163m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795a30073d78693:0xf248bf82b594d331!8m2!3d49.4765998!4d6.8945546!16s%2Fg%2F11xcwk4j7h!5m1!1e1?hl=de&entry=ttu&g_ep=EgoyMDI1MTExMi4wIKXMDSoASAFQAw%3D%3D
+- datum: 2025-11-28
+  zeit: "22:00"
+  gegner: "Finale / Spiel um Platz 3"
+  ort: 
+  adresse: Talbachhalle, Schmelz
+  adress_url: https://www.google.de/maps/place/Talbachhalle/@49.4765998,6.8919797,1163m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795a30073d78693:0xf248bf82b594d331!8m2!3d49.4765998!4d6.8945546!16s%2Fg%2F11xcwk4j7h!5m1!1e1?hl=de&entry=ttu&g_ep=EgoyMDI1MTExMi4wIKXMDSoASAFQAw%3D%3D  
