@@ -5,37 +5,3 @@
 #  ort: H - Heim oder A - Auswärts
 #  ergebnis: optional (in Anführungszeichen, Beispiel: "13:11")
 #
-- datum: 2025-01-24
-  zeit: "21:00"
-  titel: "Ligapokal: Viertelfinale"
-  adresse: Bruche Wirtschaft, Dirminger Str. 1, Berschweiler
-  adress_url: https://maps.google.de/maps?f=q&source=s_q&hl=de&geocode=&z=15&q=Dirminger%20Str.%201,66646
-- datum: 2025-01-25
-  zeit: "15:30"
-  titel: "Ligapokal: Halbfinale/Finale"
-  adresse: Bruche Wirtschaft, Dirminger Str. 1, Berschweiler
-  adress_url: https://maps.google.de/maps?f=q&source=s_q&hl=de&geocode=&z=15&q=Dirminger%20Str.%201,66646
-- datum: 2025-03-14
-  gegner: Vorrunde
-  ort: 
-  ergebnis: "spielfrei"
-- datum: 2025-05-02
-  gegner: TFC Bliesen 1
-  ort: A
-  ergebnis: "11:13"
-- datum: 2025-09-12
-  gegner: Achtelfinale
-  ort: 
-  ergebnis: "spielfrei"
-- datum: 2025-10-10
-  gegner: Viertelfinale
-  ort: 
-  ergebnis: "spielfrei"
-- datum: 2025-11-08
-  gegner: Halbfinale
-  ort: 
-  ergebnis: "spielfrei"
-- datum: 2025-11-29
-  gegner: Finale
-  ort: 
-  ergebnis: "spielfrei"

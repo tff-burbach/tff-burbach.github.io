@@ -6,37 +6,6 @@
 #   adresse:
 #   adress_url: Google Maps URL
 #
-- datum: 2025-01-10
-  zeit: "19:00"
-  titel: TFF Neujahrsfeier
-  adresse: Vereinsheim FC Rastpfuhl, Hausschildweg 2, 66113 Saarbrücken
-  adress_url: https://www.google.de/maps/place/Hauschildweg+2,+66113+Saarbr%C3%BCcken/@49.2547681,6.9651782,1063m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4795b140dc3da289:0xfc2e779798f6bb9a!8m2!3d49.2547646!4d6.9677531!16s%2Fg%2F11h7xd1qch?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D
-- datum: 2025-01-19
-  titel: STFV Mitgliederversammlung
-  treff: 13:00, Gasthaus Schank
-  zeit: "14:00"
-  adresse: Tagungsraum 20 am Sportcampus Saar, 66123 Saarbrücken
-  adress_url: https://www.google.de/maps/place/SPORTCAMPUS+SAAR/@49.251647,7.0286281,1063m/data=!3m2!1e3!4b1!4m9!3m8!1s0x4795b68afd45dda9:0xe829e7dd807eddc5!5m2!4m1!1i2!8m2!3d49.2516436!4d7.033499!16s%2Fg%2F121bj_md?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D
-- datum: 2025-10-11
-  zeit: 
-  titel: Saarlandmeisterschaften - Tag 1
-  ort: 
-- datum: 2025-10-12
-  zeit: 
-  titel: Saarlandmeisterschaften - Tag 2
-  ort: 
-- datum: 2025-11-02
-  zeit: 
-  titel: Saarlandmeisterschaften - Senioren
-  ort: 
-- datum: 2025-11-27
-  zeit: "19:00"
-  titel: TFF Burbach Generalversammlung
-  ort: Gasthaus Schank
-- datum: 2025-12-19
-  zeit: "19:00"
-  titel: TFF Burbach Jahresabschlusstreffen
-  ort: Gasthaus Schank
 - datum: 2026-01-09
   zeit: "19:00"
   titel: TFF Neujahrsfeier

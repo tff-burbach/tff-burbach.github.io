@@ -39,7 +39,7 @@ tffData = {
 		teamName : 'TFF Burbach',
 		teamName2 : 'TFF Burbach 2',
 		teamFarbe : '#f8e18c',
-		jahr : '2019',
+		jahr : '2026',
 		ligaName : 'Landesliga',
 		ligaNameEncoded : 'Landesliga',
 		ligaName2 : 'Bezirksliga Süd',

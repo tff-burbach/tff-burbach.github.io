@@ -484,7 +484,7 @@ tffTools = {
 			$tableRow.find('#team').text(tableRow.team);
 			$tableRow.find('#goals').text(tffTools._formatNumberColumn(tableRow.goals, 4));
 			$tableRow.find('#sets').text(tffTools._formatNumberColumn(tableRow.sets, 3));
-			$tableRow.find('#score').text(tffTools._formatNumberColumn(tableRow.scores, 2));
+			$tableRow.find('#score').text(tableRow.scores, 2);
 			// Show
 			$tableRow.removeClass('d-none');
 			// Highlight
@@ -612,7 +612,7 @@ tffTools = {
 
 	getCurrentDate() {
 		return new Date();
-		// return new Date('2025-09-06T11:01');
+		// return new Date('2026-04-06T11:01');
 	},
 
 }
