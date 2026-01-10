@@ -5,3 +5,11 @@
 #   ort: H - Heim oder A - Auswärts
 #   ergebnis:
 #
+- datum: 2026-01-16
+  zeit: "21:00"
+  gegner: "TFC Riegelsberg 1"
+  ort: H
+- datum: 2026-01-23
+  zeit: "21:00"
+  gegner: "TFC Riegelsberg 1"
+  ort: A
