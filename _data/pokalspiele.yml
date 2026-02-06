@@ -5,3 +5,7 @@
 #  ort: H - Heim oder A - Auswärts
 #  ergebnis: optional (in Anführungszeichen, Beispiel: "13:11")
 #
+- datum: 2026-03-20
+  zeit: "21:00"
+  gegner: "TFC Schiffweiler"
+  ort: A
