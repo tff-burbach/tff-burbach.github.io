@@ -26,8 +26,7 @@ stfvData = {
 		groupNo = groupNo ? groupNo : 'Ligaphase';
 		const stfvURL = `https://stfv.de/teamsport/classic-ligen/classic-landesliga?a=b`;
 		const stfvURLEncoded = encodeURI(stfvURL);
-		return USE_PROXY ? `https://proxy.cors.sh/${stfvURLEncoded}` : stfvURL;
-		// return USE_PROXY ? `https://corsproxy.io/?${stfvURLEncoded}` : stfvURL;
+		return USE_PROXY ? `https://api.codetabs.com/v1/proxy?quest=${stfvURLEncoded}` : stfvURL;
 	},
 
 	getBackupLeagueUrl(leaguename, matchdayno, year, category, groupNo) {
