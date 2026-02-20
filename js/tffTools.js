@@ -420,7 +420,7 @@ tffTools = {
 		var games = matchday.games;
 		var loaded = false;
 		$matchdayGames.find('.gamesRowGenerated').remove();
-		$matchdayGames.find('#gamesTitle').text(matchday.text);
+		$matchdayGames.find('#gamesTitle').text(matchday.text + ", " + matchday.date.toLocaleDateString("de-DE", { day: "numeric", month: "long"}));
 		$matchdayGames.attr('spieltag', matchday.no);
 		$matchdayGames.attr('matchdayIndex', matchdayIndex);
 		var index = 1;

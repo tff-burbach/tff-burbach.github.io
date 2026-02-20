@@ -163,7 +163,7 @@ stfvData = {
 		today.setHours(0, 0, 0, 0); 
 		allMatchdays.forEach((matchDay, index) => {
  			let matchDate = matchDay.date;
-			if (matchDate < today && (!mostRecentPastDate || matchDate > mostRecentPastDate)) {
+			if (matchDate <= today && (!mostRecentPastDate || matchDate > mostRecentPastDate)) {
 				mostRecentPastDate = matchDate;
 				currentMatchDay = matchDay;
 				currentMatchDay.index = index;
