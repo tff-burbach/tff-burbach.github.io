@@ -4,6 +4,56 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+// Smooth scrolling for entire page
+html {
+  scroll-behavior: smooth;
+}
+
+// Offset for sticky navbar when scrolling to sections
+section {
+  scroll-margin-top: 70px;
+}
+
+// Fade-in animation for dynamically loaded content
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contentEntryGenerated,
+.gamesRow:not(#gamesRowTemplate),
+.tableRow:not(#tableRowTemplate) {
+  animation: fadeInUp 0.4s ease-out backwards;
+}
+
+// Stagger animation delays for sequential items (up to 20 items)
+.contentEntryGenerated:nth-child(1) { animation-delay: 0.05s; }
+.contentEntryGenerated:nth-child(2) { animation-delay: 0.1s; }
+.contentEntryGenerated:nth-child(3) { animation-delay: 0.15s; }
+.contentEntryGenerated:nth-child(4) { animation-delay: 0.2s; }
+.contentEntryGenerated:nth-child(5) { animation-delay: 0.25s; }
+.contentEntryGenerated:nth-child(6) { animation-delay: 0.3s; }
+.contentEntryGenerated:nth-child(7) { animation-delay: 0.35s; }
+.contentEntryGenerated:nth-child(8) { animation-delay: 0.4s; }
+.contentEntryGenerated:nth-child(9) { animation-delay: 0.45s; }
+.contentEntryGenerated:nth-child(10) { animation-delay: 0.5s; }
+.contentEntryGenerated:nth-child(11) { animation-delay: 0.55s; }
+.contentEntryGenerated:nth-child(12) { animation-delay: 0.6s; }
+.contentEntryGenerated:nth-child(13) { animation-delay: 0.65s; }
+.contentEntryGenerated:nth-child(14) { animation-delay: 0.7s; }
+.contentEntryGenerated:nth-child(15) { animation-delay: 0.75s; }
+.contentEntryGenerated:nth-child(16) { animation-delay: 0.8s; }
+.contentEntryGenerated:nth-child(17) { animation-delay: 0.85s; }
+.contentEntryGenerated:nth-child(18) { animation-delay: 0.9s; }
+.contentEntryGenerated:nth-child(19) { animation-delay: 0.95s; }
+.contentEntryGenerated:nth-child(20) { animation-delay: 1s; }
+
 //  body {
 //   overflow-x: hidden;
 //   font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -819,6 +869,24 @@ img::-moz-selection {
   height: 10px;
 }
 
+// Modern card style for event entries
+#contentEntryTemplate:not(.d-none),
+.contentEntryGenerated {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 8px 12px;
+  margin-bottom: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 191, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
 .content {
 	margin-left: 10px;
 }
@@ -837,6 +905,34 @@ img::-moz-selection {
 
 .contentView>button {
   font-style: italic;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  padding-bottom: 8px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 80%;
+    height: 2px;
+    background: $template-color-primary;
+    transition: transform 0.3s ease;
+  }
+
+  &.active::after {
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  &:hover:not(.active) {
+    transform: translateY(-2px);
+    color: $template-color-primary;
+  }
+
+  &.active {
+    color: $template-color-primary;
+  }
 }
 
 .contentdate {
@@ -846,6 +942,13 @@ img::-moz-selection {
 	margin: 9px;
 	padding: 0 0 0 0;
 	width: 45px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .contentdate>h3 {
@@ -950,6 +1053,29 @@ img::-moz-selection {
   color: $template-color-secondary;
 }
 
+// Hover effects for game and table rows
+.gamesRow, .tableRow {
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  padding-left: 8px;
+
+  &:hover {
+    background: rgba(255, 191, 0, 0.05);
+    border-left-color: $template-color-primary;
+    transform: translateX(5px);
+    cursor: pointer;
+  }
+
+  &.ownTeam {
+    border-left-color: $template-color-secondary;
+    background: rgba(224, 168, 2, 0.08);
+
+    &:hover {
+      background: rgba(224, 168, 2, 0.15);
+    }
+  }
+}
+
 .tableseparator{
   height: 50px;
 }
@@ -965,10 +1091,28 @@ img::-moz-selection {
   // color: $template-color-muted;
 }
 
-.status{
+// Loading spinner animation
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.status {
   color: gray;
   font-style: italic;
   // font-size: medium;
+
+  &.loading::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 191, 0, 0.3);
+    border-top-color: $template-color-primary;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+  }
 }
 
 .statusbar{
@@ -991,4 +1135,27 @@ body a{
 
 .clearfix {
   clear: both;
+}
+
+// Toast notification
+.toast-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: $template-color-primary;
+  color: #000;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  font-style: normal;
+  font-weight: 600;
+
+  &.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

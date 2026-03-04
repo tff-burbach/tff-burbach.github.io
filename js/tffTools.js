@@ -536,7 +536,7 @@ tffTools = {
 	async _initializeTffData(force) {
 		tffTools._log('Load data from STFV');
 		// $('#refreshData').addClass('inactive');
-		$('.status').text('loading');
+		$('.status').addClass('loading').text('loading');
 		try {
 			tffData.leagueData = await stfvData.collectLeagueData(tffTools.getTeam());
 			tffData.termine = tffData.termine.filter(termin => {
@@ -596,11 +596,31 @@ tffTools = {
 		tffTools._initializeSchedules();
 		tffData.initialized = true;
 		tffData.initializationTime = new Date();
-		$('.status').text(tffData.initializationTime.toLocaleDateString("de-de", { month:"numeric", day:"numeric"}) + " " + tffData.initializationTime.toLocaleTimeString("de-de"));
+		$('.status').removeClass('loading').text(tffData.initializationTime.toLocaleDateString("de-de", { month:"numeric", day:"numeric"}) + " " + tffData.initializationTime.toLocaleTimeString("de-de"));
 		$('#refreshData').removeClass('inactive');
+
+		// Show toast notification on successful refresh
+		if (force) {
+			tffTools.showToast('Daten aktualisiert');
+		}
 		// if (!force) {
 		// 	setTimeout(tffTools._initializeTffData, tffTools.cacheTimeMsec);
 		// }
+	},
+
+	showToast(message) {
+		const toast = document.createElement('div');
+		toast.className = 'toast-notification';
+		toast.textContent = message;
+		document.body.appendChild(toast);
+
+		setTimeout(() => {
+			toast.classList.add('show');
+			setTimeout(() => {
+				toast.classList.remove('show');
+				setTimeout(() => toast.remove(), 300);
+			}, 2000);
+		}, 100);
 	},
 
 	_createTFFResult(match) {
