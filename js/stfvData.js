@@ -19,8 +19,13 @@ stfvData = {
 		return stfvData.getLeagueData(team, 1, category, 'Abstiegsrunde');
 	},
 
+	async collectCupData(team) {
+		const stfvCupHTML = await stfvData.fetchCupFromStfv(team);
+		return stfvData.extractCupData(team, stfvCupHTML);
+	},
+
 	getLeagueUrl(leaguename, matchdayno, year, category, groupNo) {
-		year = year ? year : 2026;
+		year = year ? year : new Date().getFullYear();
 		category = category ? encodeURIComponent(category) : 'Ligabetrieb+Classic';
 		leaguename = leaguename.replace(' ', '+').replace('ü','%FC');
 		groupNo = groupNo ? groupNo : 'Ligaphase';
@@ -31,6 +36,33 @@ stfvData = {
 
 	getBackupLeagueUrl(leaguename, matchdayno, year, category, groupNo) {
 		return '/stfv/landesliga-classic.html';
+	},
+
+	getCupUrl(year) {
+		year = year ? year : new Date().getFullYear();
+		const stfvURL = `https://stfv.de/teamsport/classic-ligen/classic-pokal`;
+		const stfvURLEncoded = encodeURI(stfvURL);
+		return USE_PROXY ? `https://api.codetabs.com/v1/proxy?quest=${stfvURLEncoded}` : stfvURL;
+	},
+
+	getBackupCupUrl() {
+		return '/stfv/pokal-classic.html';
+	},
+
+	async fetchCupFromStfv(team) {
+		var response;
+		try {
+			const url = stfvData.getCupUrl(team.year);
+			response = await $.get({url: url, cache: false});
+		}
+		catch (ex) {
+			const url = stfvData.getBackupCupUrl();
+			response = await $.get({url: url, cache: false});
+		}
+		var html = response;
+		var stfvCup = document.createElement('div');
+		stfvCup.innerHTML = html;
+		return stfvCup;
 	},
 
 	async fetchTableFromStfv(team, matchdayno, category, groupNo) {
@@ -186,6 +218,63 @@ stfvData = {
 
 	getCurrentDate() {
 		return tffTools.getCurrentDate();
+	},
+
+	extractCupData: function (team, stfvCupHtml) {
+		// Cup matches (no league table for cup)
+		let matches = [];
+		let roundName = null;
+
+		$("table.contentpaneopen tr", stfvCupHtml).each(function() {
+
+			if ($(this).hasClass('sectiontableheader')) {
+				// Extract the round name (e.g., "1. Runde - Vorrunde")
+				roundName = $(this).find('th').text().trim();
+
+			} else if ($(this).hasClass('sectiontableentry1') || $(this).hasClass('sectiontableentry2')) {
+
+				// Extract match information
+				let dateTimeStr = $(this).find('td').eq(0).text().trim();
+				let [, date, time] = dateTimeStr.split(' ');
+
+				if (!date || !time) return; // Skip invalid entries
+
+				let dateSplit = date.split(".");
+				let timeSplit = time.split(":");
+
+				let isoDate = `${dateSplit[2]}-${dateSplit[1]}-${dateSplit[0]}`;
+				let isoDatetime = `${isoDate}T${timeSplit[0]}:${timeSplit[1]}`;
+
+				let team1 = $(this).find('td').eq(1).text().trim();
+				let team2 = $(this).find('td').eq(2).text().trim();
+				let result = $(this).find('td').eq(3).text().trim();
+
+				if (result.includes('_:_')) {
+					result = '';
+				}
+
+				// Check if this is our team's match
+				if (team1 === team.name || team2 === team.name) {
+					let match = {
+						datetime: isoDatetime,
+						date: isoDate,
+						time: `${timeSplit[0]}:${timeSplit[1]}`,
+						result: result,
+						round: roundName
+					};
+					if (team1 === team.name) {
+						match.home = true;
+						match.opponent = team2;
+					} else {
+						match.home = false;
+						match.opponent = team1;
+					}
+					matches.push(match);
+				}
+			}
+		});
+
+		return { matches: matches };
 	},
 
 };

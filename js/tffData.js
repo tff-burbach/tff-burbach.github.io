@@ -21,7 +21,7 @@ tffData = {
 	typF : 'F',
 	typF2 : 'F2',
 	typO : 'O',
-	typLString : 'Info',
+	typIString : 'Info',
 	typLString : 'Landesliga',
 	typL2String : 'Bezirksliga Süd',
 	typBString : 'Verbandsliga pro',
@@ -55,7 +55,7 @@ tffData = {
     ],
 	
 	getTypeAsString : function(type) {
-		if (type === tffData.typI) return '';
+		if (type === tffData.typI) return tffData.typIString;
 		if (type === tffData.typL) return tffData.typLString;
 		if (type === tffData.typL2) return tffData.typL2String;
 		if (type === tffData.typB) return tffData.typBString;

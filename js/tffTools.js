@@ -144,7 +144,6 @@ tffTools = {
 			scheduleTitleMain += ' ' + termin.zeit + '';
 		}
 		scheduleTitleMain += " - ";
-		// if (termin.titel == undefined || termin.title.length == 0) {
 		if (!!termin.titel) {
 			scheduleTitleMain += ' ' + termin.titel;
 		}
@@ -540,7 +539,7 @@ tffTools = {
 		$('.status').text('loading');
 		try {
 			tffData.leagueData = await stfvData.collectLeagueData(tffTools.getTeam());
-			tffData.termine = tffData.termine.filter(termin => { 
+			tffData.termine = tffData.termine.filter(termin => {
 				return !termin.generated;
 			});
 			tffData.leagueData.matches.forEach(match => {
@@ -564,6 +563,24 @@ tffTools = {
 						datum: match.date,
 						zeit: match.time,
 						typ: tffData.typO,
+						gegner: match.opponent,
+						ort: match.home ? 'H' : 'A',
+						ergebnis: tffTools._createTFFResult(match),
+						generated: new Date()
+					})
+				});
+			}
+
+			// Load cup data
+			tffData.cupData = await stfvData.collectCupData(tffTools.getTeam());
+			if (tffData.cupData && tffData.cupData.matches) {
+				tffData.cupData.matches.forEach(match => {
+					tffData.termine.push({
+						datetime: match.datetime,
+						datum: match.date,
+						zeit: match.time,
+						typ: tffData.typP,
+						titel: match.round,
 						gegner: match.opponent,
 						ort: match.home ? 'H' : 'A',
 						ergebnis: tffTools._createTFFResult(match),
@@ -604,10 +621,6 @@ tffTools = {
 
 	getTeam() {
 		return { name: 'TFF Burbach', league: 'Landesliga', year: tffTools.getCurrentDate().getFullYear() };
-		if (!team.year) {
-			team.year = getCurrentDate.getYear();
-		}
-		return tffData.team;
 	},
 
 	getCurrentDate() {
