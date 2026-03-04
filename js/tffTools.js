@@ -36,33 +36,48 @@ tffTools = {
 		}
 		var eventId = '#' + view;
 		$(eventId).parent().find('.btn').removeClass('active')
+
+		// Show loading animation
+		$('#eventsLoading').removeClass('d-none');
+		$('#scrollableEventsContainer .contentEntryGenerated').remove();
+
 		switch(view) {
 			case 'allSchedules':
-				tffTools._showCurrentSchedules();
+				await tffTools._showAllSchedules();
 				break;
 			case 'leagueSchedules':
-				tffTools._showSchedulesByType('#contentSchedules', tffData.typL);
+				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typL);
 				break;
 			case 'bonziniSchedules':
-				tffTools._showSchedulesByType('#contentSchedules', tffData.typB);
+				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typB);
 				break;
 				case 'playoffSchedules':
-				tffTools._showSchedulesByType('#contentSchedules', tffData.typO);
+				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typO);
 				break;
 			case 'cupSchedules':
-				tffTools._showSchedulesByType('#contentSchedules', tffData.typP);
+				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typP);
 				break;
 			case 'friendlySchedules':
-				tffTools._showSchedulesByType('#contentSchedules', tffData.typF);
+				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typF);
 				break;
 			case 'infoSchedules':
-				tffTools._showSchedulesByType('#contentSchedules', tffData.typI);
+				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typI);
 				break;
 			default:
-				tffTools._showCurrentSchedules(3, 6, true, true);
+				await tffTools._showAllSchedules();
 		}
+
+		// Hide loading animation
+		$('#eventsLoading').addClass('d-none');
+
 		$(eventId).addClass('active');
 		$('#contentView').attr('view',view);
+	},
+
+	async _showAllSchedules() {
+		var $scheduleParent = $('#scrollableEventsContainer');
+		// Show all schedules with max 2 past events
+		tffTools._showSchedules($scheduleParent, await tffTools._getSchedules(2, undefined, undefined), false);
 	},
 
 	async _showCurrentSchedules(noPast, noFuture, animate, onlyImportant, types) {
@@ -78,7 +93,8 @@ tffTools = {
 	async _showSchedulesByType(contentSchedulesId, type) {
 		var animate;
 		var $scheduleParent = $(contentSchedulesId);
-		tffTools._showSchedules($scheduleParent, await tffTools._getSchedules(undefined, undefined, Array.from(type)), animate);
+		// Show filtered schedules with max 2 past events
+		tffTools._showSchedules($scheduleParent, await tffTools._getSchedules(2, undefined, Array.from(type)), animate);
 	},
 
 	refreshPage() {
@@ -91,6 +107,9 @@ tffTools = {
 		var $scheduleTemplate = $scheduleParent.find('#contentEntryTemplate');
 		var fadeTimeTmp = tffTools.fadeTime;
 		var contentShown = false;
+		var currentEventIndex = -1;
+		var today = tffTools.getCurrentDate();
+
 		for (var i = 0; i < requestedSchedules.length; i++) {
 			var termin = requestedSchedules[i];
 			var date = new Date(termin.datum);
@@ -102,6 +121,13 @@ tffTools = {
 			if (termin.isPast) {
 				$scheduleEntry.addClass('contentinactive');
 			}
+
+			// Mark the next upcoming event (first non-past event)
+			if (!termin.isPast && currentEventIndex === -1) {
+				$scheduleEntry.addClass('event-current');
+				currentEventIndex = i;
+			}
+
 			var $scheduleEntryContentDate = $scheduleEntry.find('#contentdate');
 			if (termin.isPast) {
 				$scheduleEntryContentDate.addClass('contentdateinactive');
@@ -122,6 +148,17 @@ tffTools = {
 			$scheduleParent.append($scheduleEntry);
 		}
 		contentShown ? $('#noEvents').addClass('d-none') : $('#noEvents').removeClass('d-none');
+
+		// Auto-scroll to current event after rendering
+		if (currentEventIndex >= 0) {
+			setTimeout(() => {
+				const currentElement = document.getElementById('contentEntryGenerated' + currentEventIndex);
+				if (currentElement) {
+					currentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				}
+			}, 100);
+		}
+
 		tffTools.setAddresses();
 	},
 

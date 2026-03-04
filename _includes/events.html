@@ -7,9 +7,8 @@
                 <h3 class="section-subheading text-muted">Spiele, Versammlungen, Feste.</h3>
             </div>
         </div>
-        <div id="contentView" class="contentView row" view="normalSchedules">
-            <button id="normalSchedules" type="button" class="col text-truncate btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('normalSchedules')">aktuell</button>
-            <button id="allSchedules" type="button" class="col text-truncate btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('allSchedules')">alle</button>
+        <div id="contentView" class="contentView row" view="allSchedules">
+            <button id="allSchedules" type="button" class="col text-truncate btn btn-link fs-5 fw-bold active" onclick="tffTools.showSchedules('allSchedules')">alle</button>
             <button id="leagueSchedules" type="button" class="col text-truncate d-none d-sm-block btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('leagueSchedules')">liga</button>
             <button id="bonziniSchedules" type="button" class="col text-truncate d-none d-sm-block btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('bonziniSchedules')">leistungsliga</button>
             <button id="cupSchedules" type="button" class="col text-truncate d-none d-sm-block btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('cupSchedules')">pokal</button>
@@ -18,8 +17,15 @@
 
         </div>
         <div class="eventsseparator row"></div>
-        <div id="noEvents" class="text-center d-none">... keine Termine</div>
-        <div id="contentEntryTemplate" class="row justify-content-start d-none">
+        <div id="scrollableEventsContainer" class="scrollable-events-container">
+            <div id="eventsLoading" class="events-loading">
+                <div class="spinner-container">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Termine werden geladen...</div>
+                </div>
+            </div>
+            <div id="noEvents" class="text-center d-none">... keine Termine</div>
+            <div id="contentEntryTemplate" class="row justify-content-start d-none">
             <div id="contentdate" class="contentdate col-1">
                 <h4 id="month"></h4>
                 <h3 id="day"></h3>
@@ -36,6 +42,7 @@
                     <p class="clearfix" />
                 </div>
             </div>
+        </div>
         </div>
     </div>
     <!-- <div id="status" class="status text-end">loading</div> -->
