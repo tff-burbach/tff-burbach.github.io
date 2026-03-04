@@ -71,14 +71,21 @@
                     <div id="result" class="col-1 text-center"></div>
                     <div id="empty" class="col-1 d-none d-md-block"></div>
                 </div>
-            </div>                    
-            <div id="gamesNavigation" class="row">
-                <div id="empty" class="col d-none d-md-block"></div>
-                <button id="previousGames" type="button" class="col-1 text-start btn btn-link fs-4 fw-bold inactive" onclick="tffTools.showPreviousGames(this)"><<</button>
-                <a class="col text-center fs-4" target="_blank" href="https://www.stfv.de/stfv/index.php">STFV Datenbank</a>
-                <!-- <button id="refreshData" type="button" class="col text-center btn btn-link fs-4 inactive" onclick="tffTools.showTFFData(true)">aktualisieren</button> -->
-                <button id="nextGames" type="button" class="col-1 text-end btn btn-link fs-4 fw-bold inactive" onclick="tffTools.showNextGames(this)">>></button>
-                <div id="empty" class="col d-none d-md-block"></div>
+            </div>
+            <div id="gamesNavigation" class="games-navigation row">
+                <div class="col d-flex align-items-center justify-content-center gap-3">
+                    <button id="previousGames" type="button" class="btn btn-outline-warning btn-nav inactive" onclick="tffTools.showPreviousGames(this)">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                    </button>
+                    <a class="btn btn-link link-stfv" target="_blank" href="https://www.stfv.de/stfv/index.php">STFV Datenbank</a>
+                    <button id="nextGames" type="button" class="btn btn-outline-warning btn-nav inactive" onclick="tffTools.showNextGames(this)">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
             <!-- <div id="tableSTFVLink" class="row text-center">
                 <a class="fs-4" target="_blank" href="https://www.stfv.de/stfv/index.php">STFV Datenbank</a>
@@ -156,13 +163,23 @@
                     <div id="result" class="col-1 text-center"></div>
                     <div id="empty" class="col-1 d-none d-md-block"></div>
                 </div>
-            </div>                    
-            <div id="gamesNavigation" class="row">
-                <div id="empty" class="col d-none d-md-block"></div>
-                <button id="previousGames" type="button" class="col-1 text-start btn btn-link fs-4 fw-bold inactive" onclick="tffTools.showPreviousGames(this)"><<</button>
-                <a class="col text-center fs-4" target="_blank" href="https://alt.stfv.de/stfv/index.php">STFV Datenbank</a>
-                <button id="nextGames" type="button" class="col-1 text-end btn btn-link fs-4 fw-bold inactive" onclick="tffTools.showNextGames(this)">>></button>
-                <div id="empty" class="col d-none d-md-block"></div>
+            </div>
+            <div id="gamesNavigation" class="games-navigation row">
+                <div class="col d-flex align-items-center justify-content-center gap-3">
+                    <button id="previousGames" type="button" class="btn btn-outline-warning btn-nav inactive" onclick="tffTools.showPreviousGames(this)">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                    </button>
+                    <a class="btn btn-link link-stfv" target="_blank" href="https://stfv.de/teamsport/classic-ligen/classic-landesliga?view=sportsmanager">STFV</a>
+                    <span class="text-muted">|</span>
+                    <a class="btn btn-link link-live" target="_blank" href="https://stfv.de/teamsport/aktuelle-partien?task=veranstaltungen_ticker&tmpl=component">live</a>
+                    <button id="nextGames" type="button" class="btn btn-outline-warning btn-nav inactive" onclick="tffTools.showNextGames(this)">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </section>

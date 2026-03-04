@@ -85,10 +85,15 @@ stfvData = {
 		// League Table
 		let leagueTable = [];
 		$("table.dtfl-table-medium tr.sectiontableentry1, table.dtfl-table-medium tr.sectiontableentry2", stfvTableHtml).each(function() {
+			let gamesPlayed = parseInt($(this).find('td').eq(3).text().trim());
+			let plusPoints = parseInt($(this).find('td').eq(11).text().trim());
+			let totalPoints = gamesPlayed * 2;
+			let minusPoints = totalPoints - plusPoints;
+
 			let team = {
 				place: $(this).find('td').eq(0).text().trim(),
 				team: $(this).find('td').eq(1).text().trim(),
-				games: $(this).find('td').eq(3).text().trim(),
+				games: gamesPlayed,
 				wins: $(this).find('td').eq(4).text().trim(),
 				draws: $(this).find('td').eq(5).text().trim(),
 				losses: $(this).find('td').eq(6).text().trim(),
@@ -96,7 +101,9 @@ stfvData = {
 				goals_diff: $(this).find('td').eq(8).text().trim(),
 				sets: $(this).find('td').eq(9).text().trim(),
 				sets_diff: $(this).find('td').eq(10).text().trim(),
-				scores: $(this).find('td').eq(11).text().trim()
+				scores: plusPoints + ':' + minusPoints,
+				plusPoints: plusPoints,
+				minusPoints: minusPoints
 			};
 			leagueTable.push(team);
 		});
@@ -143,6 +150,20 @@ stfvData = {
 				let isoDate = `${dateSplit[2]}-${dateSplit[1]}-${dateSplit[0]}`;
 				let isoDatetime = `${isoDate}T${timeSplit[0]}:${timeSplit[1]}`;
 
+				let rawResult = $(this).find('td').eq(3).text().trim();
+				let resultHasSuffix = false;
+				let cleanResult = rawResult;
+
+				// Check for letter suffix (like "live", "n.V.", etc.)
+				// BUT NOT for dates in format (DD.MM.)
+				const suffixMatch = rawResult.match(/^(\d+:\d+)\s*([a-zA-Z.]+)$/);
+				const isDateFormat = rawResult.match(/\(\d+\.\d+\.\)/); // Matches (17.4.)
+
+				if (suffixMatch && !isDateFormat) {
+					cleanResult = suffixMatch[1]; // Extract only the score
+					resultHasSuffix = true;
+				}
+
 				let game = {
 					matchDay: matchDay.no,
 					datetime: isoDatetime,
@@ -150,7 +171,8 @@ stfvData = {
 					time: `${timeSplit[0]}:${timeSplit[1]}`,
 					team1: $(this).find('td').eq(1).text().trim(),
 					team2: $(this).find('td').eq(2).text().trim(),
-					result: $(this).find('td').eq(3).text().trim(),
+					result: cleanResult,
+					resultHasSuffix: resultHasSuffix
 				};
 
 				if (game.result.includes('_:_')) {
@@ -169,7 +191,8 @@ stfvData = {
 						datetime: game.datetime,
 						date: game.date,
 						time: game.time,
-						result: game.result
+						result: game.result,
+						resultHasSuffix: game.resultHasSuffix
 					};
 					if (game.team1 === team.name) {
 						match.home = true;

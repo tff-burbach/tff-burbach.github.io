@@ -13,7 +13,7 @@ tffTools = {
 
 	async showTFFData(force) {
 		await tffTools._initializeData(force);
-		await tffTools.showSchedules();
+		await tffTools.showSchedules(null, !force); // Auto-scroll only on initial load, not on refresh
 		await tffTools.showTable(force);
 		// var dataSpyList = [].slice.call(document.querySelectorAll('[data-bs-spy="scroll"]'))
 		// dataSpyList.forEach(function (dataSpyEl) {
@@ -30,10 +30,13 @@ tffTools = {
 		tffData.timer = setTimeout(tffTools.showTFFData, tffTools.cacheTimeMsec);
 	},
 
-	async showSchedules(view) {
+	async showSchedules(view, autoScroll) {
 		if (!view) {
 			view = $('#contentView').attr('view');
 		}
+		// Default: no auto-scroll (only on initial page load)
+		autoScroll = (autoScroll === undefined ? false : autoScroll);
+
 		var eventId = '#' + view;
 		$(eventId).parent().find('.btn').removeClass('active')
 
@@ -43,28 +46,28 @@ tffTools = {
 
 		switch(view) {
 			case 'allSchedules':
-				await tffTools._showAllSchedules();
+				await tffTools._showAllSchedules(autoScroll);
 				break;
 			case 'leagueSchedules':
-				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typL);
+				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typL, autoScroll);
 				break;
 			case 'bonziniSchedules':
-				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typB);
+				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typB, autoScroll);
 				break;
 				case 'playoffSchedules':
-				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typO);
+				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typO, autoScroll);
 				break;
 			case 'cupSchedules':
-				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typP);
+				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typP, autoScroll);
 				break;
 			case 'friendlySchedules':
-				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typF);
+				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typF, autoScroll);
 				break;
 			case 'infoSchedules':
-				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typI);
+				await tffTools._showSchedulesByType('#scrollableEventsContainer', tffData.typI, autoScroll);
 				break;
 			default:
-				await tffTools._showAllSchedules();
+				await tffTools._showAllSchedules(autoScroll);
 		}
 
 		// Hide loading animation
@@ -74,10 +77,10 @@ tffTools = {
 		$('#contentView').attr('view',view);
 	},
 
-	async _showAllSchedules() {
+	async _showAllSchedules(autoScroll) {
 		var $scheduleParent = $('#scrollableEventsContainer');
 		// Show all schedules with max 2 past events
-		tffTools._showSchedules($scheduleParent, await tffTools._getSchedules(2, undefined, undefined), false);
+		tffTools._showSchedules($scheduleParent, await tffTools._getSchedules(2, undefined, undefined), false, autoScroll);
 	},
 
 	async _showCurrentSchedules(noPast, noFuture, animate, onlyImportant, types) {
@@ -90,19 +93,20 @@ tffTools = {
 		}
 	},
 
-	async _showSchedulesByType(contentSchedulesId, type) {
+	async _showSchedulesByType(contentSchedulesId, type, autoScroll) {
 		var animate;
 		var $scheduleParent = $(contentSchedulesId);
 		// Show filtered schedules with max 2 past events
-		tffTools._showSchedules($scheduleParent, await tffTools._getSchedules(2, undefined, Array.from(type)), animate);
+		tffTools._showSchedules($scheduleParent, await tffTools._getSchedules(2, undefined, Array.from(type)), animate, autoScroll);
 	},
 
 	refreshPage() {
 		location.reload(false);
 	},
 
-	async _showSchedules($scheduleParent, requestedSchedules, animate) {
+	async _showSchedules($scheduleParent, requestedSchedules, animate, autoScroll) {
 		animate = (animate === undefined ? false : animate);
+		autoScroll = (autoScroll === undefined ? true : autoScroll); // Default: auto-scroll only on first load
 		$scheduleParent.find('.contentEntryGenerated').remove();
 		var $scheduleTemplate = $scheduleParent.find('#contentEntryTemplate');
 		var fadeTimeTmp = tffTools.fadeTime;
@@ -149,8 +153,8 @@ tffTools = {
 		}
 		contentShown ? $('#noEvents').addClass('d-none') : $('#noEvents').removeClass('d-none');
 
-		// Auto-scroll to current event after rendering
-		if (currentEventIndex >= 0) {
+		// Auto-scroll to current event after rendering (only if autoScroll is true)
+		if (autoScroll && currentEventIndex >= 0) {
 			setTimeout(() => {
 				const currentElement = document.getElementById('contentEntryGenerated' + currentEventIndex);
 				if (currentElement) {
@@ -387,7 +391,14 @@ tffTools = {
 		const leagueData = tableParent[0].id == 'contentPlayoffTable' ? tffData.playoffLeagueData : tffData.leagueData;
 		const $contentTable = $(`#${tableParent[0].id}`);
 		var currentIndex = parseInt($('#nextMatchDayGames', $contentTable).attr('matchdayindex'));
-		tffTools._showGames($contentTable, tffTools.getPreviousMatchdayIndex(currentIndex, leagueData), leagueData);
+
+		// Add animation class only to nextMatchDayGames (below table)
+		$('#nextMatchDayGames', $contentTable).addClass('page-previous');
+
+		setTimeout(() => {
+			tffTools._showGames($contentTable, tffTools.getPreviousMatchdayIndex(currentIndex, leagueData), leagueData);
+			$('#nextMatchDayGames', $contentTable).removeClass('page-previous');
+		}, 300);
 	},
 
 	getPreviousMatchdayIndex(currentIndex, leagueData) {
@@ -404,7 +415,14 @@ tffTools = {
 		const leagueData = tableParent[0].id == 'contentPlayoffTable' ? tffData.playoffLeagueData : tffData.leagueData;
 		const $contentTable = $(`#${tableParent[0].id}`);
 		var currentIndex = parseInt($('#nextMatchDayGames', $contentTable).attr('matchdayindex'));
-		tffTools._showGames($contentTable, tffTools.getNextMatchdayIndex(currentIndex, leagueData), leagueData);
+
+		// Add animation class only to nextMatchDayGames (below table)
+		$('#nextMatchDayGames', $contentTable).addClass('page-next');
+
+		setTimeout(() => {
+			tffTools._showGames($contentTable, tffTools.getNextMatchdayIndex(currentIndex, leagueData), leagueData);
+			$('#nextMatchDayGames', $contentTable).removeClass('page-next');
+		}, 300);
 	},
 
 	getNextMatchdayIndex(currentIndex, leagueData) {
@@ -482,7 +500,8 @@ tffTools = {
 			$gamesRow.find('#team1').text(game.team1);
 			$gamesRow.find('#team2').text(game.team2);
 			$gamesRow.find('#result').text(game.result);
-			if (game.result.indexOf(':') < 0) {
+			// Make result italic if it had a suffix (like "live") or if it's not a score
+			if (game.resultHasSuffix || game.result.indexOf(':') < 0) {
 				$gamesRow.find('#result').css('font-style','italic');
 			}
 			// Show

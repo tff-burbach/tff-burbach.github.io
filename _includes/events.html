@@ -7,13 +7,25 @@
                 <h3 class="section-subheading text-muted">Spiele, Versammlungen, Feste.</h3>
             </div>
         </div>
-        <div id="contentView" class="contentView row" view="allSchedules">
+        <!-- Mobile: Dropdown (show only on small screens) -->
+        <div class="mobile-filter-container">
+            <select id="mobileScheduleFilter" class="form-select mobile-filter-dropdown" onchange="tffTools.showSchedules(this.value)">
+                <option value="allSchedules">alle</option>
+                <option value="leagueSchedules">liga</option>
+                <option value="bonziniSchedules">leistungsliga</option>
+                <option value="cupSchedules">pokal</option>
+                <option value="playoffSchedules">play-off</option>
+                <option value="infoSchedules">infos</option>
+            </select>
+        </div>
+        <!-- Desktop: Buttons (show only on larger screens) -->
+        <div id="contentView" class="contentView desktop-filter-buttons row" view="allSchedules">
             <button id="allSchedules" type="button" class="col text-truncate btn btn-link fs-5 fw-bold active" onclick="tffTools.showSchedules('allSchedules')">alle</button>
-            <button id="leagueSchedules" type="button" class="col text-truncate d-none d-sm-block btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('leagueSchedules')">liga</button>
-            <button id="bonziniSchedules" type="button" class="col text-truncate d-none d-sm-block btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('bonziniSchedules')">leistungsliga</button>
-            <button id="cupSchedules" type="button" class="col text-truncate d-none d-sm-block btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('cupSchedules')">pokal</button>
-            <button id="playoffSchedules" type="button" class="col text-truncate d-none d-sm-block btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('playoffSchedules')">play-off</button>
-            <button id="infoSchedules" type="button" class="col text-truncate d-none d-sm-block btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('infoSchedules')">infos</button>
+            <button id="leagueSchedules" type="button" class="col text-truncate btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('leagueSchedules')">liga</button>
+            <button id="bonziniSchedules" type="button" class="col text-truncate btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('bonziniSchedules')">leistungsliga</button>
+            <button id="cupSchedules" type="button" class="col text-truncate btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('cupSchedules')">pokal</button>
+            <button id="playoffSchedules" type="button" class="col text-truncate btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('playoffSchedules')">play-off</button>
+            <button id="infoSchedules" type="button" class="col text-truncate btn btn-link fs-5 fw-bold" onclick="tffTools.showSchedules('infoSchedules')">infos</button>
 
         </div>
         <div class="eventsseparator row"></div>
