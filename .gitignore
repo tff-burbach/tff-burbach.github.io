@@ -351,3 +351,4 @@ MigrationBackup/
 
 # Jekyll local
 _site/
+.claude/settings.local.json
