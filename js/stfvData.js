@@ -79,7 +79,7 @@ stfvData = {
 		const urls = stfvData.getProxyUrls(url);
 		for (const currentUrl of urls) {
 			try {
-				const response = await $.get({url: currentUrl, cache: false});
+				const response = await $.get({url: currentUrl, cache: false, timeout: 10000});
 				stfvData._liveFetchErrorShown = false;
 				return response;
 			}
