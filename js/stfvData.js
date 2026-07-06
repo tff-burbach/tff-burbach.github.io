@@ -4,7 +4,8 @@
 
 const USE_PROXY = true;
 const STFV_PROXY_URL_BUILDERS = [
-	(url) => `https://proxy.cors.sh/${url}`
+	(url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+	(url) => `https://corsproxy.io/?${encodeURIComponent(url)}`
 ];
 
 stfvData = {
