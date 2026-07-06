@@ -3,8 +3,13 @@
  */
 
 const USE_PROXY = true;
+const STFV_PROXY_URL_BUILDERS = [
+	(url) => `https://proxy.cors.sh/${url}`
+];
 
 stfvData = {
+
+	_liveFetchErrorShown: false,
 
 	async getLeagueData(team, matchdayno, category, groupNo) {
 		const stfvTableHTML = await stfvData.fetchTableFromStfv(team, matchdayno, category, groupNo);
@@ -29,9 +34,7 @@ stfvData = {
 		category = category ? encodeURIComponent(category) : 'Ligabetrieb+Classic';
 		leaguename = leaguename.replace(' ', '+').replace('ü','%FC');
 		groupNo = groupNo ? groupNo : 'Ligaphase';
-		const stfvURL = `https://stfv.de/teamsport/classic-ligen/classic-landesliga?a=b`;
-		const stfvURLEncoded = encodeURI(stfvURL);
-		return USE_PROXY ? `https://api.codetabs.com/v1/proxy?quest=${stfvURLEncoded}` : stfvURL;
+		return `https://stfv.de/teamsport/classic-ligen/classic-landesliga`;
 	},
 
 	getBackupLeagueUrl(leaguename, matchdayno, year, category, groupNo) {
@@ -40,9 +43,50 @@ stfvData = {
 
 	getCupUrl(year) {
 		year = year ? year : new Date().getFullYear();
-		const stfvURL = `https://stfv.de/teamsport/classic-ligen/classic-pokal`;
-		const stfvURLEncoded = encodeURI(stfvURL);
-		return USE_PROXY ? `https://api.codetabs.com/v1/proxy?quest=${stfvURLEncoded}` : stfvURL;
+		return `https://stfv.de/teamsport/classic-ligen/classic-pokal`;
+	},
+
+	getProxyUrls(url) {
+		if (!USE_PROXY) {
+			return [url];
+		}
+		return STFV_PROXY_URL_BUILDERS.map((buildUrl) => buildUrl(url));
+	},
+
+	showDataError(message) {
+		if (typeof tffTools !== 'undefined' && typeof tffTools.showToast === 'function') {
+			tffTools.showToast(message);
+			return;
+		}
+		alert(message);
+	},
+
+	notifyLiveFetchFallback() {
+		if (stfvData._liveFetchErrorShown) {
+			return;
+		}
+		stfvData._liveFetchErrorShown = true;
+		stfvData.showDataError('STFV Live-Daten konnten nicht geladen werden. Es werden Sicherungsdaten verwendet.');
+	},
+
+	notifyFetchTotalFailure() {
+		stfvData.showDataError('STFV-Daten konnten nicht geladen werden. Auch die Sicherungsdaten sind nicht verfuegbar.');
+	},
+
+	async fetchFromStfv(url) {
+		let lastError;
+		const urls = stfvData.getProxyUrls(url);
+		for (const currentUrl of urls) {
+			try {
+				const response = await $.get({url: currentUrl, cache: false});
+				stfvData._liveFetchErrorShown = false;
+				return response;
+			}
+			catch (ex) {
+				lastError = ex;
+			}
+		}
+		throw lastError;
 	},
 
 	getBackupCupUrl() {
@@ -52,12 +96,19 @@ stfvData = {
 	async fetchCupFromStfv(team) {
 		var response;
 		try {
-			const url = stfvData.getCupUrl(team.year);
-			response = await $.get({url: url, cache: false});
+			const sourceUrl = stfvData.getCupUrl(team.year);
+			response = await stfvData.fetchFromStfv(sourceUrl);
 		}
 		catch (ex) {
-			const url = stfvData.getBackupCupUrl();
-			response = await $.get({url: url, cache: false});
+			stfvData.notifyLiveFetchFallback();
+			try {
+				const url = stfvData.getBackupCupUrl();
+				response = await $.get({url: url, cache: false});
+			}
+			catch (backupEx) {
+				stfvData.notifyFetchTotalFailure();
+				throw backupEx;
+			}
 		}
 		var html = response;
 		var stfvCup = document.createElement('div');
@@ -68,12 +119,19 @@ stfvData = {
 	async fetchTableFromStfv(team, matchdayno, category, groupNo) {
 		var response;
 		try {
-			const url = stfvData.getLeagueUrl(team.league, matchdayno, team.year, category, groupNo);
-			response = await $.get({url: url, cache: false});
+			const sourceUrl = stfvData.getLeagueUrl(team.league, matchdayno, team.year, category, groupNo);
+			response = await stfvData.fetchFromStfv(sourceUrl);
 		}
 		catch (ex) {
-			const url = stfvData.getBackupLeagueUrl(team.league, matchdayno, team.year, category, groupNo);
-			response = await $.get({url: url, cache: false});
+			stfvData.notifyLiveFetchFallback();
+			try {
+				const url = stfvData.getBackupLeagueUrl(team.league, matchdayno, team.year, category, groupNo);
+				response = await $.get({url: url, cache: false});
+			}
+			catch (backupEx) {
+				stfvData.notifyFetchTotalFailure();
+				throw backupEx;
+			}
 		}
 		var html = response;
 		var stfvTable = document.createElement('div');
