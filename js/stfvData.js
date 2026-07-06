@@ -4,6 +4,7 @@
 
 const USE_PROXY = true;
 const STFV_PROXY_URL_BUILDERS = [
+	(url) => `https://quiet-waterfall-441f.ralph-kiefer.workers.dev/?url=${encodeURIComponent(url)}`,
 	(url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
 	(url) => `https://corsproxy.io/?${encodeURIComponent(url)}`
 ];
