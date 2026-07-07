@@ -30,12 +30,31 @@ tffTools = {
 		tffData.timer = setTimeout(tffTools.showTFFData, tffTools.cacheTimeMsec);
 	},
 
+	async _updateFilterVisibility() {
+		await tffTools._initializeData();
+		var filterTypes = {
+			leagueSchedules:  Array.from(tffData.typL),
+			bonziniSchedules: Array.from(tffData.typB),
+			cupSchedules:     Array.from(tffData.typP),
+			playoffSchedules: Array.from(tffData.typO),
+			infoSchedules:    Array.from(tffData.typI),
+		};
+		for (var [filterId, types] of Object.entries(filterTypes)) {
+			var schedules = await tffTools._getSchedules(2, undefined, types);
+			var hasEvents = schedules.length > 0;
+			$('#' + filterId).toggleClass('d-none', !hasEvents);
+			$('#mobileScheduleFilter option[value="' + filterId + '"]').toggleClass('d-none', !hasEvents);
+		}
+	},
+
 	async showSchedules(view, autoScroll) {
 		if (!view) {
 			view = $('#contentView').attr('view');
 		}
 		// Default: no auto-scroll (only on initial page load)
 		autoScroll = (autoScroll === undefined ? false : autoScroll);
+
+		await tffTools._updateFilterVisibility();
 
 		var eventId = '#' + view;
 		$(eventId).parent().find('.btn').removeClass('active')
