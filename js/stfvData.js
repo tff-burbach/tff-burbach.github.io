@@ -216,11 +216,11 @@ stfvData = {
 
 				// Check for letter suffix (like "live", "n.V.", etc.)
 				// BUT NOT for dates in format (DD.MM.)
-				const suffixMatch = rawResult.match(/^(\d+:\d+)\s*([a-zA-Z.]+)$/);
+				const suffixMatch = rawResult.match(/^(\d+:\d+)\s*([^\d\s]\S*)$/);
 				const isDateFormat = rawResult.match(/\(\d+\.\d+\.\)/); // Matches (17.4.)
 
 				if (suffixMatch && !isDateFormat) {
-					cleanResult = suffixMatch[1]; // Extract only the score
+					cleanResult = suffixMatch[1] + '*';
 					resultHasSuffix = true;
 				}
 
