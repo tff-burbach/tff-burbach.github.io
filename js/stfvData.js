@@ -145,22 +145,22 @@ stfvData = {
 		// League Table
 		let leagueTable = [];
 		$("table.dtfl-table-medium tr.sectiontableentry1, table.dtfl-table-medium tr.sectiontableentry2", stfvTableHtml).each(function() {
-			let gamesPlayed = parseInt($(this).find('td').eq(3).text().trim());
-			let plusPoints = parseInt($(this).find('td').eq(11).text().trim());
+			let gamesPlayed = parseInt($(this).find('td').eq(3).text().replace(/\s+/g, ' ').trim());
+			let plusPoints = parseInt($(this).find('td').eq(11).text().replace(/\s+/g, ' ').trim());
 			let totalPoints = gamesPlayed * 2;
 			let minusPoints = totalPoints - plusPoints;
 
 			let team = {
-				place: $(this).find('td').eq(0).text().trim(),
-				team: $(this).find('td').eq(1).text().trim(),
+				place: $(this).find('td').eq(0).text().replace(/\s+/g, ' ').trim(),
+				team: $(this).find('td').eq(1).text().replace(/\s+/g, ' ').trim(),
 				games: gamesPlayed,
-				wins: $(this).find('td').eq(4).text().trim(),
-				draws: $(this).find('td').eq(5).text().trim(),
-				losses: $(this).find('td').eq(6).text().trim(),
-				goals: $(this).find('td').eq(7).text().trim(),
-				goals_diff: $(this).find('td').eq(8).text().trim(),
-				sets: $(this).find('td').eq(9).text().trim(),
-				sets_diff: $(this).find('td').eq(10).text().trim(),
+				wins: $(this).find('td').eq(4).text().replace(/\s+/g, ' ').trim(),
+				draws: $(this).find('td').eq(5).text().replace(/\s+/g, ' ').trim(),
+				losses: $(this).find('td').eq(6).text().replace(/\s+/g, ' ').trim(),
+				goals: $(this).find('td').eq(7).text().replace(/\s+/g, ' ').trim(),
+				goals_diff: $(this).find('td').eq(8).text().replace(/\s+/g, ' ').trim(),
+				sets: $(this).find('td').eq(9).text().replace(/\s+/g, ' ').trim(),
+				sets_diff: $(this).find('td').eq(10).text().replace(/\s+/g, ' ').trim(),
 				scores: plusPoints + ':' + minusPoints,
 				plusPoints: plusPoints,
 				minusPoints: minusPoints
@@ -189,7 +189,7 @@ stfvData = {
 
 				// Extract the match day
 				if ($(this).find('th').text().indexOf('Spieltag') > 0) {
-					matchDayText = $(this).find('th').text().trim();
+					matchDayText = $(this).find('th').text().replace(/\s+/g, ' ').trim();
 					matchDay = { 
 						no: parseInt(matchDayText.match(/\d+/)[0]),
 						text: matchDayText,
@@ -202,7 +202,7 @@ stfvData = {
 			} else if ($(this).hasClass('sectiontableentry1') || $(this).hasClass('sectiontableentry2')) {
 
 				// Extract match information
-				let dateTimeStr = $(this).find('td').eq(0).text().trim();
+				let dateTimeStr = $(this).find('td').eq(0).text().replace(/\s+/g, ' ').trim();
 				let [date, time] = dateTimeStr.split(' ').slice(1);
 				let dateSplit = date.split(".");
 				let timeSplit = time.split(":");
@@ -210,7 +210,7 @@ stfvData = {
 				let isoDate = `${dateSplit[2]}-${dateSplit[1]}-${dateSplit[0]}`;
 				let isoDatetime = `${isoDate}T${timeSplit[0]}:${timeSplit[1]}`;
 
-				let rawResult = $(this).find('td').eq(3).text().trim();
+				let rawResult = $(this).find('td').eq(3).text().replace(/\s+/g, ' ').trim();
 				let resultHasSuffix = false;
 				let cleanResult = rawResult;
 
@@ -229,8 +229,8 @@ stfvData = {
 					datetime: isoDatetime,
 					date: isoDate,
 					time: `${timeSplit[0]}:${timeSplit[1]}`,
-					team1: $(this).find('td').eq(1).text().trim(),
-					team2: $(this).find('td').eq(2).text().trim(),
+					team1: $(this).find('td').eq(1).text().replace(/\s+/g, ' ').trim(),
+					team2: $(this).find('td').eq(2).text().replace(/\s+/g, ' ').trim(),
 					result: cleanResult,
 					resultHasSuffix: resultHasSuffix
 				};
@@ -312,12 +312,12 @@ stfvData = {
 
 			if ($(this).hasClass('sectiontableheader')) {
 				// Extract the round name (e.g., "1. Runde - Vorrunde")
-				roundName = $(this).find('th').text().trim();
+				roundName = $(this).find('th').text().replace(/\s+/g, ' ').trim();
 
 			} else if ($(this).hasClass('sectiontableentry1') || $(this).hasClass('sectiontableentry2')) {
 
 				// Extract match information
-				let dateTimeStr = $(this).find('td').eq(0).text().trim();
+				let dateTimeStr = $(this).find('td').eq(0).text().replace(/\s+/g, ' ').trim();
 				let [, date, time] = dateTimeStr.split(' ');
 
 				if (!date || !time) return; // Skip invalid entries
@@ -328,9 +328,9 @@ stfvData = {
 				let isoDate = `${dateSplit[2]}-${dateSplit[1]}-${dateSplit[0]}`;
 				let isoDatetime = `${isoDate}T${timeSplit[0]}:${timeSplit[1]}`;
 
-				let team1 = $(this).find('td').eq(1).text().trim();
-				let team2 = $(this).find('td').eq(2).text().trim();
-				let result = $(this).find('td').eq(3).text().trim();
+				let team1 = $(this).find('td').eq(1).text().replace(/\s+/g, ' ').trim();
+				let team2 = $(this).find('td').eq(2).text().replace(/\s+/g, ' ').trim();
+				let result = $(this).find('td').eq(3).text().replace(/\s+/g, ' ').trim();
 
 				if (result.includes('_:_')) {
 					result = '';
