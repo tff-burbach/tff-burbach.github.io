@@ -30,11 +30,9 @@ Items are grouped by effort and worked top-to-bottom. Check off each item as it 
 
 ## Group 3 — UX Quick Wins
 
-- [ ] **3.1 Tooltip for truncated team names** — Table cells use `text-truncate` but provide no way to see the full name. Add `data-bs-toggle="tooltip" title="{{ name }}"` and initialise Bootstrap tooltips.
-
-- [ ] **3.2 Navigation button labels** — Prev/next matchday buttons contain only an unlabelled SVG. Add `aria-label="Vorheriger Spieltag"` / `aria-label="Nächster Spieltag"` and `aria-hidden="true"` on the SVG elements.
-
-- [ ] **3.3 Friendly matches filter** — `friendlySchedules` is handled in `tffTools.js` but has no `<button>` or `<option>` in the filter UI. Add the missing filter entry to both `events.html` filter controls.
+- [x] **3.1 Tooltip for truncated team names**
+- [x] **3.2 Navigation button labels**
+- [x] **3.3 Friendly matches filter**
 
 ---
 

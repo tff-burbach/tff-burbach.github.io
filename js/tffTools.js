@@ -454,6 +454,9 @@ tffTools = {
 
 	_showGames($contentTable, index, leagueData) {
 		tffTools._buildMatchdayGames($contentTable, $('.nextMatchDayGames', $contentTable), tffTools.getTeam().name, index, leagueData);
+		$contentTable.find('[data-bs-toggle="tooltip"]').each(function() {
+			bootstrap.Tooltip.getOrCreateInstance(this);
+		});
 	},
 
 	async showTable(force) {
@@ -482,6 +485,9 @@ tffTools = {
 		// if (nextMatchDay) {
 			tffTools._buildMatchdayGames($contentTable, $contentTable.find('.nextMatchDayGames'), teamname, nextIndex, leagueData);
 		// }
+		$contentTable.find('[data-bs-toggle="tooltip"]').each(function() {
+			bootstrap.Tooltip.getOrCreateInstance(this);
+		});
 	},
 
 	_buildMatchdayGames($contentTable, $matchdayGames, teamname, matchdayIndex, leagueData) {
@@ -516,8 +522,8 @@ tffTools = {
 			$gamesRow.attr('id', 'gamesRowGenerated' + index);
 			$gamesRow.addClass('gamesRowGenerated');
 			$gamesRow.find('.no').text(no);
-			$gamesRow.find('.team1').text(game.team1);
-			$gamesRow.find('.team2').text(game.team2);
+			$gamesRow.find('.team1').text(game.team1).attr('title', game.team1);
+			$gamesRow.find('.team2').text(game.team2).attr('title', game.team2);
 			$gamesRow.find('.result').text(game.result);
 			// Make result italic if it had a suffix (like "live") or if it's not a score
 			if (game.resultHasSuffix || game.result.indexOf(':') < 0) {
@@ -556,7 +562,7 @@ tffTools = {
 			$tableRow.attr('id', 'tableRowGenerated' + tableRow.place);
 			$tableRow.addClass('tableRowGenerated');
 			$tableRow.find('.place').text(tableRow.place);
-			$tableRow.find('.team').text(tableRow.team);
+			$tableRow.find('.team').text(tableRow.team).attr('title', tableRow.team);
 			$tableRow.find('.goals').text(tffTools._formatNumberColumn(tableRow.goals, 4));
 			$tableRow.find('.sets').text(tffTools._formatNumberColumn(tableRow.sets, 3));
 			$tableRow.find('.score').text(tableRow.scores, 2);
