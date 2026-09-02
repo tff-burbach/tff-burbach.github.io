@@ -38,13 +38,10 @@ Items are grouped by effort and worked top-to-bottom. Check off each item as it 
 
 ## Group 4 — Performance
 
-- [ ] **4.1 Consolidate Google Fonts requests** — Replace five separate `?family=` requests with one combined URL and add `&display=swap`.
-
-- [ ] **4.2 Add `preconnect` hints** — Add `<link rel="preconnect" href="https://fonts.googleapis.com">` and `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>` in `<head>`.
-
-- [ ] **4.3 Remove IE8 shims** — `html5shiv` and `respond.js` are loaded from external CDNs on every page load. Remove them; no supported browser needs them.
-
-- [ ] **4.4 Delete backup/draft JS files** — Remove `js/stfvData copy.js`, `js/stfvData copy 2.js`, `js/tffTools_backup.js`, `js/tffDataNew.js` from the repo.
+- [x] **4.1 Consolidate Google Fonts requests**
+- [x] **4.2 Add `preconnect` hints**
+- [x] **4.3 Remove IE8 shims**
+- [x] **4.4 Delete backup/draft JS files**
 
 ---
 
