@@ -141,31 +141,73 @@ stfvData = {
 		return stfvTable;
 	},
 
+	_buildLeagueColMap: function(leagueTable) {
+		const map = { place: 0, team: 1, games: 3, wins: 4, draws: 5, losses: 6, goals: 7, goals_diff: 8, sets: 9, sets_diff: 10, points: 11 };
+		const headerRow = $('tr.sectiontableheader', leagueTable).first();
+		if (!headerRow.length) return map;
+		headerRow.find('th').each(function(i) {
+			const title = ($(this).attr('title') || '').toLowerCase();
+			const text = $(this).text().replace(/\s+/g, ' ').trim().toLowerCase();
+			if (text === 'platz') map.place = i;
+			else if (text === 'mannschaft') map.team = i;
+			else if (title === 'begegnungen') map.games = i;
+			else if (title === 'siege') map.wins = i;
+			else if (title === 'unentschieden') map.draws = i;
+			else if (title === 'niederlagen') map.losses = i;
+			else if (text.includes('tore') && text.includes('absolut')) map.goals = i;
+			else if (text.includes('tore')) map.goals_diff = i;
+			else if (text.includes('spielpunkte') && text.includes('absolut')) map.sets = i;
+			else if (text === 'spiele' || title === 'punktedifferenz') map.sets_diff = i;
+			else if (text === 'punkte') map.points = i;
+		});
+		return map;
+	},
+
+	_buildMatchColMap: function(matchTables) {
+		const map = { datetime: 0, team1: 1, team2: 2, result: 3 };
+		$('tr.sectiontableheader', matchTables).each(function() {
+			if ($(this).find('th').length < 3) return; // skip single-th matchday headers
+			$(this).find('th').each(function(i) {
+				const text = $(this).text().replace(/\s+/g, ' ').trim().toLowerCase();
+				if (text.includes('zeitpunkt')) map.datetime = i;
+				else if (text === 'heim') map.team1 = i;
+				else if (text === 'gast') map.team2 = i;
+				else if (text.includes('ergebnis')) map.result = i;
+			});
+			return false; // stop after first column-header row
+		});
+		return map;
+	},
+
 	extractLeagueData: function (team, stfvTableHtml) {
+		const leagueColMap = stfvData._buildLeagueColMap($('table.dtfl-table-medium', stfvTableHtml));
+		const matchColMap = stfvData._buildMatchColMap($('table.contentpaneopen:not(.dtfl-table-medium)', stfvTableHtml));
+
 		// League Table
 		let leagueTable = [];
 		$("table.dtfl-table-medium tr.sectiontableentry1, table.dtfl-table-medium tr.sectiontableentry2", stfvTableHtml).each(function() {
-			let gamesPlayed = parseInt($(this).find('td').eq(3).text().replace(/\s+/g, ' ').trim());
-			let plusPoints = parseInt($(this).find('td').eq(11).text().replace(/\s+/g, ' ').trim());
+			const col = (i) => $(this).find('td').eq(i).text().replace(/\s+/g, ' ').trim();
+			let gamesPlayed = parseInt(col(leagueColMap.games));
+			let plusPoints = parseInt(col(leagueColMap.points));
 			let totalPoints = gamesPlayed * 2;
 			let minusPoints = totalPoints - plusPoints;
 
-			let team = {
-				place: $(this).find('td').eq(0).text().replace(/\s+/g, ' ').trim(),
-				team: $(this).find('td').eq(1).text().replace(/\s+/g, ' ').trim(),
+			let entry = {
+				place: col(leagueColMap.place),
+				team: col(leagueColMap.team),
 				games: gamesPlayed,
-				wins: $(this).find('td').eq(4).text().replace(/\s+/g, ' ').trim(),
-				draws: $(this).find('td').eq(5).text().replace(/\s+/g, ' ').trim(),
-				losses: $(this).find('td').eq(6).text().replace(/\s+/g, ' ').trim(),
-				goals: $(this).find('td').eq(7).text().replace(/\s+/g, ' ').trim(),
-				goals_diff: $(this).find('td').eq(8).text().replace(/\s+/g, ' ').trim(),
-				sets: $(this).find('td').eq(9).text().replace(/\s+/g, ' ').trim(),
-				sets_diff: $(this).find('td').eq(10).text().replace(/\s+/g, ' ').trim(),
+				wins: col(leagueColMap.wins),
+				draws: col(leagueColMap.draws),
+				losses: col(leagueColMap.losses),
+				goals: col(leagueColMap.goals),
+				goals_diff: col(leagueColMap.goals_diff),
+				sets: col(leagueColMap.sets),
+				sets_diff: col(leagueColMap.sets_diff),
 				scores: plusPoints + ':' + minusPoints,
 				plusPoints: plusPoints,
 				minusPoints: minusPoints
 			};
-			leagueTable.push(team);
+			leagueTable.push(entry);
 		});
 
 		// Games
@@ -190,7 +232,7 @@ stfvData = {
 				// Extract the match day
 				if ($(this).find('th').text().indexOf('Spieltag') > 0) {
 					matchDayText = $(this).find('th').text().replace(/\s+/g, ' ').trim();
-					matchDay = { 
+					matchDay = {
 						no: parseInt(matchDayText.match(/\d+/)[0]),
 						text: matchDayText,
 						date: null,
@@ -202,7 +244,8 @@ stfvData = {
 			} else if ($(this).hasClass('sectiontableentry1') || $(this).hasClass('sectiontableentry2')) {
 
 				// Extract match information
-				let dateTimeStr = $(this).find('td').eq(0).text().replace(/\s+/g, ' ').trim();
+				const col = (i) => $(this).find('td').eq(i).text().replace(/\s+/g, ' ').trim();
+				let dateTimeStr = col(matchColMap.datetime);
 				let [date, time] = dateTimeStr.split(' ').slice(1);
 				let dateSplit = date.split(".");
 				let timeSplit = time.split(":");
@@ -210,7 +253,7 @@ stfvData = {
 				let isoDate = `${dateSplit[2]}-${dateSplit[1]}-${dateSplit[0]}`;
 				let isoDatetime = `${isoDate}T${timeSplit[0]}:${timeSplit[1]}`;
 
-				let rawResult = $(this).find('td').eq(3).text().replace(/\s+/g, ' ').trim();
+				let rawResult = col(matchColMap.result);
 				let resultHasSuffix = false;
 				let cleanResult = rawResult;
 
@@ -229,8 +272,8 @@ stfvData = {
 					datetime: isoDatetime,
 					date: isoDate,
 					time: `${timeSplit[0]}:${timeSplit[1]}`,
-					team1: $(this).find('td').eq(1).text().replace(/\s+/g, ' ').trim(),
-					team2: $(this).find('td').eq(2).text().replace(/\s+/g, ' ').trim(),
+					team1: col(matchColMap.team1),
+					team2: col(matchColMap.team2),
 					result: cleanResult,
 					resultHasSuffix: resultHasSuffix
 				};
