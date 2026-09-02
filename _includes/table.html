@@ -8,88 +8,85 @@
                 </div>
             </div>
             <div class="row"></div>
-            <div id="currentMatchDayGames" class="row d-none">
-                <h3 id="gamesTitle" class="gamesTitle text-center">Spieltag</h3>
-                <h5 id="gamesRowHeader" class="row gamesHeader fs-4 fw-bold">
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
-                    <div id="no" class="col-1 text-center">Nr.</div>
-                    <div id="team1" class="col">Heim</div>
-                    <div id="team2" class="col">Gast</div>
-                    <div id="result" class="col-1 text-center">Erg.</div>
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
+            <div class="currentMatchDayGames row d-none">
+                <h3 class="gamesTitle text-center">Spieltag</h3>
+                <h5 class="row gamesHeader fs-4 fw-bold">
+                    <div class="col-1 d-none d-md-block"></div>
+                    <div class="col-1 text-center">Nr.</div>
+                    <div class="col">Heim</div>
+                    <div class="col">Gast</div>
+                    <div class="col-1 text-center">Erg.</div>
+                    <div class="col-1 d-none d-md-block"></div>
                 </h5>
-                <div id="gamesRowTemplate" class="row gamesRow fs-4 d-none">
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
-                    <div id="no" class="col-1 text-center"></div>
-                    <div id="team1" class="col text-nowrap text-truncate"></div>
-                    <div id="team2" class="col text-nowrap text-truncate"></div>
-                    <div id="result" class="col-1 text-center"></div>
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
+                <div class="gamesRowTemplate row gamesRow fs-4 d-none">
+                    <div class="col-1 d-none d-md-block"></div>
+                    <div class="no col-1 text-center"></div>
+                    <div class="team1 col text-nowrap text-truncate"></div>
+                    <div class="team2 col text-nowrap text-truncate"></div>
+                    <div class="result col-1 text-center"></div>
+                    <div class="col-1 d-none d-md-block"></div>
                 </div>
             </div>
-            <div id="statusbar" class="statusbar row">
-                <div id="empty" class="col-1 d-none d-md-block"></div>
-                <div id="empty" class="col"></div>
-                <button id="refreshData" type="button" class="col text-center btn btn-link fs-4" onclick="tffTools.showTFFData(true)">aktualisieren</button>
-                <div id="status" class="col status text-end fs-6">loading</div>
-                <div id="empty" class="col-1 d-none d-md-block"></div>
+            <div class="statusbar row">
+                <div class="col-1 d-none d-md-block"></div>
+                <div class="col"></div>
+                <button class="refreshData col text-center btn btn-link fs-4" type="button" onclick="tffTools.showTFFData(true)">aktualisieren</button>
+                <div class="status col text-end fs-6">loading</div>
+                <div class="col-1 d-none d-md-block"></div>
             </div>
             <div class="tableseparator row"></div>
-            <div id="currentMatchDayTable" class="leagueHeader row d-none">
-                <h3 id="tableTitle" class="tableTitle text-center">Tabelle</h3>
-                <h5 id="tableRowHeader" class="row tableHeader fs-4 fw-bold">
-                    <div id="place" class="col-1 text-center">Pl.</div>
-                    <div id="team" class="col-6">Verein</div>
-                    <div id="goals" class="col text-center d-none d-lg-block">Tore</div>
-                    <div id="sets" class="col text-center">Sätze</div>
-                    <div id="score" class="col col-sm text-center">Punkte</div>
+            <div class="currentMatchDayTable leagueHeader row d-none">
+                <h3 class="tableTitle text-center">Tabelle</h3>
+                <h5 class="row tableHeader fs-4 fw-bold">
+                    <div class="col-1 text-center">Pl.</div>
+                    <div class="col-6">Verein</div>
+                    <div class="col text-center d-none d-lg-block">Tore</div>
+                    <div class="col text-center">Sätze</div>
+                    <div class="col col-sm text-center">Punkte</div>
                 </h5>
-                <div id="tableRowTemplate" class="row tableRow fs-4 d-none">
-                    <div id="place" class="col-1 text-center"></div>
-                    <div id="team" class="col-6 text-nowrap text-truncate"></div>
-                    <div id="goals" class="col  text-nowrap text-center d-none d-lg-block"></div>
-                    <div id="sets" class="col text-nowrap text-center"></div>
-                    <div id="score" class="col col-sm text-nowrap text-center"></div>
+                <div class="tableRowTemplate row tableRow fs-4 d-none">
+                    <div class="place col-1 text-center"></div>
+                    <div class="team col-6 text-nowrap text-truncate"></div>
+                    <div class="goals col text-nowrap text-center d-none d-lg-block"></div>
+                    <div class="sets col text-nowrap text-center"></div>
+                    <div class="score col col-sm text-nowrap text-center"></div>
                 </div>
             </div>
             <div class="tableseparator row"></div>
-            <div id="nextMatchDayGames" class="row d-none">
-                <h3 id="gamesTitle" class="gamesTitle text-center">Spieltag</h3>
-                <h5 id="gamesRowHeader" class="row gamesHeader fs-4 fw-bold">
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
-                    <div id="no" class="col-1 text-center">Nr.</div>
-                    <div id="team1" class="col">Heim</div>
-                    <div id="team2" class="col">Gast</div>
-                    <div id="result" class="col-1 text-center">Erg.</div>
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
+            <div class="nextMatchDayGames row d-none">
+                <h3 class="gamesTitle text-center">Spieltag</h3>
+                <h5 class="row gamesHeader fs-4 fw-bold">
+                    <div class="col-1 d-none d-md-block"></div>
+                    <div class="col-1 text-center">Nr.</div>
+                    <div class="col">Heim</div>
+                    <div class="col">Gast</div>
+                    <div class="col-1 text-center">Erg.</div>
+                    <div class="col-1 d-none d-md-block"></div>
                 </h5>
-                <div id="gamesRowTemplate" class="row gamesRow fs-4 d-none">
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
-                    <div id="no" class="col-1 text-center"></div>
-                    <div id="team1" class="col text-nowrap text-truncate"></div>
-                    <div id="team2" class="col text-nowrap text-truncate"></div>
-                    <div id="result" class="col-1 text-center"></div>
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
+                <div class="gamesRowTemplate row gamesRow fs-4 d-none">
+                    <div class="col-1 d-none d-md-block"></div>
+                    <div class="no col-1 text-center"></div>
+                    <div class="team1 col text-nowrap text-truncate"></div>
+                    <div class="team2 col text-nowrap text-truncate"></div>
+                    <div class="result col-1 text-center"></div>
+                    <div class="col-1 d-none d-md-block"></div>
                 </div>
             </div>
-            <div id="gamesNavigation" class="games-navigation row">
+            <div class="games-navigation row">
                 <div class="col d-flex align-items-center justify-content-center gap-3">
-                    <button id="previousGames" type="button" class="btn btn-outline-warning btn-nav inactive" onclick="tffTools.showPreviousGames(this)">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <button class="previousGames btn btn-outline-warning btn-nav inactive" type="button" aria-label="Vorheriger Spieltag" onclick="tffTools.showPreviousGames(this)">
+                        <svg aria-hidden="true" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
                         </svg>
                     </button>
                     <a class="btn btn-link link-stfv" target="_blank" href="https://www.stfv.de/stfv/index.php">STFV Datenbank</a>
-                    <button id="nextGames" type="button" class="btn btn-outline-warning btn-nav inactive" onclick="tffTools.showNextGames(this)">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <button class="nextGames btn btn-outline-warning btn-nav inactive" type="button" aria-label="Nächster Spieltag" onclick="tffTools.showNextGames(this)">
+                        <svg aria-hidden="true" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                         </svg>
                     </button>
                 </div>
             </div>
-            <!-- <div id="tableSTFVLink" class="row text-center">
-                <a class="fs-4" target="_blank" href="https://www.stfv.de/stfv/index.php">STFV Datenbank</a>
-            </div> -->
             <div class="tableseparator row"></div>
         </div>
         <div id="contentTable" class="tableParent d-none">
@@ -100,82 +97,82 @@
                 </div>
             </div>
             <div class="row"></div>
-            <div id="currentMatchDayGames" class="row d-none">
-                <h3 id="gamesTitle" class="gamesTitle text-center">Spieltag</h3>
-                <h5 id="gamesRowHeader" class="row gamesHeader fs-4 fw-bold">
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
-                    <div id="no" class="col-1 text-center">Nr.</div>
-                    <div id="team1" class="col">Heim</div>
-                    <div id="team2" class="col">Gast</div>
-                    <div id="result" class="col-1 text-center">Erg.</div>
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
+            <div class="currentMatchDayGames row d-none">
+                <h3 class="gamesTitle text-center">Spieltag</h3>
+                <h5 class="row gamesHeader fs-4 fw-bold">
+                    <div class="col-1 d-none d-md-block"></div>
+                    <div class="col-1 text-center">Nr.</div>
+                    <div class="col">Heim</div>
+                    <div class="col">Gast</div>
+                    <div class="col-1 text-center">Erg.</div>
+                    <div class="col-1 d-none d-md-block"></div>
                 </h5>
-                <div id="gamesRowTemplate" class="row gamesRow fs-4 d-none">
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
-                    <div id="no" class="col-1 text-center"></div>
-                    <div id="team1" class="col text-nowrap text-truncate"></div>
-                    <div id="team2" class="col text-nowrap text-truncate"></div>
-                    <div id="result" class="col-1 text-center"></div>
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
+                <div class="gamesRowTemplate row gamesRow fs-4 d-none">
+                    <div class="col-1 d-none d-md-block"></div>
+                    <div class="no col-1 text-center"></div>
+                    <div class="team1 col text-nowrap text-truncate"></div>
+                    <div class="team2 col text-nowrap text-truncate"></div>
+                    <div class="result col-1 text-center"></div>
+                    <div class="col-1 d-none d-md-block"></div>
                 </div>
             </div>
-            <div id="statusbar" class="statusbar row">
-                <div id="empty" class="col-1 d-none d-md-block"></div>
-                <div id="empty" class="col"></div>
-                <button id="refreshData" type="button" class="col text-center btn btn-link fs-4" onclick="tffTools.showTFFData(true)">aktualisieren</button>
-                <div id="status" class="col status text-end fs-6">loading</div>
-                <div id="empty" class="col-1 d-none d-md-block"></div>
+            <div class="statusbar row">
+                <div class="col-1 d-none d-md-block"></div>
+                <div class="col"></div>
+                <button class="refreshData col text-center btn btn-link fs-4" type="button" onclick="tffTools.showTFFData(true)">aktualisieren</button>
+                <div class="status col text-end fs-6">loading</div>
+                <div class="col-1 d-none d-md-block"></div>
             </div>
             <div class="tableseparator row"></div>
-            <div id="currentMatchDayTable" class="leagueHeader row d-none">
-                <h3 id="tableTitle" class="tableTitle text-center">Tabelle</h3>
-                <h5 id="tableRowHeader" class="row tableHeader fs-4 fw-bold">
-                    <div id="place" class="col-1 text-center">Pl.</div>
-                    <div id="team" class="col-6">Verein</div>
-                    <div id="goals" class="col text-center d-none d-lg-block">Tore</div>
-                    <div id="sets" class="col text-center">Sätze</div>
-                    <div id="score" class="col col-sm text-center">Punkte</div>
+            <div class="currentMatchDayTable leagueHeader row d-none">
+                <h3 class="tableTitle text-center">Tabelle</h3>
+                <h5 class="row tableHeader fs-4 fw-bold">
+                    <div class="col-1 text-center">Pl.</div>
+                    <div class="col-6">Verein</div>
+                    <div class="col text-center d-none d-lg-block">Tore</div>
+                    <div class="col text-center">Sätze</div>
+                    <div class="col col-sm text-center">Punkte</div>
                 </h5>
-                <div id="tableRowTemplate" class="row tableRow fs-4 d-none">
-                    <div id="place" class="col-1 text-center"></div>
-                    <div id="team" class="col-6 text-nowrap text-truncate"></div>
-                    <div id="goals" class="col  text-nowrap text-center d-none d-lg-block"></div>
-                    <div id="sets" class="col text-nowrap text-center"></div>
-                    <div id="score" class="col col-sm text-nowrap text-center"></div>
+                <div class="tableRowTemplate row tableRow fs-4 d-none">
+                    <div class="place col-1 text-center"></div>
+                    <div class="team col-6 text-nowrap text-truncate"></div>
+                    <div class="goals col text-nowrap text-center d-none d-lg-block"></div>
+                    <div class="sets col text-nowrap text-center"></div>
+                    <div class="score col col-sm text-nowrap text-center"></div>
                 </div>
             </div>
             <div class="tableseparator row"></div>
-            <div id="nextMatchDayGames" class="row d-none">
-                <h3 id="gamesTitle" class="gamesTitle text-center">Spieltag</h3>
-                <h5 id="gamesRowHeader" class="row gamesHeader fs-4 fw-bold">
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
-                    <div id="no" class="col-1 text-center">Nr.</div>
-                    <div id="team1" class="col">Heim</div>
-                    <div id="team2" class="col">Gast</div>
-                    <div id="result" class="col-1 text-center">Erg.</div>
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
+            <div class="nextMatchDayGames row d-none">
+                <h3 class="gamesTitle text-center">Spieltag</h3>
+                <h5 class="row gamesHeader fs-4 fw-bold">
+                    <div class="col-1 d-none d-md-block"></div>
+                    <div class="col-1 text-center">Nr.</div>
+                    <div class="col">Heim</div>
+                    <div class="col">Gast</div>
+                    <div class="col-1 text-center">Erg.</div>
+                    <div class="col-1 d-none d-md-block"></div>
                 </h5>
-                <div id="gamesRowTemplate" class="row gamesRow fs-4 d-none">
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
-                    <div id="no" class="col-1 text-center"></div>
-                    <div id="team1" class="col text-nowrap text-truncate"></div>
-                    <div id="team2" class="col text-nowrap text-truncate"></div>
-                    <div id="result" class="col-1 text-center"></div>
-                    <div id="empty" class="col-1 d-none d-md-block"></div>
+                <div class="gamesRowTemplate row gamesRow fs-4 d-none">
+                    <div class="col-1 d-none d-md-block"></div>
+                    <div class="no col-1 text-center"></div>
+                    <div class="team1 col text-nowrap text-truncate"></div>
+                    <div class="team2 col text-nowrap text-truncate"></div>
+                    <div class="result col-1 text-center"></div>
+                    <div class="col-1 d-none d-md-block"></div>
                 </div>
             </div>
-            <div id="gamesNavigation" class="games-navigation row">
+            <div class="games-navigation row">
                 <div class="col d-flex align-items-center justify-content-center gap-3">
-                    <button id="previousGames" type="button" class="btn btn-outline-warning btn-nav inactive" onclick="tffTools.showPreviousGames(this)">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <button class="previousGames btn btn-outline-warning btn-nav inactive" type="button" aria-label="Vorheriger Spieltag" onclick="tffTools.showPreviousGames(this)">
+                        <svg aria-hidden="true" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
                         </svg>
                     </button>
                     <a class="btn btn-link link-stfv" target="_blank" href="https://stfv.de/teamsport/classic-ligen/classic-landesliga?view=sportsmanager">STFV</a>
                     <span class="text-muted">|</span>
                     <a class="btn btn-link link-live" target="_blank" href="https://stfv.de/teamsport/aktuelle-partien?task=veranstaltungen_ticker&tmpl=component">live</a>
-                    <button id="nextGames" type="button" class="btn btn-outline-warning btn-nav inactive" onclick="tffTools.showNextGames(this)">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <button class="nextGames btn btn-outline-warning btn-nav inactive" type="button" aria-label="Nächster Spieltag" onclick="tffTools.showNextGames(this)">
+                        <svg aria-hidden="true" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                         </svg>
                     </button>

@@ -27,8 +27,8 @@ section {
 }
 
 .contentEntryGenerated,
-.gamesRow:not(#gamesRowTemplate),
-.tableRow:not(#tableRowTemplate) {
+.gamesRowGenerated,
+.tableRowGenerated {
   animation: fadeInUp 0.4s ease-out backwards;
 }
 
@@ -1242,11 +1242,11 @@ img::-moz-selection {
 }
 
 // Apply animations only to nextMatchDayGames (below table)
-#nextMatchDayGames.page-previous {
+.nextMatchDayGames.page-previous {
   animation: slideOutRight 0.3s ease-out forwards;
 }
 
-#nextMatchDayGames.page-next {
+.nextMatchDayGames.page-next {
   animation: slideOutLeft 0.3s ease-out forwards;
 }
 
@@ -1255,7 +1255,7 @@ img::-moz-selection {
 }
 
 #tableSTFVLink,
-#gamesNavigation {
+.games-navigation {
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -1289,7 +1289,7 @@ img::-moz-selection {
       }
     }
 
-    &#nextGames:not(.inactive):hover svg {
+    &.nextGames:not(.inactive):hover svg {
       transform: translateX(2px);
     }
 
@@ -1326,7 +1326,7 @@ img::-moz-selection {
 }
 
 // Refresh button styling
-#refreshData {
+.refreshData {
   font-style: italic;
   color: $template-color-primary;
   text-decoration: none;

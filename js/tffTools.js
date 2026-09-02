@@ -98,8 +98,7 @@ tffTools = {
 
 	async _showAllSchedules(autoScroll) {
 		var $scheduleParent = $('#scrollableEventsContainer');
-		// Show all schedules with max 2 past events
-		tffTools._showSchedules($scheduleParent, await tffTools._getSchedules(2, undefined, undefined), false, autoScroll);
+		tffTools._showSchedules($scheduleParent, await tffTools._getSchedules(undefined, undefined, undefined), false, autoScroll);
 	},
 
 	async _showCurrentSchedules(noPast, noFuture, animate, onlyImportant, types) {
@@ -115,8 +114,7 @@ tffTools = {
 	async _showSchedulesByType(contentSchedulesId, type, autoScroll) {
 		var animate;
 		var $scheduleParent = $(contentSchedulesId);
-		// Show filtered schedules with max 2 past events
-		tffTools._showSchedules($scheduleParent, await tffTools._getSchedules(2, undefined, Array.from(type)), animate, autoScroll);
+		tffTools._showSchedules($scheduleParent, await tffTools._getSchedules(undefined, undefined, Array.from(type)), animate, autoScroll);
 	},
 
 	refreshPage() {
@@ -409,14 +407,14 @@ tffTools = {
 		var tableParent = $(element).closest('.tableParent');
 		const leagueData = tableParent[0].id == 'contentPlayoffTable' ? tffData.playoffLeagueData : tffData.leagueData;
 		const $contentTable = $(`#${tableParent[0].id}`);
-		var currentIndex = parseInt($('#nextMatchDayGames', $contentTable).attr('matchdayindex'));
+		var currentIndex = parseInt($('.nextMatchDayGames', $contentTable).attr('matchdayindex'));
 
 		// Add animation class only to nextMatchDayGames (below table)
-		$('#nextMatchDayGames', $contentTable).addClass('page-previous');
+		$('.nextMatchDayGames', $contentTable).addClass('page-previous');
 
 		setTimeout(() => {
 			tffTools._showGames($contentTable, tffTools.getPreviousMatchdayIndex(currentIndex, leagueData), leagueData);
-			$('#nextMatchDayGames', $contentTable).removeClass('page-previous');
+			$('.nextMatchDayGames', $contentTable).removeClass('page-previous');
 		}, 300);
 	},
 
@@ -433,14 +431,14 @@ tffTools = {
 		var tableParent = $(element).closest('.tableParent');
 		const leagueData = tableParent[0].id == 'contentPlayoffTable' ? tffData.playoffLeagueData : tffData.leagueData;
 		const $contentTable = $(`#${tableParent[0].id}`);
-		var currentIndex = parseInt($('#nextMatchDayGames', $contentTable).attr('matchdayindex'));
+		var currentIndex = parseInt($('.nextMatchDayGames', $contentTable).attr('matchdayindex'));
 
 		// Add animation class only to nextMatchDayGames (below table)
-		$('#nextMatchDayGames', $contentTable).addClass('page-next');
+		$('.nextMatchDayGames', $contentTable).addClass('page-next');
 
 		setTimeout(() => {
 			tffTools._showGames($contentTable, tffTools.getNextMatchdayIndex(currentIndex, leagueData), leagueData);
-			$('#nextMatchDayGames', $contentTable).removeClass('page-next');
+			$('.nextMatchDayGames', $contentTable).removeClass('page-next');
 		}, 300);
 	},
 
@@ -454,7 +452,7 @@ tffTools = {
 	},
 
 	_showGames($contentTable, index, leagueData) {
-		tffTools._buildMatchdayGames($contentTable, $('#nextMatchDayGames', $contentTable), tffTools.getTeam().name, index, leagueData);
+		tffTools._buildMatchdayGames($contentTable, $('.nextMatchDayGames', $contentTable), tffTools.getTeam().name, index, leagueData);
 	},
 
 	async showTable(force) {
@@ -474,14 +472,14 @@ tffTools = {
 		}
 		$contentTable.removeClass('d-none');
 		var matchDay = leagueData.currentMatchDay;
-		tffTools._buildMatchdayGames($contentTable, $contentTable.find('#currentMatchDayGames'), teamname, matchDay.index, leagueData);
-		tffTools._buildMatchdayTable($contentTable, $contentTable.find('#currentMatchDayTable'), teamname, matchDay);
+		tffTools._buildMatchdayGames($contentTable, $contentTable.find('.currentMatchDayGames'), teamname, matchDay.index, leagueData);
+		tffTools._buildMatchdayTable($contentTable, $contentTable.find('.currentMatchDayTable'), teamname, matchDay);
 		const nextIndex = tffTools.getNextMatchdayIndex(matchDay.index, leagueData);
 		// var nextIndex = $contentTable.find('#nextMatchDayGames').attr('matchdayIndex');
 		// nextIndex = force || !nextIndex ? leagueData.matchDays.findIndex(entry => entry.no === matchDay.no) + 1 : nextIndex;
 		// const nextMatchDay = leagueData.matchDays[nextIndex];
 		// if (nextMatchDay) {
-			tffTools._buildMatchdayGames($contentTable, $contentTable.find('#nextMatchDayGames'), teamname, nextIndex, leagueData);
+			tffTools._buildMatchdayGames($contentTable, $contentTable.find('.nextMatchDayGames'), teamname, nextIndex, leagueData);
 		// }
 	},
 
@@ -493,7 +491,7 @@ tffTools = {
 		var games = matchday.games;
 		var loaded = false;
 		$matchdayGames.find('.gamesRowGenerated').remove();
-		$matchdayGames.find('#gamesTitle').text(matchday.text + ", " + matchday.date.toLocaleDateString("de-DE", { day: "numeric", month: "long"}));
+		$matchdayGames.find('.gamesTitle').text(matchday.text + ", " + matchday.date.toLocaleDateString("de-DE", { day: "numeric", month: "long"}));
 		$matchdayGames.attr('spieltag', matchday.no);
 		$matchdayGames.attr('matchdayIndex', matchdayIndex);
 		var index = 1;
@@ -511,27 +509,28 @@ tffTools = {
 					game.result = ":";
 				}
 			}
-			var $gamesRow = $matchdayGames.find('#gamesRowTemplate').clone();
+			var $gamesRow = $matchdayGames.find('.gamesRowTemplate').first().clone();
+			$gamesRow.removeClass('gamesRowTemplate');
 			var no = game.no ? game.no : index;
 			$gamesRow.attr('id', 'gamesRowGenerated' + index);
 			$gamesRow.addClass('gamesRowGenerated');
-			$gamesRow.find('#no').text(no);
-			$gamesRow.find('#team1').text(game.team1);
-			$gamesRow.find('#team2').text(game.team2);
-			$gamesRow.find('#result').text(game.result);
+			$gamesRow.find('.no').text(no);
+			$gamesRow.find('.team1').text(game.team1);
+			$gamesRow.find('.team2').text(game.team2);
+			$gamesRow.find('.result').text(game.result);
 			// Make result italic if it had a suffix (like "live") or if it's not a score
 			if (game.resultHasSuffix || game.result.indexOf(':') < 0) {
-				$gamesRow.find('#result').css('font-style','italic');
+				$gamesRow.find('.result').css('font-style','italic');
 			}
 			// Show
 			$gamesRow.removeClass('d-none');
 			// Highlight
 			var highlightTeam;
-			highlightTeam = game.team1 === teamname ? '#team1' : highlightTeam
-			highlightTeam = game.team2 === teamname ? '#team2' : highlightTeam
+			highlightTeam = game.team1 === teamname ? '.team1' : highlightTeam
+			highlightTeam = game.team2 === teamname ? '.team2' : highlightTeam
 			if (highlightTeam) {
 				$gamesRow.find(highlightTeam).addClass('ownTeam');
-				$gamesRow.find('#result').addClass('ownTeam');
+				$gamesRow.find('.result').addClass('ownTeam');
 			}
 			$matchdayGames.append($gamesRow);
 			loaded = true;
@@ -541,8 +540,8 @@ tffTools = {
 			$matchdayGames.removeClass('d-none');
 			var previousIndex = tffTools.getPreviousMatchdayIndex(matchdayIndex, leagueData);
 			var nextIndex = tffTools.getNextMatchdayIndex(matchdayIndex, leagueData);
-			previousIndex == matchdayIndex ? $('#previousGames', $contentTable).addClass('inactive') : $('#previousGames', $contentTable).removeClass('inactive');
-			nextIndex == matchdayIndex ? $('#nextGames', $contentTable).addClass('inactive') : $('#nextGames', $contentTable).removeClass('inactive');
+			previousIndex == matchdayIndex ? $('.previousGames', $contentTable).addClass('inactive') : $('.previousGames', $contentTable).removeClass('inactive');
+			nextIndex == matchdayIndex ? $('.nextGames', $contentTable).addClass('inactive') : $('.nextGames', $contentTable).removeClass('inactive');
 		}
 	},
 
@@ -551,14 +550,15 @@ tffTools = {
 		var loaded = false;
 		$matchdayTable.find('.tableRowGenerated').remove();
 		table.forEach(tableRow => {
-			$tableRow = $matchdayTable.find('#tableRowTemplate').clone();
+			$tableRow = $matchdayTable.find('.tableRowTemplate').first().clone();
+			$tableRow.removeClass('tableRowTemplate');
 			$tableRow.attr('id', 'tableRowGenerated' + tableRow.place);
 			$tableRow.addClass('tableRowGenerated');
-			$tableRow.find('#place').text(tableRow.place);
-			$tableRow.find('#team').text(tableRow.team);
-			$tableRow.find('#goals').text(tffTools._formatNumberColumn(tableRow.goals, 4));
-			$tableRow.find('#sets').text(tffTools._formatNumberColumn(tableRow.sets, 3));
-			$tableRow.find('#score').text(tableRow.scores, 2);
+			$tableRow.find('.place').text(tableRow.place);
+			$tableRow.find('.team').text(tableRow.team);
+			$tableRow.find('.goals').text(tffTools._formatNumberColumn(tableRow.goals, 4));
+			$tableRow.find('.sets').text(tffTools._formatNumberColumn(tableRow.sets, 3));
+			$tableRow.find('.score').text(tableRow.scores, 2);
 			// Show
 			$tableRow.removeClass('d-none');
 			// Highlight
@@ -672,7 +672,7 @@ tffTools = {
 		tffData.initialized = true;
 		tffData.initializationTime = new Date();
 		$('.status').removeClass('loading').text(tffData.initializationTime.toLocaleDateString("de-de", { month:"numeric", day:"numeric"}) + " " + tffData.initializationTime.toLocaleTimeString("de-de"));
-		$('#refreshData').removeClass('inactive');
+		$('.refreshData').removeClass('inactive');
 
 		// Show toast notification on successful refresh
 		if (force) {
