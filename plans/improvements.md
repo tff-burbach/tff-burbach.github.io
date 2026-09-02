@@ -20,13 +20,11 @@ Items are grouped by effort and worked top-to-bottom. Check off each item as it 
 
 ## Group 2 — Data / Logic Bugs
 
-- [ ] **2.1 `getLeagueUrl()` ignores its parameters** — `stfvData.js` accepts `leaguename`, `matchdayno`, `year`, `category`, `groupNo` but always returns the same hardcoded URL. Fix: build the URL from the parameters so callers requesting a specific matchday or league get the correct page.
+- [x] **2.1 `getLeagueUrl()` ignores its parameters** — `stfvData.js` accepts `leaguename`, `matchdayno`, `year`, `category`, `groupNo` but always returns the same hardcoded URL. Fix: build the URL from the parameters so callers requesting a specific matchday or league get the correct page.
 
-- [ ] **2.2 Mobile/desktop filter desync** — The mobile `<select>` and desktop `<button>` filters each drive the view independently. Selecting via dropdown does not update the attribute that desktop buttons read (and vice versa). Fix: funnel both inputs through a single `setView(name)` helper.
-
-- [ ] **2.3 Auto-refresh fires in background tabs** — The `setTimeout` in `tffTools.js` is never cleared when the page is hidden. Fix: pause the timer on `visibilitychange` (hidden) and restart it when the page becomes visible again.
-
-- [ ] **2.4 Liquid JS string escaping** — Team names and addresses from `_data` / `tffData.js` are emitted into JS array literals without JS-escaping. An apostrophe or quote in a name breaks the array silently. Fix: run values through a `jsonify` filter or escape single quotes before output.
+- [x] **2.2 Mobile/desktop filter desync**
+- [x] **2.3 Auto-refresh fires in background tabs**
+- [x] **2.4 Liquid JS string escaping**
 
 ---
 

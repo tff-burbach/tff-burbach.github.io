@@ -13,17 +13,17 @@ stfvData = {
 
 	_liveFetchErrorShown: false,
 
-	async getLeagueData(team, matchdayno, category, groupNo) {
-		const stfvTableHTML = await stfvData.fetchTableFromStfv(team, matchdayno, category, groupNo);
+	async getLeagueData(team) {
+		const stfvTableHTML = await stfvData.fetchTableFromStfv();
 		return stfvData.extractLeagueData(team, stfvTableHTML);
 	},
 
-	async collectLeagueData(team, category) {
-		return stfvData.getLeagueData(team, 1, category);
+	async collectLeagueData(team) {
+		return stfvData.getLeagueData(team);
 	},
 
-	async collectPlayoffLeagueData(team, category) {
-		return stfvData.getLeagueData(team, 1, category, 'Abstiegsrunde');
+	async collectPlayoffLeagueData(team) {
+		return stfvData.getLeagueData(team);
 	},
 
 	async collectCupData(team) {
@@ -31,15 +31,11 @@ stfvData = {
 		return stfvData.extractCupData(team, stfvCupHTML);
 	},
 
-	getLeagueUrl(leaguename, matchdayno, year, category, groupNo) {
-		year = year ? year : new Date().getFullYear();
-		category = category ? encodeURIComponent(category) : 'Ligabetrieb+Classic';
-		leaguename = leaguename.replace(' ', '+').replace('ü','%FC');
-		groupNo = groupNo ? groupNo : 'Ligaphase';
+	getLeagueUrl() {
 		return `https://stfv.de/teamsport/classic-ligen/classic-landesliga`;
 	},
 
-	getBackupLeagueUrl(leaguename, matchdayno, year, category, groupNo) {
+	getBackupLeagueUrl() {
 		return '/stfv/landesliga-classic.html';
 	},
 
@@ -118,16 +114,16 @@ stfvData = {
 		return stfvCup;
 	},
 
-	async fetchTableFromStfv(team, matchdayno, category, groupNo) {
+	async fetchTableFromStfv() {
 		var response;
 		try {
-			const sourceUrl = stfvData.getLeagueUrl(team.league, matchdayno, team.year, category, groupNo);
+			const sourceUrl = stfvData.getLeagueUrl();
 			response = await stfvData.fetchFromStfv(sourceUrl);
 		}
 		catch (ex) {
 			stfvData.notifyLiveFetchFallback();
 			try {
-				const url = stfvData.getBackupLeagueUrl(team.league, matchdayno, team.year, category, groupNo);
+				const url = stfvData.getBackupLeagueUrl();
 				response = await $.get({url: url, cache: false});
 			}
 			catch (backupEx) {

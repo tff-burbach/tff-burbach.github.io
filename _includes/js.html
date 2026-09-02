@@ -34,19 +34,19 @@
    <script src="{{ "/js/stfvData.js" | prepend: site.baseurl }}"></script>
    
    <script>
-      tffData.team1 = { name: '{{ site.data.stfv.verein }}', league: '{{ site.data.stfv.liga }}', year: '{{ site.data.stfv.jahr }}' };
+      tffData.team1 = { name: {{ site.data.stfv.verein | jsonify }}, league: {{ site.data.stfv.liga | jsonify }}, year: {{ site.data.stfv.jahr | jsonify }} };
       tffData.termine = [
          {% for info in site.data.infos %}
-            {datetime: '{{ info.datum }}T{{ info.zeit | default:'00:00' }}' ,datum:'{{ info.datum }}', zeit:'{{ info.zeit }}', typ:'I', titel: '{{ info.titel }}', treff:'{{ info.treff }}', ort:'{{ info.ort }}', ergebnis:'{{ info.ergebnis }}', adresse:'{{ info.adresse }}', adress_url:'{{ info.adress_url }}'},
+            {datetime: '{{ info.datum }}T{{ info.zeit | default:'00:00' }}' ,datum:'{{ info.datum }}', zeit:'{{ info.zeit }}', typ:'I', titel: {{ info.titel | default:"" | jsonify }}, treff:{{ info.treff | default:"" | jsonify }}, ort:{{ info.ort | default:"" | jsonify }}, ergebnis:{{ info.ergebnis | default:"" | jsonify }}, adresse:{{ info.adresse | default:"" | jsonify }}, adress_url:{{ info.adress_url | default:"" | jsonify }}},
          {% endfor %}
          {% for spiel in site.data.freundschaftspiele %}
-            {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'F', gegner:'{{ spiel.gegner }}', ergebnis:'{{ spiel.ergebnis }}', ort:'{{ spiel.ort }}', adresse:'{{ spiel.adresse }}', adress_url:'{{ spiel.adress_url }}'},
+            {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'F', gegner:{{ spiel.gegner | default:"" | jsonify }}, ergebnis:{{ spiel.ergebnis | default:"" | jsonify }}, ort:{{ spiel.ort | default:"" | jsonify }}, adresse:{{ spiel.adresse | default:"" | jsonify }}, adress_url:{{ spiel.adress_url | default:"" | jsonify }}},
          {% endfor %}
          {% for spiel in site.data.playoffspiele %}
-            {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'O', gegner:'{{ spiel.gegner }}', ergebnis:'{{ spiel.ergebnis }}', ort:'{{ spiel.ort }}', adresse:'{{ spiel.adresse }}', adress_url:'{{ spiel.adress_url }}'},
+            {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'O', gegner:{{ spiel.gegner | default:"" | jsonify }}, ergebnis:{{ spiel.ergebnis | default:"" | jsonify }}, ort:{{ spiel.ort | default:"" | jsonify }}, adresse:{{ spiel.adresse | default:"" | jsonify }}, adress_url:{{ spiel.adress_url | default:"" | jsonify }}},
          {% endfor %}
          {% for spiel in site.data.leistungsligaspiele %}
-            {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'B', titel: '{{ spiel.titel }}', gegner:'{{ spiel.gegner }}', ergebnis:'{{ spiel.ergebnis }}', ort:'{{ spiel.ort }}', adresse:'{{ spiel.adresse }}', adress_url:'{{ spiel.adress_url }}'},
+            {datetime: '{{ spiel.datum }}T{{ spiel.zeit | default:'21:00' }}' ,datum:'{{ spiel.datum }}', zeit:'{{ spiel.zeit | default:'21:00' }}', typ:'B', titel: {{ spiel.titel | default:"" | jsonify }}, gegner:{{ spiel.gegner | default:"" | jsonify }}, ergebnis:{{ spiel.ergebnis | default:"" | jsonify }}, ort:{{ spiel.ort | default:"" | jsonify }}, adresse:{{ spiel.adresse | default:"" | jsonify }}, adress_url:{{ spiel.adress_url | default:"" | jsonify }}},
          {% endfor %}
       ]
 
@@ -54,9 +54,18 @@
 
    <script>
       jQuery(document).ready(function() {
-         //  tffTools.showCountdown(2, 80);
-         //  tffTools.showInfos(true);
          tffTools.showTFFData();
+      });
+
+      document.addEventListener('visibilitychange', function() {
+         if (document.hidden) {
+            if (tffData.timer) {
+               clearTimeout(tffData.timer);
+               tffData.timer = null;
+            }
+         } else {
+            tffTools.showTFFData();
+         }
       });
    </script>
       

@@ -93,7 +93,8 @@ tffTools = {
 		$('#eventsLoading').addClass('d-none');
 
 		$(eventId).addClass('active');
-		$('#contentView').attr('view',view);
+		$('#contentView').attr('view', view);
+		$('#mobileScheduleFilter').val(view);
 	},
 
 	async _showAllSchedules(autoScroll) {
