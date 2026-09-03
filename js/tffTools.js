@@ -12,22 +12,28 @@ tffTools = {
 	],
 
 	async showTFFData(force) {
-		await tffTools._initializeData(force);
-		await tffTools.showSchedules(null, !force); // Auto-scroll only on initial load, not on refresh
-		await tffTools.showTable(force);
-		// var dataSpyList = [].slice.call(document.querySelectorAll('[data-bs-spy="scroll"]'))
-		// dataSpyList.forEach(function (dataSpyEl) {
-		// 	bootstrap.ScrollSpy.getInstance(dataSpyEl)
-		// 		.refresh()
-		// })
-		// var firstScrollSpyEl = document.querySelector('[data-bs-spy="scroll"]')
-		// firstScrollSpyEl.addEventListener('activate.bs.scrollspy', function (event) {
-		// 	tffTools._log(`activate.bs.scrollspy: event: ${event}, source: ${event.srcElement}, target: ${event.relatedTarget}`);
-		// })
-		if (tffData.timer) {
-			clearTimeout(tffData.timer);
+		try {
+			await tffTools._initializeData(force);
+			await tffTools.showSchedules(null, !force); // Auto-scroll only on initial load, not on refresh
+			await tffTools.showTable(force);
+			// var dataSpyList = [].slice.call(document.querySelectorAll('[data-bs-spy="scroll"]'))
+			// dataSpyList.forEach(function (dataSpyEl) {
+			// 	bootstrap.ScrollSpy.getInstance(dataSpyEl)
+			// 		.refresh()
+			// })
+			// var firstScrollSpyEl = document.querySelector('[data-bs-spy="scroll"]')
+			// firstScrollSpyEl.addEventListener('activate.bs.scrollspy', function (event) {
+			// 	tffTools._log(`activate.bs.scrollspy: event: ${event}, source: ${event.srcElement}, target: ${event.relatedTarget}`);
+			// })
+			if (tffData.timer) {
+				clearTimeout(tffData.timer);
+			}
+			tffData.timer = setTimeout(tffTools.showTFFData, tffTools.cacheTimeMsec);
+		} catch (e) {
+			console.error('TFF init error:', e);
+			$('#eventsLoading').addClass('d-none');
+			$('#noEvents').text('Fehler beim Laden. Bitte Seite neu laden.').removeClass('d-none');
 		}
-		tffData.timer = setTimeout(tffTools.showTFFData, tffTools.cacheTimeMsec);
 	},
 
 	async _updateFilterVisibility() {

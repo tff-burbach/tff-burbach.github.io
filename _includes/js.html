@@ -54,16 +54,22 @@
 
    <script>
       jQuery(document).ready(function() {
+         if (typeof tffTools === 'undefined' || typeof stfvData === 'undefined') {
+            document.getElementById('eventsLoading').classList.add('d-none');
+            var el = document.getElementById('noEvents');
+            if (el) { el.textContent = 'Seite konnte nicht geladen werden. Bitte F5 drücken.'; el.classList.remove('d-none'); }
+            return;
+         }
          tffTools.showTFFData();
       });
 
       document.addEventListener('visibilitychange', function() {
          if (document.hidden) {
-            if (tffData.timer) {
+            if (typeof tffData !== 'undefined' && tffData.timer) {
                clearTimeout(tffData.timer);
                tffData.timer = null;
             }
-         } else {
+         } else if (typeof tffTools !== 'undefined') {
             tffTools.showTFFData();
          }
       });

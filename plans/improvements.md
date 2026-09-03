@@ -59,9 +59,9 @@ Items are grouped by effort and worked top-to-bottom. Check off each item as it 
 
 ## Group 6 — Resilience
 
-- [ ] **6.1 CORS proxy fallback robustness** — The proxy chain relies on `ralph-kiefer.workers.dev` → `allorigins.win` → `corsproxy.io`. Consider a self-hosted Cloudflare Worker as the sole primary to remove dependency on two public free-tier services.
+- [x] **6.1 CORS proxy fallback robustness**
 
-- [ ] **6.2 Guard JS initialisation order** — If `tffTools` or `stfvData` fails to load before `jQuery(document).ready`, `tffTools.showTFFData()` throws with no user-visible message. Wrap in a try/catch and surface a meaningful error state.
+- [x] **6.2 Guard JS initialisation order**
 
 ---
 
