@@ -398,6 +398,53 @@ stfvData = {
 		return stfvData.extractTeamMembers(html);
 	},
 
+	getClassicLandesligaStatsUrl() {
+		return 'https://stfv.de/teamsport/spielerstatistiken?task=spielerstatistik&id=13';
+	},
+
+	async fetchClassicLandesligaStats() {
+		const response = await stfvData.fetchFromStfv(stfvData.getClassicLandesligaStatsUrl());
+		const div = document.createElement('div');
+		div.innerHTML = response;
+		return div;
+	},
+
+	extractPlayerStats(statsHtml, teamName) {
+		const map = new Map();
+		const $table = $(statsHtml).find('table').filter(function () {
+			return $(this).find('tr.sectiontableheader').length > 0;
+		}).first();
+
+		// Build column index map from header names
+		const colIdx = {};
+		$table.find('tr.sectiontableheader th').each(function (i) {
+			const key = $(this).text().replace(/\s+/g, ' ').trim().toLowerCase();
+			colIdx[key] = i;
+		});
+		const spielerIdx = colIdx['spieler'];
+		const pPlusIdx   = colIdx['p +'];
+		const spieleIdx  = colIdx['spiele'];
+		if (spielerIdx == null || pPlusIdx == null || spieleIdx == null) return map;
+
+		$table.find('tr.sectiontableentry1, tr.sectiontableentry2').each(function () {
+			const tds = $(this).find('td');
+			const spieler = tds.eq(spielerIdx).text().replace(/\s+/g, ' ').trim();
+			if (!spieler.includes(teamName)) return;
+			const name = spieler.replace(teamName, '').trim();
+			const pPlus  = parseInt(tds.eq(pPlusIdx).text().trim());
+			const spiele = parseInt(tds.eq(spieleIdx).text().trim());
+			if (!isNaN(pPlus) && !isNaN(spiele) && spiele > 0) {
+				map.set(name, Math.round((pPlus / spiele) * 2 * 100) / 100);
+			}
+		});
+		return map;
+	},
+
+	async collectPlayerStats(teamName) {
+		const html = await stfvData.fetchClassicLandesligaStats();
+		return stfvData.extractPlayerStats(html, teamName);
+	},
+
 	extractCupData: function (team, stfvCupHtml) {
 		// Cup matches (no league table for cup)
 		let matches = [];

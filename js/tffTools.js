@@ -757,6 +757,14 @@ tffTools = {
 			return;
 		}
 
+		const teamName = tffTools.getTeam().name;
+		let statsMap = new Map();
+		try {
+			statsMap = await stfvData.collectPlayerStats(teamName);
+		} catch (e) {
+			// stats are optional — continue without them
+		}
+
 		$loading.addClass('d-none');
 
 		if (!members || members.length === 0) {
@@ -776,6 +784,8 @@ tffTools = {
 
 			$card.find('.team-member-name').text(member.name);
 			$card.find('.team-member-passnr').text(member.passNr || '');
+			const avg = statsMap.get(member.name);
+			$card.find('.team-member-avg').text(avg != null ? 'Ø ' + avg.toFixed(2) : '');
 			$grid.append($card);
 		});
 
