@@ -1,20 +1,19 @@
 ---
 layout: default
 ---
-
-<div class="home">
-
-  <h1>Posts</h1>
-
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
-</div>
+<section id="news" class="d-none">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 class="section-heading">Neuigkeiten</h2>
+        </div>
+    </div>
+    <div class="newsItemTemplate row mb-4 pb-3 border-bottom border-secondary d-none">
+        <div class="col">
+            <div class="newsDate fs-6 text-muted mb-1"></div>
+            <h4 class="newsTitle mb-2"></h4>
+            <div class="newsText fs-5"></div>
+            <a class="newsAddressLink fs-5 d-none" target="_blank" href=""></a>
+            <div class="newsAddressText fs-5 d-none"></div>
+        </div>
+    </div>
+</section>

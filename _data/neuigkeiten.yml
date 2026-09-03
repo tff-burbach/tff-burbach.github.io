@@ -1,0 +1,10 @@
+# Felder:
+#   datum: Format JJJJ-MM-TT (Beispiel: 2026-09-05)
+#   titel:
+#   text:  (optional, mehrzeilig mit |-Syntax)
+#
+- datum: 2026-09-05
+  titel: A-Ranglistenturnier des TFF Burbach
+  text: Am Samstag, den 5. September 2026 veranstalten wir ein A-Ranglistenturnier. Alle Interessierten sind herzlich willkommen!
+  adresse: Sporthalle, Andreas-Kemp Str., 66130 Saarbrücken-Eschringen
+  adress_url: https://maps.app.goo.gl/uZHV2z6o9MzvgQgd8

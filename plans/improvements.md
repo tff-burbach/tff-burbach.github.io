@@ -49,7 +49,7 @@ Items are grouped by effort and worked top-to-bottom. Check off each item as it 
 
 - [ ] **5.1 Enable contact form** — `_includes/contact.html` exists and the scripts are present but commented out in `js.html`. Include the section in `default.html` and re-enable the scripts.
 
-- [ ] **5.2 Enable news/blog** — `default.html` never outputs `{{ content }}`, so `index.html`'s posts loop is silently discarded. Add `{{ content }}` in the right place and verify post rendering.
+- [x] **5.2 Enable news/blog**
 
 - [ ] **5.3 Calendar export (iCal)** — Generate an `.ics` file from `tffData.termine` at build time (Jekyll generator plugin or a static pre-generated file) and add a download link in the events section.
 
