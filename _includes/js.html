@@ -67,6 +67,14 @@
             return;
          }
          tffTools.showTFFData();
+
+         const teamCollapseEl = document.getElementById('teamGalleryContent');
+         if (teamCollapseEl) {
+            teamCollapseEl.addEventListener('show.bs.collapse', function onFirstOpen() {
+               tffTools.showTeamGallery();
+               teamCollapseEl.removeEventListener('show.bs.collapse', onFirstOpen);
+            });
+         }
       });
 
       document.addEventListener('visibilitychange', function() {

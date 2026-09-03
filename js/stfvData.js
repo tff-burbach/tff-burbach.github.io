@@ -340,6 +340,64 @@ stfvData = {
 		return tffTools.getCurrentDate();
 	},
 
+	getClubUrl(clubId) {
+		return `https://stfv.de/verband/vereine?task=verein_details&id=${clubId}`;
+	},
+
+	async fetchClubFromStfv(clubId) {
+		const sourceUrl = stfvData.getClubUrl(clubId);
+		let response;
+		try {
+			response = await stfvData.fetchFromStfv(sourceUrl);
+		} catch (ex) {
+			stfvData.showDataError('STFV Vereinsdaten konnten nicht geladen werden.');
+			throw ex;
+		}
+		const div = document.createElement('div');
+		div.innerHTML = response;
+		return div;
+	},
+
+	extractTeamMembers(clubHtml) {
+		const members = [];
+		const seen = new Set();
+
+		// Name is in td[0], photo is in td[1] of the same row
+		$(clubHtml).find('img[src*="/images/sportsmanager/spieler/"]').each(function () {
+			const rawSrc = $(this).attr('src') || '';
+			const photoUrl = rawSrc.startsWith('http') ? rawSrc : 'https://stfv.de' + rawSrc;
+			const $td0 = $(this).closest('tr').find('td').eq(0);
+			const name = $td0.find('a').first().text().replace(/\s+/g, ' ').trim();
+			const passNr = $td0.find('small').first().text().replace(/\s+/g, ' ').trim();
+			if (name && !seen.has(name)) {
+				seen.add(name);
+				members.push({ name, photoUrl, passNr });
+			}
+		});
+
+		// Fallback: td with sectiontableentry class that has an anchor (no photo)
+		$(clubHtml).find('td.sectiontableentry1 a, td.sectiontableentry2 a').each(function () {
+			const name = $(this).text().replace(/\s+/g, ' ').trim();
+			const passNr = $(this).closest('td').find('small').first().text().replace(/\s+/g, ' ').trim();
+			if (name && !seen.has(name)) {
+				seen.add(name);
+				members.push({ name, photoUrl: null, passNr });
+			}
+		});
+
+		members.sort((a, b) => {
+			const lastName = n => n.split(',')[0].trim().toLowerCase();
+			return lastName(a.name).localeCompare(lastName(b.name), 'de');
+		});
+
+		return members;
+	},
+
+	async collectTeamMembers(clubId) {
+		const html = await stfvData.fetchClubFromStfv(clubId);
+		return stfvData.extractTeamMembers(html);
+	},
+
 	extractCupData: function (team, stfvCupHtml) {
 		// Cup matches (no league table for cup)
 		let matches = [];

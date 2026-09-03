@@ -736,6 +736,53 @@ tffTools = {
 		// }
 	},
 
+	showTeamGallery: async function () {
+		const $grid     = $('#teamGalleryGrid');
+		const $loading  = $('#teamGalleryLoading');
+		const $error    = $('#teamGalleryError');
+		const $sub      = $('#teamGallerySubheading');
+		const $template = $('#teamMemberTemplate');
+
+		if ($grid.children('.teamMemberGenerated').length > 0) return;
+
+		$loading.removeClass('d-none');
+		$error.addClass('d-none');
+
+		let members;
+		try {
+			members = await stfvData.collectTeamMembers(272);
+		} catch (e) {
+			$loading.addClass('d-none');
+			$error.removeClass('d-none');
+			return;
+		}
+
+		$loading.addClass('d-none');
+
+		if (!members || members.length === 0) {
+			$error.removeClass('d-none');
+			return;
+		}
+
+		members.forEach((member, i) => {
+			const $card = $template.clone();
+			$card.attr('id', 'teamMemberGenerated' + i)
+			     .addClass('teamMemberGenerated').removeClass('d-none').removeAttr('style');
+
+			const $img = $card.find('.team-member-photo');
+			const src = member.photoUrl || '/img/vereinswappen_small.png';
+			$img.attr('src', src).attr('alt', member.name);
+			$img.on('error', function () { $(this).attr('src', '/img/vereinswappen_small.png'); });
+
+			$card.find('.team-member-name').text(member.name);
+			$card.find('.team-member-passnr').text(member.passNr || '');
+			$grid.append($card);
+		});
+
+		$grid.removeClass('d-none');
+		$sub.removeClass('d-none');
+	},
+
 	showToast(message) {
 		const toast = document.createElement('div');
 		toast.className = 'toast-notification';

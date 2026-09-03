@@ -1,0 +1,70 @@
+<!-- Team Gallery Section -->
+<section id="team">
+  <div class="fs-4">
+
+    <div class="row">
+      <div class="col-12 text-center">
+        <button
+          class="btn btn-link text-decoration-none w-100 d-flex align-items-center justify-content-center gap-2"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#teamGalleryContent"
+          aria-expanded="false"
+          aria-controls="teamGalleryContent"
+          id="teamGalleryToggle"
+        >
+          <h2 class="section-heading mb-0">Mannschaft</h2>
+          <svg class="team-chevron" aria-hidden="true"
+               width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </button>
+        <h3 class="section-subheading text-muted d-none" id="teamGallerySubheading">
+          Alle Mitglieder laut STFV.
+        </h3>
+      </div>
+    </div>
+
+    <div class="collapse" id="teamGalleryContent">
+
+      <div id="teamGalleryLoading" class="events-loading">
+        <div class="spinner-container">
+          <div class="spinner"></div>
+          <div class="loading-text">Mannschaft wird geladen...</div>
+        </div>
+      </div>
+
+      <div id="teamGalleryError" class="text-center text-muted d-none py-3">
+        Daten konnten nicht geladen werden.
+        <a href="https://stfv.de/verband/vereine?task=verein_details&id=272"
+           target="_blank" class="btn btn-link">STFV</a>
+      </div>
+
+      <div id="teamGalleryGrid"
+           class="row row-cols-3 row-cols-sm-4 row-cols-md-5 row-cols-lg-6 g-3 d-none">
+        <div id="teamMemberTemplate" class="col d-none">
+          <div class="team-member text-center">
+            <img src="" alt="" class="team-member-photo img-fluid rounded mb-1"
+                 style="width:90px;height:120px;object-fit:cover;">
+            <div class="fw-bold fs-6 text-truncate team-member-name"></div>
+            <div class="text-muted fs-6 team-member-passnr"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col text-center fs-6">
+          <a href="https://stfv.de/verband/vereine?task=verein_details&id=272"
+             target="_blank" class="btn btn-link link-stfv">STFV Vereinsseite</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .team-chevron { transition: transform .25s ease; }
+  #teamGalleryToggle[aria-expanded="true"] .team-chevron { transform: rotate(180deg); }
+</style>
