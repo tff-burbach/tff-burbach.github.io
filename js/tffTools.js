@@ -61,6 +61,9 @@ tffTools = {
 			$item.removeClass('newsItemTemplate d-none').addClass('newsItemGenerated');
 			$item.find('.newsDate').text(date.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }));
 			$item.find('.newsTitle').text(item.titel);
+			if (item.titel_url) {
+				$item.find('.newsTitle').wrapInner(`<a href="${item.titel_url}" target="_blank" class="text-decoration-none"></a>`);
+			}
 			$item.find('.newsText').text(item.text || '');
 			if (item.adress_url) {
 				$item.find('.newsAddressLink').attr('href', item.adress_url).text(item.adresse || item.adress_url).removeClass('d-none');

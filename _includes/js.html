@@ -52,7 +52,7 @@
 
       tffData.neuigkeiten = [
          {% for item in site.data.neuigkeiten %}
-            {datum: '{{ item.datum }}', titel: {{ item.titel | default:"" | jsonify }}, text: {{ item.text | default:"" | jsonify }}, adresse: {{ item.adresse | default:"" | jsonify }}, adress_url: {{ item.adress_url | default:"" | jsonify }}},
+            {datum: '{{ item.datum }}', titel: {{ item.titel | default:"" | jsonify }}, titel_url: {{ item.titel_url | default:"" | jsonify }}, text: {{ item.text | default:"" | jsonify }}, adresse: {{ item.adresse | default:"" | jsonify }}, adress_url: {{ item.adress_url | default:"" | jsonify }}},
          {% endfor %}
       ]
 
