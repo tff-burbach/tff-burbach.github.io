@@ -683,21 +683,22 @@ tffTools = {
 				})
 			});
 			tffData.leagueData.matchDays.length = tffData.leagueData.matchDays.filter(element => element !== undefined).length;
-			if (tffData.leagueData.matchDays[tffData.leagueData.matchDays.length - 1].date < tffTools.getCurrentDate()) {
-				tffData.playoffLeagueData = await stfvData.collectPlayoffLeagueData(tffTools.getTeam());
-				tffData.playoffLeagueData.matches.forEach(match => {
-					tffData.termine.push({
-						datetime: match.datetime,
-						datum: match.date,
-						zeit: match.time,
-						typ: tffData.typO,
-						gegner: match.opponent,
-						ort: match.home ? 'H' : 'A',
-						ergebnis: tffTools._createTFFResult(match),
-						generated: new Date()
-					})
-				});
-			}
+			// Abstiegsrunde disabled — logic triggered prematurely when last regular matchday is past
+			// if (tffData.leagueData.matchDays[tffData.leagueData.matchDays.length - 1].date < tffTools.getCurrentDate()) {
+			// 	tffData.playoffLeagueData = await stfvData.collectPlayoffLeagueData(tffTools.getTeam());
+			// 	tffData.playoffLeagueData.matches.forEach(match => {
+			// 		tffData.termine.push({
+			// 			datetime: match.datetime,
+			// 			datum: match.date,
+			// 			zeit: match.time,
+			// 			typ: tffData.typO,
+			// 			gegner: match.opponent,
+			// 			ort: match.home ? 'H' : 'A',
+			// 			ergebnis: tffTools._createTFFResult(match),
+			// 			generated: new Date()
+			// 		})
+			// 	});
+			// }
 
 			// Load cup data
 			tffData.cupData = await stfvData.collectCupData(tffTools.getTeam());
