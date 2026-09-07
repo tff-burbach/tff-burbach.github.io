@@ -5,3 +5,28 @@
 #  ort: H - Heim oder A - Auswärts
 #  ergebnis: optional (in Anführungszeichen, Beispiel: "13:11")
 #
+- datum: 2026-09-18
+  zeit: "21:00"
+  gegner: "TFC Heusweiler"
+  ort: H
+- datum: 2026-09-25
+  zeit: "21:00"
+  gegner: "TFC Heusweiler"
+  ort: A
+- datum: 2026-10-23
+  zeit: "21:00"
+  gegner: "Playoff Halbfinale 1"
+  ort: 
+- datum: 2026-10-30
+  zeit: "21:00"
+  gegner: "Playoff Halbfinale 2"
+  ort: 
+- datum: 2026-11-13
+  zeit: "21:00"
+  gegner: "Playoff Finale 1"
+  ort: 
+- datum: 2026-11-20
+  zeit: "21:00"
+  gegner: "Playoff Finale 2"
+  ort: 
+
