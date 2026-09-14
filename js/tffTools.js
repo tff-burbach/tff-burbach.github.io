@@ -510,27 +510,28 @@ tffTools = {
 		tffTools.showTableGeneric(force, '#contentTable', tffData.leagueData);
 		if (tffData.playoffLeagueData) {
 			tffTools.showTableGeneric(force, '#contentPlayoffTable', tffData.playoffLeagueData);
+			const playoffName = tffData.playoffLeagueData.competitionName;
+			if (playoffName) {
+				$('#contentPlayoffTable .playoff-section-heading').text(playoffName);
+			}
 		}
 	},
 
 	showTableGeneric(force, tableId, leagueData) {
 		const teamname = tffTools.getTeam().name;
 		const $contentTable = $(tableId);
-		// Only continue with valid league data
-		if (!leagueData || !leagueData.matches || leagueData.matches.length <= 0) {
-			return;
-		}
+		if (!leagueData) return;
+		const hasMatches = leagueData.matches && leagueData.matches.length > 0;
+		const hasTable = leagueData.currentMatchDay && leagueData.currentMatchDay.table && leagueData.currentMatchDay.table.length > 0;
+		if (!hasMatches && !hasTable) return;
 		$contentTable.removeClass('d-none');
 		var matchDay = leagueData.currentMatchDay;
-		tffTools._buildMatchdayGames($contentTable, $contentTable.find('.currentMatchDayGames'), teamname, matchDay.index, leagueData);
-		tffTools._buildMatchdayTable($contentTable, $contentTable.find('.currentMatchDayTable'), teamname, matchDay);
-		const nextIndex = tffTools.getNextMatchdayIndex(matchDay.index, leagueData);
-		// var nextIndex = $contentTable.find('#nextMatchDayGames').attr('matchdayIndex');
-		// nextIndex = force || !nextIndex ? leagueData.matchDays.findIndex(entry => entry.no === matchDay.no) + 1 : nextIndex;
-		// const nextMatchDay = leagueData.matchDays[nextIndex];
-		// if (nextMatchDay) {
+		if (matchDay) {
+			tffTools._buildMatchdayGames($contentTable, $contentTable.find('.currentMatchDayGames'), teamname, matchDay.index, leagueData);
+			tffTools._buildMatchdayTable($contentTable, $contentTable.find('.currentMatchDayTable'), teamname, matchDay);
+			const nextIndex = tffTools.getNextMatchdayIndex(matchDay.index, leagueData);
 			tffTools._buildMatchdayGames($contentTable, $contentTable.find('.nextMatchDayGames'), teamname, nextIndex, leagueData);
-		// }
+		}
 		$contentTable.find('[data-bs-toggle="tooltip"]').each(function() {
 			bootstrap.Tooltip.getOrCreateInstance(this);
 		});
@@ -599,9 +600,19 @@ tffTools = {
 	},
 
 	_buildMatchdayTable($contentTable, $matchdayTable, teamname, matchday) {
-		table = matchday.table;
-		var loaded = false;
+		const table = matchday.table;
+		let loaded = false;
 		$matchdayTable.find('.tableRowGenerated').remove();
+
+		// Auto-hide columns that have no data (e.g. Playoff tables show only Platz + Mannschaft)
+		const hasGoals = table && table.some(r => r.goals && r.goals.trim());
+		const hasSets  = table && table.some(r => r.sets  && r.sets.trim());
+		const hasScore = table && table.some(r => r.scores && r.scores.trim() && !r.scores.includes('NaN'));
+		$matchdayTable.find('.goals').toggleClass('col-hidden', !hasGoals);
+		$matchdayTable.find('.sets').toggleClass('col-hidden', !hasSets);
+		$matchdayTable.find('.score').toggleClass('col-hidden', !hasScore);
+
+		if (!table) return;
 		table.forEach(tableRow => {
 			$tableRow = $matchdayTable.find('.tableRowTemplate').first().clone();
 			$tableRow.removeClass('tableRowTemplate');
@@ -609,9 +620,9 @@ tffTools = {
 			$tableRow.addClass('tableRowGenerated');
 			$tableRow.find('.place').text(tableRow.place);
 			$tableRow.find('.team').text(tableRow.team).attr('title', tableRow.team);
-			$tableRow.find('.goals').text(tffTools._formatNumberColumn(tableRow.goals, 4));
-			$tableRow.find('.sets').text(tffTools._formatNumberColumn(tableRow.sets, 3));
-			$tableRow.find('.score').text(tableRow.scores, 2);
+			$tableRow.find('.goals').text(hasGoals && tableRow.goals ? tffTools._formatNumberColumn(tableRow.goals, 4) : '');
+			$tableRow.find('.sets').text(hasSets && tableRow.sets ? tffTools._formatNumberColumn(tableRow.sets, 3) : '');
+			$tableRow.find('.score').text(hasScore ? tableRow.scores : '');
 			// Show
 			$tableRow.removeClass('d-none');
 			// Highlight
@@ -628,7 +639,9 @@ tffTools = {
 
 	_formatNumberColumn(value, size) {
 		var values = value.split(':');
-		return ' '.repeat(size - values[0].length) + values[0] + ':' + ' '.repeat(size - values[1].length) + values[1];
+		if (values.length < 2) return value;
+		const pad = (s) => ' '.repeat(Math.max(0, size - s.length)) + s;
+		return pad(values[0]) + ':' + pad(values[1]);
 	},
 
 	_initializeSchedules(fromDate, toDate) {
@@ -666,10 +679,15 @@ tffTools = {
 		// $('#refreshData').addClass('inactive');
 		$('.status').addClass('loading').text('loading');
 		try {
-			tffData.leagueData = await stfvData.collectLeagueData(tffTools.getTeam());
+			const allData = await stfvData.collectAllLeagueData(tffTools.getTeam());
+			tffData.leagueData = allData.leagueData;
+			tffData.playoffLeagueData = allData.playoffData;
+
 			tffData.termine = tffData.termine.filter(termin => {
 				return !termin.generated;
 			});
+
+			// Add Ligaphase matches to Termine
 			tffData.leagueData.matches.forEach(match => {
 				tffData.termine.push({
 					datetime: match.datetime,
@@ -683,22 +701,23 @@ tffTools = {
 				})
 			});
 			tffData.leagueData.matchDays.length = tffData.leagueData.matchDays.filter(element => element !== undefined).length;
-			// Abstiegsrunde disabled — logic triggered prematurely when last regular matchday is past
-			// if (tffData.leagueData.matchDays[tffData.leagueData.matchDays.length - 1].date < tffTools.getCurrentDate()) {
-			// 	tffData.playoffLeagueData = await stfvData.collectPlayoffLeagueData(tffTools.getTeam());
-			// 	tffData.playoffLeagueData.matches.forEach(match => {
-			// 		tffData.termine.push({
-			// 			datetime: match.datetime,
-			// 			datum: match.date,
-			// 			zeit: match.time,
-			// 			typ: tffData.typO,
-			// 			gegner: match.opponent,
-			// 			ort: match.home ? 'H' : 'A',
-			// 			ergebnis: tffTools._createTFFResult(match),
-			// 			generated: new Date()
-			// 		})
-			// 	});
-			// }
+
+			// Add Playoff / Abstiegsrunde matches to Termine
+			if (allData.playoffData) {
+				allData.playoffData.matches.forEach(match => {
+					tffData.termine.push({
+						datetime: match.datetime,
+						datum: match.date,
+						zeit: match.time,
+						typ: tffData.typO,
+						gegner: match.opponent,
+						ort: match.home ? 'H' : 'A',
+						ergebnis: tffTools._createTFFResult(match),
+						generated: new Date()
+					})
+				});
+				allData.playoffData.matchDays.length = allData.playoffData.matchDays.filter(e => e !== undefined).length;
+			}
 
 			// Load cup data
 			tffData.cupData = await stfvData.collectCupData(tffTools.getTeam());
@@ -719,7 +738,7 @@ tffTools = {
 			}
 		}
 		catch(ex){
-			console.log('Error fetching STFV data!')
+			console.log('Error fetching STFV data!', ex)
 		}
 		tffData.termine.sort((a, b) => (a.datetime > b.datetime) ? 1 : -1);
 		tffTools._initializeSchedules();
@@ -732,9 +751,6 @@ tffTools = {
 		if (force) {
 			tffTools.showToast('Daten aktualisiert');
 		}
-		// if (!force) {
-		// 	setTimeout(tffTools._initializeTffData, tffTools.cacheTimeMsec);
-		// }
 	},
 
 	showTeamGallery: async function () {

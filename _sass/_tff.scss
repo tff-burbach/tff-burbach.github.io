@@ -1196,6 +1196,9 @@ img::-moz-selection {
   }
 }
 
+// Hide table columns that have no data (e.g. Playoff table with only Platz + Mannschaft)
+.col-hidden { display: none !important; }
+
 // Page flip animation for matchday changes
 @keyframes slideOutLeft {
   from {
