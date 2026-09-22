@@ -315,7 +315,9 @@ stfvData = {
 				const timeSplit = time.split(":");
 				const isoDate = `${dateSplit[2]}-${dateSplit[1]}-${dateSplit[0]}`;
 				const isoDatetime = `${isoDate}T${timeSplit[0]}:${timeSplit[1]}`;
-				const rawResult = col(matchColMap.result);
+				const rawResult = matchColMap.result !== null
+					? col(matchColMap.result)
+					: $(this).find('td').last().text().replace(/\s+/g, ' ').trim();
 				let cleanResult = rawResult;
 				let resultHasSuffix = false;
 				const suffixMatch = rawResult.match(/^(\d+:\d+)\s*([^\d\s]\S*)$/);
@@ -504,7 +506,7 @@ stfvData = {
 	},
 
 	_buildMatchColMap: function(matchTables) {
-		const map = { datetime: 0, team1: 1, team2: 2, result: 3 };
+		const map = { datetime: 0, team1: 1, team2: 2, result: null };
 		$('tr.sectiontableheader', matchTables).each(function() {
 			if ($(this).find('th').length < 3) return; // skip single-th matchday headers
 			$(this).find('th').each(function(i) {
@@ -512,7 +514,7 @@ stfvData = {
 				if (text.includes('zeitpunkt')) map.datetime = i;
 				else if (text === 'heim') map.team1 = i;
 				else if (text === 'gast') map.team2 = i;
-				else if (text.includes('ergebnis')) map.result = i;
+				else if (text.includes('ergebnis') || text.includes('sätze')) map.result = i;
 			});
 			return false; // stop after first column-header row
 		});
@@ -593,7 +595,7 @@ stfvData = {
 				let isoDate = `${dateSplit[2]}-${dateSplit[1]}-${dateSplit[0]}`;
 				let isoDatetime = `${isoDate}T${timeSplit[0]}:${timeSplit[1]}`;
 
-				let rawResult = col(matchColMap.result);
+				let rawResult = $(this).find('td').last().text().replace(/\s+/g, ' ').trim();
 				let resultHasSuffix = false;
 				let cleanResult = rawResult;
 
